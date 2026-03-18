@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GITS Teknoloji — Global IT Solutions | v4.2</title>
+<title>GITS Teknoloji — Global IT Solutions | v4.3</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{background:#0a0c10;color:#e8eaf0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6}
+html{scroll-behavior:smooth}html,body{background:#0a0c10;color:#e8eaf0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6}
 button{cursor:pointer;font-family:inherit}input,select,textarea{font-family:inherit}
 .page{display:none}.page.on{display:block}#adm{display:none}#adm.on{display:flex}#site{display:block}
 .nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;background:rgba(10,12,16,.95);border-bottom:1px solid rgba(255,255,255,.07);backdrop-filter:blur(20px)}
@@ -299,6 +299,16 @@ button{cursor:pointer;font-family:inherit}input,select,textarea{font-family:inhe
 .cfmb h3{font-weight:700;font-size:.88rem;color:#fff;margin-bottom:7px}
 .cfmb p{font-size:.79rem;color:#5a6270;line-height:1.55;margin-bottom:16px}
 .cfma{display:flex;gap:7px;justify-content:flex-end}
+
+a.btnp, a.btng, a.navcta {
+  display:inline-flex;align-items:center;justify-content:center;
+  text-decoration:none;cursor:pointer;
+}
+a[id^="nav"] {
+  background:none;border:none;color:#6b7280;font-size:.83rem;
+  padding:0;transition:color .2s;text-decoration:none;display:inline;
+}
+a[id^="nav"]:hover{color:#fff}
 </style>
 </head>
 <body>
@@ -313,10 +323,10 @@ button{cursor:pointer;font-family:inherit}input,select,textarea{font-family:inhe
 <nav class="nav">
   <svg width="124" height="32"><use href="#L-nav"/></svg>
   <ul class="navl">
-    <li><button onclick="gs('ssvc')" id="nav1">Hizmetler</button></li>
-    <li><button onclick="gs('swhy')" id="nav2">Neden Biz</button></li>
-    <li><button onclick="gs('squote')" id="nav3">Teklif Al</button></li>
-    <li><button class="navcta" onclick="gs('scta')" id="nav4">İletişim</button></li>
+    <li><a href="#ssvc" id="nav1">Hizmetler</a></li>
+    <li><a href="#swhy" id="nav2">Neden Biz</a></li>
+    <li><a href="#squote" id="nav3">Teklif Al</a></li>
+    <li><a href="#scta" class="navcta" id="nav4">İletişim</a></li>
   </ul>
 </nav>
 <section class="hero">
@@ -327,8 +337,8 @@ button{cursor:pointer;font-family:inherit}input,select,textarea{font-family:inhe
   <h1 id="htit">Kurumsal IT<br>altyapınızı<br><em>güvence altına</em><br>alın.</h1>
   <p class="hsub" id="hsub">Siber güvenlikten bulut hizmetlerine, L1–L3 destekten mühendislik çözümlerine kadar uçtan uca IT hizmetleri.</p>
   <div class="hbtns">
-    <button class="btnp" id="heroBtnP" onclick="gs('squote')">Teklif Al</button>
-    <button class="btng" id="heroBtnS" onclick="gs('ssvc')">Hizmetleri Keşfet</button>
+    <a href="#squote" class="btnp" id="heroBtnP">Teklif Al</a>
+    <a href="#ssvc" class="btng" id="heroBtnS">Hizmetleri Keşfet</a>
   </div>
   <div class="hstats">
     <div><div class="snum" id="s1">200+</div><div class="slbl" id="s1l">Aktif hizmet paketi</div></div>
@@ -345,7 +355,7 @@ button{cursor:pointer;font-family:inherit}input,select,textarea{font-family:inhe
   </div>
   <div class="tabs" id="stabs"></div>
   <div class="sgrid" id="sgrid"></div>
-  <div style="text-align:center;margin-top:26px"><button class="btng" id="svcCta" onclick="gs('squote')">Tüm hizmetler için teklif alın →</button></div>
+  <div style="text-align:center;margin-top:26px"><a href="#squote" class="btng" id="svcCta">Tüm hizmetler için teklif alın →</a></div>
 </section>
 <section class="sec" id="swhy" style="background:#0d0f14">
   <div class="slabel" id="whyLabel">Neden GITS?</div>
@@ -451,7 +461,7 @@ button{cursor:pointer;font-family:inherit}input,select,textarea{font-family:inhe
   <h2 class="stitle" id="ctaTitle">Hemen başlayalım</h2>
   <p id="ctatxt">IT altyapınızı bir üst seviyeye taşımak için bugün bizimle iletişime geçin.</p>
   <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-    <button class="btnp" id="ctaBtnP" onclick="gs('squote')">Teklif İste</button>
+    <a href="#squote" class="btnp" id="ctaBtnP">Teklif İste</a>
     <button class="btng" id="ctaBtnS">Bizi Arayın</button>
   </div>
 </section>
@@ -466,7 +476,7 @@ button{cursor:pointer;font-family:inherit}input,select,textarea{font-family:inhe
       <li><a onclick="showLegal('terms')">Kullanım Koşulları</a></li>
     </ul></div>
   </div>
-  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v4.2</span><span class="admin-hint">· #admin</span></div>
+  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v4.3</span><span class="admin-hint">· #admin</span></div>
 </footer>
 </div>
 <!-- HUKUKİ SAYFALAR -->
@@ -536,7 +546,7 @@ button{cursor:pointer;font-family:inherit}input,select,textarea{font-family:inhe
   </div></div>
 </div>
 <div class="asb">
-  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v4.2</small></div>
+  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v4.3</small></div>
   <nav class="asbnav" id="admNav"></nav>
   <div class="asbft">
     <button onclick="closeAdm()">🌐 Siteye Dön</button>
@@ -562,7 +572,7 @@ button{cursor:pointer;font-family:inherit}input,select,textarea{font-family:inhe
 
 <script>
 /* ═══════════════════════════════════════
-   GITS TEKNOLOJİ v4.2 — localStorage tabanlı
+   GITS TEKNOLOJİ v4.3 — localStorage tabanlı
    Firebase kaldırıldı, tüm veri tarayıcıda saklanır
    ═══════════════════════════════════════ */
 
@@ -810,12 +820,22 @@ function sendReset() {
 /* ── HASH ROUTING ── */
 function checkHash() {
   var h = location.hash;
-  /* Site HER ZAMAN görünür - asla gizleme */
+  var specialHashes = ['#admin','#privacy','#kvkk','#terms'];
+  
+  /* Sadece özel hash'lere tepki ver, diğerlerini yoksay */
+  if(specialHashes.indexOf(h) === -1) {
+    /* Normal sayfa içi link (#squote, #ssvc vs) - siteyi gizleme */
+    document.getElementById('site').style.display = 'block';
+    document.getElementById('adm').style.display = 'none';
+    return;
+  }
+  
   document.getElementById('site').style.display = 'block';
   document.getElementById('adm').style.display = 'none';
   ['legal-privacy','legal-kvkk','legal-terms'].forEach(function(id){
     var el=document.getElementById(id);if(el)el.style.display='none';
   });
+  
   if(h==='#admin'){
     document.getElementById('site').style.display='none';
     document.getElementById('adm').style.display='flex';
