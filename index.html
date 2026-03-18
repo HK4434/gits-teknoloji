@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GITS Teknoloji — Global IT Solutions | v4.2</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0a0c10;color:#e8eaf0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6}
+button{cursor:pointer;font-family:inherit}input,select,textarea{font-family:inherit}
+.page{display:none}.page.on{display:block}#adm{display:none}#adm.on{display:flex}#site{display:block}
+.nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;background:rgba(10,12,16,.95);border-bottom:1px solid rgba(255,255,255,.07);backdrop-filter:blur(20px)}
+.navl{display:flex;gap:28px;list-style:none;align-items:center}
+.navl button{background:none;border:none;color:#6b7280;font-size:.83rem;padding:0;transition:color .2s}.navl button:hover{color:#fff}
+.navcta{background:linear-gradient(135deg,#00c4ef,#0066ff)!important;color:#fff!important;padding:8px 18px;border-radius:5px;font-weight:600!important;font-size:.82rem!important}
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 40px 68px;position:relative;overflow:hidden;background:#0a0c10}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.035) 1px,transparent 1px);background-size:72px 72px;-webkit-mask-image:radial-gradient(ellipse 85% 65% at 50% 0%,#000,transparent);mask-image:radial-gradient(ellipse 85% 65% at 50% 0%,#000,transparent)}
+.hglow{position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(0,102,255,.12) 0%,transparent 70%);pointer-events:none}
+.hbadge{display:inline-flex;align-items:center;gap:7px;background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.18);color:#00d4ff;padding:5px 15px;border-radius:100px;font-size:.7rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:22px;width:fit-content}
+.hbadge::before{content:'';width:5px;height:5px;background:#00d4ff;border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.hero h1{font-weight:800;font-size:clamp(2.4rem,5.8vw,4.8rem);line-height:1.03;letter-spacing:-.035em;color:#fff;max-width:800px}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,#00d4ff 30%,#0066ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hsub{margin-top:20px;font-size:.98rem;color:#5a6270;max-width:440px;line-height:1.75}
+.hbtns{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+.btnp{background:linear-gradient(135deg,#00c4ef,#0066ff);color:#fff;padding:12px 28px;border:none;border-radius:5px;font-size:.88rem;font-weight:600;transition:opacity .2s,transform .2s}.btnp:hover{opacity:.88;transform:translateY(-1px)}
+.btng{background:transparent;color:#e8eaf0;padding:12px 28px;border:1px solid rgba(255,255,255,.13);border-radius:5px;font-size:.88rem;transition:all .2s}.btng:hover{border-color:rgba(255,255,255,.32);color:#fff}
+.hstats{display:flex;gap:44px;margin-top:56px;padding-top:28px;border-top:1px solid rgba(255,255,255,.06);flex-wrap:wrap}
+.snum{font-weight:800;font-size:1.75rem;color:#fff;letter-spacing:-.02em}.slbl{font-size:.75rem;color:#5a6270;margin-top:3px}
+.mq{overflow:hidden;background:#0d0f14;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);padding:12px 0}
+.mq-track{display:flex;width:max-content}.mq-track.running{animation:mqscroll var(--mq-dur,30s) linear infinite}.mq-track:hover{animation-play-state:paused}
+.mq-item{display:inline-flex;align-items:center;gap:6px;padding:0 20px;font-size:.69rem;font-weight:600;color:#4a5568;letter-spacing:.11em;text-transform:uppercase;white-space:nowrap}
+.mq-sep{color:#00d4ff;opacity:.6}
+@keyframes mqscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.sec{padding:88px 40px}
+.slabel{font-size:.67rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#00d4ff;margin-bottom:13px;opacity:.85}
+.stitle{font-weight:800;font-size:clamp(1.65rem,3.3vw,2.6rem);color:#fff;letter-spacing:-.025em;line-height:1.14}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px}
+.tab{background:transparent;border:1px solid rgba(255,255,255,.09);color:#5a6270;padding:5px 15px;border-radius:100px;font-size:.75rem;transition:all .2s}
+.tab.on,.tab:hover{background:#00d4ff;border-color:#00d4ff;color:#0a0c10;font-weight:600}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.sc{background:#0f1117;padding:26px;position:relative;overflow:hidden;transition:background .25s;display:block}
+.sc.hidden{display:none}
+.sc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#00d4ff,#0066ff);transform:scaleX(0);transition:transform .35s;transform-origin:left}
+.sc:hover::after{transform:scaleX(1)}
+.sico{width:38px;height:38px;background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.12);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:15px;font-size:.98rem}
+.sc h3{font-weight:600;font-size:.9rem;color:#e8eaf0;margin-bottom:7px;line-height:1.3}
+.sc p{font-size:.78rem;color:#5a6270;line-height:1.58}
+.sc-detail{font-size:.75rem;color:#4a8090;margin-top:8px;line-height:1.55;display:none;border-top:1px solid rgba(255,255,255,.05);padding-top:8px}
+.sc:hover .sc-detail{display:block}
+.spr{font-size:.73rem;color:#00d4ff;margin-top:9px;font-weight:600}
+.sarr{position:absolute;top:26px;right:26px;color:#3a4252;font-size:.9rem;transition:transform .2s,color .2s}
+.sc:hover .sarr{transform:translate(2px,-2px);color:#00d4ff}
+.wgrid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:42px}
+.why-feat{display:flex;gap:14px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.06)}
+.why-feat:last-child{border-bottom:none;padding-bottom:0}
+.why-feat-num{font-size:.65rem;font-weight:700;color:#00d4ff;min-width:22px;padding-top:3px;opacity:.8}
+.why-feat-body h4{font-weight:600;font-size:.9rem;color:#e8eaf0;margin-bottom:6px}
+.why-feat-body p{font-size:.79rem;color:#5a6270;line-height:1.62}
+.mcard{background:#141720;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:24px;position:relative;overflow:hidden}
+.mcard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,255,.6),transparent)}
+.mcard-title{font-size:.71rem;color:#4a5568;letter-spacing:.09em;text-transform:uppercase;margin-bottom:18px;font-weight:600;display:flex;align-items:center;justify-content:space-between}
+.mrow{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.mt2{display:flex;justify-content:space-between;align-items:center}
+.mn{font-size:.81rem;color:#c8cdd6}
+.mb{height:4px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden}
+.mf{height:100%;border-radius:2px}
+.upt{margin-top:18px;background:rgba(0,212,255,.05);border:1px solid rgba(0,212,255,.12);border-radius:8px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.upt .ul{font-size:.7rem;color:#4a5568}.upt .uv{font-weight:800;font-size:1.25rem}
+.qlayout{display:grid;grid-template-columns:260px 1fr;gap:24px;margin-top:38px;align-items:start}
+.qsbar{position:sticky;top:72px}
+.qbox{background:#0f1117;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:16px}
+.qboxt{font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4a5568;margin-bottom:10px}
+.qi{font-size:.76rem;color:#c8cdd6;display:flex;justify-content:space-between;gap:6px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.qi:last-child{border-bottom:none}.qi b{color:#00d4ff;white-space:nowrap;font-weight:600}
+.qemp{font-size:.76rem;color:#4a5568;font-style:italic}
+.qtot{margin-top:11px;padding-top:11px;border-top:1px solid rgba(255,255,255,.07);display:none;justify-content:space-between;align-items:center}
+.qtotl{font-size:.67rem;color:#4a5568;text-transform:uppercase;letter-spacing:.06em}
+.qtotv{font-weight:800;font-size:1rem;color:#00d4ff}
+.qform{background:#0f1117;border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden}
+.qsec{padding:20px 24px;border-bottom:1px solid rgba(255,255,255,.06)}.qsec:last-child{border-bottom:none}
+.qst{font-size:.69rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4a5568;margin-bottom:13px;display:flex;align-items:center;gap:7px}
+.qst::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
+.fg label{font-size:.67rem;font-weight:600;color:#4a5568;letter-spacing:.04em;text-transform:uppercase}
+.fg input,.fg select,.fg textarea{background:#181c24;border:1px solid rgba(255,255,255,.08);border-radius:6px;color:#e8eaf0;font-size:.84rem;padding:9px 11px;outline:none;transition:border-color .2s;width:100%}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:rgba(0,212,255,.45);box-shadow:0 0 0 3px rgba(0,212,255,.07)}
+.fg input::placeholder,.fg textarea::placeholder{color:#3a4252}
+.fg select option{background:#181c24}.fg textarea{resize:vertical;min-height:74px}
+.fgr{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.psrch{position:relative;margin-bottom:10px}.psrch input{padding-left:30px}
+.psi{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:#4a5568;font-size:.82rem;pointer-events:none}
+.pscroll{max-height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:2px}
+.pscroll::-webkit-scrollbar{width:3px}.pscroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.09);border-radius:2px}
+.cglbl{font-size:.61rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:#3a4252;padding:8px 0 4px;border-top:1px solid rgba(255,255,255,.05);margin-top:3px}
+.pr{display:grid;grid-template-columns:1fr 60px 52px 28px;gap:7px;align-items:center;padding:8px 10px;background:#141720;border:1px solid rgba(255,255,255,.07);border-radius:6px;margin-bottom:2px;transition:border-color .2s}
+.pr.sel{border-color:rgba(0,212,255,.35);background:rgba(0,212,255,.04)}
+.prn{font-size:.8rem;color:#c8cdd6}.prc{font-size:.66rem;color:#4a5568}
+.prp{font-size:.73rem;color:#00d4ff;font-weight:600;text-align:right}
+.prq{background:#0f1117;border:1px solid rgba(255,255,255,.1);border-radius:4px;color:#e8eaf0;font-size:.8rem;padding:4px 6px;width:100%;text-align:center;outline:none}
+.prt{width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,.11);background:transparent;color:#3a4252;display:flex;align-items:center;justify-content:center;font-size:.78rem;flex-shrink:0;transition:all .2s}
+.prt.on{background:linear-gradient(135deg,#00c4ef,#0066ff);border-color:transparent;color:#fff}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.pill{padding:6px 13px;border:1px solid rgba(255,255,255,.09);border-radius:100px;font-size:.75rem;color:#5a6270;transition:all .2s;user-select:none;cursor:pointer}
+.pill.on{background:linear-gradient(135deg,#00c4ef,#0066ff);border-color:transparent;color:#fff;font-weight:600}
+.locrow{display:flex;gap:7px;align-items:flex-end;margin-bottom:7px}
+.locrow .fg{flex:1;margin-bottom:0}
+.locbtn{background:rgba(0,212,255,.09);border:1px solid rgba(0,212,255,.2);color:#00d4ff;padding:8px 13px;border-radius:6px;font-size:.78rem;white-space:nowrap;font-weight:500}
+.lc{display:flex;justify-content:space-between;align-items:center;padding:6px 11px;background:#141720;border:1px solid rgba(255,255,255,.07);border-radius:6px;font-size:.78rem;color:#c8cdd6;margin-bottom:4px}
+.lrm{background:none;border:none;color:#4a5568;font-size:.85rem;padding:0 3px}.lrm:hover{color:#ef4444}
+.oogrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.oo{display:flex;align-items:flex-start;gap:8px;padding:8px 11px;background:#141720;border:1px solid rgba(255,255,255,.07);border-radius:6px;user-select:none;cursor:pointer}
+.oo:hover{border-color:rgba(0,212,255,.18)}.oo.sel{border-color:rgba(0,212,255,.35);background:rgba(0,212,255,.04)}
+.oocb{width:14px;height:14px;border:1px solid rgba(255,255,255,.14);border-radius:3px;background:#0f1117;flex-shrink:0;position:relative;margin-top:2px}
+.oo.sel .oocb{background:#00d4ff;border-color:#00d4ff}
+.oo.sel .oocb::after{content:'✓';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:8px;color:#0a0c10;font-weight:700}
+.oon{font-size:.78rem;color:#c8cdd6;line-height:1.35}.oop{font-size:.7rem;color:#00d4ff;margin-top:2px;font-weight:500}
+.csrow{display:flex;gap:8px;align-items:center;margin-bottom:6px}
+.csrow input{flex:1;background:#141720;border:1px solid rgba(255,255,255,.1);border-radius:5px;color:#e8eaf0;font-size:.8rem;padding:7px 10px;outline:none}
+.csrow input:focus{border-color:rgba(0,212,255,.4)}
+.csrow input::placeholder{color:#3a4252}
+.csqty{width:65px!important;flex:none!important;text-align:center}
+.csrm{background:none;border:none;color:#4a5568;font-size:1rem;transition:color .2s;padding:0 4px}.csrm:hover{color:#ef4444}
+.ptabs{display:flex;gap:6px;margin-bottom:12px}
+.ptab{padding:5px 12px;border:1px solid rgba(255,255,255,.1);border-radius:100px;font-size:.73rem;color:#5a6270;background:transparent;transition:all .2s;cursor:pointer}
+.ptab.on{background:rgba(0,212,255,.12);border-color:rgba(0,212,255,.3);color:#00d4ff;font-weight:600}
+.ptabc{display:none}.ptabc.on{display:block}
+.paybox{background:rgba(0,212,255,.04);border:1px solid rgba(0,212,255,.12);border-radius:8px;padding:14px;margin-bottom:10px}
+.paybox h4{font-size:.75rem;font-weight:700;color:#00d4ff;margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase}
+.paybox p{font-size:.76rem;color:#5a6270;line-height:1.65;margin-bottom:5px}.paybox p:last-child{margin-bottom:0}
+.caybox{background:rgba(239,68,68,.03);border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:14px;margin-bottom:10px}
+.caybox h4{font-size:.75rem;font-weight:700;color:#f87171;margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase}
+.caybox p{font-size:.76rem;color:#5a6270;line-height:1.65;margin-bottom:5px}.caybox p:last-child{margin-bottom:0}
+.tcheck{display:flex;align-items:flex-start;gap:9px;padding:12px;background:rgba(251,191,36,.04);border:1px solid rgba(251,191,36,.15);border-radius:7px;margin-bottom:12px}
+.tcheck input[type=checkbox]{width:16px;height:16px;flex-shrink:0;margin-top:1px;accent-color:#00d4ff}
+.tcheck label{font-size:.76rem;color:#c8cdd6;line-height:1.55;cursor:pointer}
+.tcheck a{color:#00d4ff;text-decoration:none}.tcheck a:hover{text-decoration:underline}
+.qsub{width:100%;background:linear-gradient(135deg,#00c4ef,#0066ff);border:none;border-radius:6px;color:#fff;font-size:.95rem;font-weight:700;padding:14px;box-shadow:0 4px 20px rgba(0,180,255,.25);transition:transform .2s,box-shadow .2s}
+.qsub:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,180,255,.35)}
+.qsub:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+.qnote{text-align:center;font-size:.7rem;color:#4a5568;margin-top:8px}
+.fsts{border-radius:6px;padding:11px 16px;font-size:.82rem;font-weight:500;margin-top:10px;display:none;align-items:center;gap:8px}
+.fsts.sending{display:flex;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2);color:#00d4ff}
+.fsts.success{display:flex;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);color:#22c55e}
+.fsts.error{display:flex;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.22);color:#ef4444}
+.cta{background:#0a0c10;text-align:center;padding:88px 40px;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:560px;height:360px;background:radial-gradient(ellipse,rgba(0,102,255,.07) 0%,transparent 70%)}
+.cta .stitle{margin-bottom:14px}.cta>p{color:#5a6270;max-width:400px;margin:0 auto 28px;font-size:.92rem;line-height:1.7}
+.ft{background:#0d0f14;border-top:1px solid rgba(255,255,255,.06);padding:48px 40px}
+.ftg{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:48px;margin-bottom:38px}
+.ftbr p{color:#4a5568;font-size:.79rem;line-height:1.7;margin-top:12px;max-width:240px}
+.ftcol h5{font-size:.67rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:#3a4252;margin-bottom:14px}
+.ftcol ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.ftcol a{color:#8892a0;font-size:.79rem;transition:color .2s;cursor:pointer}.ftcol a:hover{color:#00d4ff}
+.ftbot{padding-top:22px;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:center}
+.ftbot p{font-size:.72rem;color:#3a4252}
+.ft-year{color:rgba(0,212,255,.5)}
+.admin-hint{font-size:.62rem;color:transparent;transition:color .5s;user-select:none}
+.ftbot:hover .admin-hint{color:rgba(58,66,82,.5)}
+.legal-pg{display:none;padding:60px 40px;max-width:860px;margin:0 auto}
+.legal-pg.on{display:block}
+.legal-pg h1{font-size:1.6rem;font-weight:800;color:#fff;margin-bottom:6px}
+.legal-date{font-size:.75rem;color:#4a5568;margin-bottom:32px}
+.legal-pg h2{font-size:1rem;font-weight:700;color:#e8eaf0;margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.07)}
+.legal-pg p{font-size:.84rem;color:#6b7280;line-height:1.8;margin-bottom:10px}
+.legal-pg ul{padding-left:20px;margin-bottom:10px}
+.legal-pg ul li{font-size:.84rem;color:#6b7280;line-height:1.8;margin-bottom:4px}
+.mo{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.mo.on{display:flex}
+.mbox{background:#111318;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:32px;max-width:400px;width:90%;text-align:center}
+.mico{width:54px;height:54px;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto 16px}
+.mbox h3{font-weight:700;font-size:1.08rem;color:#fff;margin-bottom:8px}
+.mbox p{color:#5a6270;font-size:.85rem;line-height:1.65;margin-bottom:20px}
+.mcls{background:linear-gradient(135deg,#00c4ef,#0066ff);border:none;border-radius:6px;color:#fff;font-size:.86rem;font-weight:600;padding:10px 26px}
+/* ADMIN */
+#adm{background:#080a0e;min-height:100vh;flex-direction:row}
+.asb{width:220px;background:#0c0e13;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.asbl{padding:16px 14px;border-bottom:1px solid rgba(255,255,255,.06)}
+.asbl small{display:block;font-size:.6rem;color:#3a4252;margin-top:3px;letter-spacing:.04em}
+.asbnav{flex:1;padding:7px 0}
+.asbg{font-size:.59rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#3a4252;padding:11px 14px 4px}
+.ai{display:flex;align-items:center;gap:7px;padding:7px 14px;color:#5a6270;font-size:.8rem;border:none;background:none;width:100%;text-align:left;border-left:2px solid transparent;transition:all .2s;position:relative}
+.ai:hover{color:#c8cdd6;background:rgba(255,255,255,.025)}.ai.on{color:#fff;background:rgba(0,212,255,.06);border-left-color:#00d4ff}
+.ai.locked{opacity:.35;cursor:not-allowed}
+.nbadge{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:#ef4444;color:#fff;font-size:.58rem;font-weight:700;padding:1px 6px;border-radius:100px;min-width:18px;text-align:center}
+.asbft{padding:11px 14px;border-top:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;gap:4px}
+.asbft button{background:none;border:none;color:#4a5568;font-size:.77rem;padding:5px 0;text-align:left;transition:color .2s}.asbft button:hover{color:#00d4ff}
+.amain{flex:1;display:flex;flex-direction:column;overflow-y:auto}
+.atb{background:#0c0e13;border-bottom:1px solid rgba(255,255,255,.06);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.atb h1{font-weight:700;font-size:.9rem;color:#fff}
+.atb-right{display:flex;align-items:center;gap:10px}
+.atb-hash{font-size:.69rem;color:rgba(58,66,82,.7);font-family:monospace;background:rgba(255,255,255,.04);padding:3px 9px;border-radius:4px;border:1px solid rgba(255,255,255,.06)}
+.uchip{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:100px;padding:4px 10px 4px 6px}
+.uav{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.66rem;font-weight:700;color:#fff;background:linear-gradient(135deg,#00c4ef,#0066ff)}
+.sbadge{font-size:.67rem;padding:2px 8px;border-radius:100px;font-weight:600;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);color:#22c55e}
+.sbadge.offline{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.2);color:#ef4444}
+.acont{padding:20px;flex:1}
+.asts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.ast{background:#0c0e13;border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:14px 16px;position:relative;overflow:hidden}
+.ast::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#0066ff,#00d4ff)}
+.ast.red::after{background:linear-gradient(90deg,#ef4444,#f59e0b)}
+.ast .av{font-weight:800;font-size:1.4rem;color:#fff;letter-spacing:-.02em}.ast .al{font-size:.7rem;color:#4a5568;margin-top:2px}
+.acard{background:#0c0e13;border:1px solid rgba(255,255,255,.07);border-radius:9px;overflow:hidden;margin-bottom:14px}
+.ahead{padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between}
+.ahead h3{font-weight:700;font-size:.8rem;color:#fff}
+.abody{padding:16px}
+.ab{border:none;border-radius:5px;font-size:.75rem;font-weight:600;padding:6px 13px;transition:opacity .2s;display:inline-flex;align-items:center;gap:3px;cursor:pointer}
+.ab:hover{opacity:.85}
+.abA{background:linear-gradient(135deg,#00c4ef,#0066ff);color:#fff}
+.abG{background:transparent;border:1px solid rgba(255,255,255,.1);color:#c8cdd6}
+.abR{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.22);color:#ef4444}
+.abGr{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.22);color:#22c55e}
+.abY{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.22);color:#fbbf24}
+.abSm{padding:4px 10px;font-size:.7rem}
+.aff{display:flex;flex-direction:column;gap:4px;margin-bottom:9px}
+.aff label{font-size:.67rem;font-weight:600;color:#4a5568;text-transform:uppercase;letter-spacing:.04em}
+.aff input,.aff select,.aff textarea{background:#141720;border:1px solid rgba(255,255,255,.08);border-radius:5px;color:#e8eaf0;font-size:.8rem;padding:7px 10px;outline:none;transition:border-color .2s;width:100%}
+.aff input:focus,.aff select:focus,.aff textarea:focus{border-color:rgba(0,212,255,.4)}
+.aff input::placeholder{color:#3a4252}
+.aff select option{background:#141720}.aff textarea{resize:vertical;min-height:60px}
+.ag2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ag3{display:grid;grid-template-columns:2fr 1fr auto;gap:8px;align-items:flex-end}
+.ag4{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:8px;align-items:flex-end}
+.ag5{display:grid;grid-template-columns:2fr 1fr 1fr 60px auto;gap:8px;align-items:flex-end}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.atbl{width:100%;border-collapse:collapse}
+.atbl th{text-align:left;font-size:.63rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#4a5568;padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.06)}
+.atbl td{padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.03);font-size:.79rem;vertical-align:middle}
+.atbl tr:last-child td{border-bottom:none}.atbl tr:hover td{background:rgba(255,255,255,.012)}
+.ied{background:transparent;border:none;color:#c8cdd6;font-size:.79rem;width:100%;outline:none;padding:2px 0}
+.ied:focus{border-bottom:1px solid rgba(0,212,255,.5);color:#fff}
+.pied{width:88px;background:#141720;border:1px solid rgba(255,255,255,.1);border-radius:4px;color:#00d4ff;font-size:.77rem;font-weight:600;padding:4px 7px;text-align:right;outline:none}
+.tbar{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.tsc{background:#141720;border:1px solid rgba(255,255,255,.08);border-radius:5px;color:#e8eaf0;font-size:.79rem;padding:6px 10px;outline:none;width:180px}
+.tsc::placeholder{color:#4a5568}
+.tfl{background:#141720;border:1px solid rgba(255,255,255,.08);border-radius:5px;color:#e8eaf0;font-size:.77rem;padding:6px 8px;outline:none}
+.tfl option{background:#141720}.tcnt{font-size:.72rem;color:#4a5568;margin-left:auto}
+.merr{display:grid;grid-template-columns:2fr 80px 80px 90px auto;gap:8px;align-items:center;padding:8px 12px;background:#141720;border:1px solid rgba(255,255,255,.07);border-radius:6px;margin-bottom:6px}
+.mi2,.mip{background:#0f1117;border:1px solid rgba(255,255,255,.1);border-radius:4px;color:#00d4ff;font-size:.79rem;font-weight:600;padding:5px 7px;text-align:center;outline:none;width:100%}
+.mip{color:#c8cdd6;font-weight:normal}
+.mic select{background:#141720;border:1px solid rgba(255,255,255,.1);border-radius:4px;color:#c8cdd6;font-size:.76rem;padding:5px 6px;outline:none;width:100%}
+.mic select option{background:#141720}
+.whyr{background:#141720;border:1px solid rgba(255,255,255,.07);border-radius:7px;padding:12px;margin-bottom:7px}
+.whyrh{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.whyrh span{font-size:.72rem;font-weight:700;color:#00d4ff}
+.mqtr{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:9px 12px;background:#141720;border:1px solid rgba(255,255,255,.07);border-radius:6px;margin-bottom:5px}
+.mqtr:hover{border-color:rgba(0,212,255,.18)}
+.mqsw{width:34px;height:19px;background:rgba(255,255,255,.1);border:none;border-radius:100px;position:relative;transition:background .2s;flex-shrink:0;cursor:pointer}
+.mqsw.on{background:linear-gradient(135deg,#00c4ef,#0066ff)}
+.mqsw::after{content:'';position:absolute;top:2.5px;left:2.5px;width:14px;height:14px;background:#fff;border-radius:50%;transition:transform .2s}
+.mqsw.on::after{transform:translateX(15px)}
+/* Request cards */
+.rqcard{background:#141720;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:14px;margin-bottom:8px;cursor:pointer;transition:border-color .2s}
+.rqcard:hover{border-color:rgba(0,212,255,.25)}
+.rqcard.new{border-left:3px solid #ef4444}
+.rqhdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.rqname{font-size:.84rem;font-weight:600;color:#e8eaf0}
+.rqtime{font-size:.7rem;color:#4a5568;margin-top:2px}
+.rqmeta{display:flex;flex-wrap:wrap;gap:10px}
+.rqmeta span{font-size:.72rem;color:#5a6270}
+.rqbadge{font-size:.65rem;font-weight:600;padding:2px 8px;border-radius:100px}
+.rqbadge.new{background:rgba(239,68,68,.15);color:#ef4444;border:1px solid rgba(239,68,68,.3)}
+.rqbadge.read{background:rgba(107,114,128,.1);color:#6b7280;border:1px solid rgba(107,114,128,.2)}
+.rqbadge.done{background:rgba(34,197,94,.1);color:#22c55e;border:1px solid rgba(34,197,94,.2)}
+/* Request detail modal */
+.rdmo{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:none;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto;backdrop-filter:blur(4px)}
+.rdmo.on{display:flex}
+.rdbox{background:#0f1117;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:28px;width:100%;max-width:680px}
+.rdhdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.07)}
+.rdsec{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.06)}
+.rdsec:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.rdsec h4{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4a5568;margin-bottom:10px}
+.rdrow{display:flex;gap:8px;margin-bottom:5px}
+.rdlabel{font-size:.78rem;color:#4a5568;min-width:120px}
+.rdval{font-size:.78rem;color:#e8eaf0}
+.rdchip{display:inline-flex;align-items:center;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.15);color:#00d4ff;font-size:.72rem;padding:3px 9px;border-radius:100px;margin:2px}
+/* Auth */
+.lscr{position:absolute;inset:0;background:rgba(8,10,14,.97);z-index:9999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.lbox{background:#0f1117;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:28px;width:320px}
+.lbox h2{font-weight:800;font-size:1.05rem;color:#fff;margin-bottom:3px}
+.lsub{font-size:.77rem;color:#4a5568;margin-bottom:18px}
+.lf{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.lf label{font-size:.69rem;color:#4a5568;text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.lf input{background:#141720;border:1px solid rgba(255,255,255,.1);border-radius:5px;color:#e8eaf0;font-size:.85rem;padding:9px 11px;outline:none;width:100%;transition:border-color .2s}
+.lf input:focus{border-color:rgba(0,212,255,.45)}
+.lf input::placeholder{color:#3a4252}
+.lbtn{width:100%;background:linear-gradient(135deg,#00c4ef,#0066ff);border:none;border-radius:6px;color:#fff;font-size:.88rem;font-weight:600;padding:10px;margin-top:4px;transition:opacity .2s}.lbtn:hover{opacity:.88}
+.lbtn:disabled{opacity:.5;cursor:not-allowed}
+.lerr{color:#ef4444;font-size:.73rem;text-align:center;margin-top:7px;display:none}
+.llink{background:none;border:none;color:#00d4ff;font-size:.73rem;cursor:pointer;text-decoration:underline;padding:0}
+.authsc{display:none}.authsc.on{display:block}
+.fbsync{position:fixed;bottom:60px;right:20px;background:#0f1117;border:1px solid rgba(0,212,255,.2);border-radius:8px;padding:8px 14px;font-size:.75rem;color:#00d4ff;display:none;align-items:center;gap:6px;z-index:9998}
+.fbsync.on{display:flex}
+.toast{position:fixed;bottom:20px;right:20px;background:#0f1117;border:1px solid rgba(34,197,94,.4);border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:7px;font-size:.79rem;color:#fff;transform:translateY(55px);opacity:0;transition:transform .3s,opacity .3s;z-index:99999}
+.toast.on{transform:translateY(0);opacity:1}
+.cfm{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:9998;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.cfm.on{display:flex}
+.cfmb{background:#0f1117;border:1px solid rgba(255,255,255,.1);border-radius:11px;padding:22px;max-width:340px;width:90%}
+.cfmb h3{font-weight:700;font-size:.88rem;color:#fff;margin-bottom:7px}
+.cfmb p{font-size:.79rem;color:#5a6270;line-height:1.55;margin-bottom:16px}
+.cfma{display:flex;gap:7px;justify-content:flex-end}
+</style>
+</head>
+<body>
+<!-- SVG LOGO -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="L-nav" viewBox="0 0 136 34"><circle cx="8" cy="11" r="2.8" fill="#00d4ff" opacity=".55"/><circle cx="17" cy="17" r="4.5" fill="#00d4ff"/><circle cx="8" cy="23" r="2.8" fill="#00d4ff" opacity=".55"/><circle cx="28" cy="9" r="2" fill="#00d4ff" opacity=".32"/><circle cx="28" cy="25" r="2" fill="#00d4ff" opacity=".32"/><line x1="8" y1="11" x2="17" y2="17" stroke="#00d4ff" stroke-width="1" opacity=".42"/><line x1="8" y1="23" x2="17" y2="17" stroke="#00d4ff" stroke-width="1" opacity=".42"/><line x1="28" y1="9" x2="17" y2="17" stroke="#00d4ff" stroke-width=".7" opacity=".2"/><line x1="28" y1="25" x2="17" y2="17" stroke="#00d4ff" stroke-width=".7" opacity=".2"/><circle cx="17" cy="17" r="4.5" fill="url(#ng)"/><line x1="40" y1="8" x2="40" y2="26" stroke="rgba(255,255,255,.1)" stroke-width=".8"/><text x="48" y="20" font-family="'Segoe UI',system-ui" font-weight="800" font-size="14.5" letter-spacing=".6" fill="white">GITS</text><line x1="48" y1="23" x2="90" y2="23" stroke="rgba(255,255,255,.08)" stroke-width=".7"/><text x="48" y="31" font-family="'Segoe UI',system-ui" font-weight="400" font-size="8" letter-spacing="2.4" fill="#4a5568">TEKNOLOJİ</text><defs><radialGradient id="ng"><stop offset="0%" stop-color="#fff" stop-opacity=".35"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient></defs></symbol>
+<symbol id="L-hero" viewBox="0 0 210 56"><circle cx="26" cy="28" r="20" fill="none" stroke="#00d4ff" stroke-width=".4" opacity=".12"/><circle cx="26" cy="28" r="14" fill="none" stroke="#00d4ff" stroke-width=".5" opacity=".18"/><circle cx="11" cy="18" r="4" fill="#00d4ff" opacity=".5"/><circle cx="26" cy="28" r="7" fill="#00d4ff"/><circle cx="26" cy="28" r="7" fill="url(#hg)"/><circle cx="11" cy="38" r="4" fill="#00d4ff" opacity=".5"/><circle cx="42" cy="14" r="3" fill="#00d4ff" opacity=".28"/><circle cx="42" cy="42" r="3" fill="#00d4ff" opacity=".28"/><line x1="11" y1="18" x2="26" y2="28" stroke="#00d4ff" stroke-width="1.2" opacity=".42"/><line x1="11" y1="38" x2="26" y2="28" stroke="#00d4ff" stroke-width="1.2" opacity=".42"/><line x1="42" y1="14" x2="26" y2="28" stroke="#00d4ff" stroke-width=".8" opacity=".18"/><line x1="42" y1="42" x2="26" y2="28" stroke="#00d4ff" stroke-width=".8" opacity=".18"/><line x1="60" y1="10" x2="60" y2="46" stroke="rgba(255,255,255,.09)" stroke-width=".9"/><text x="72" y="32" font-family="'Segoe UI',system-ui" font-weight="800" font-size="22" letter-spacing=".5" fill="white">GITS</text><line x1="72" y1="37" x2="152" y2="37" stroke="rgba(255,255,255,.08)" stroke-width=".8"/><text x="72" y="47" font-family="'Segoe UI',system-ui" font-weight="400" font-size="10" letter-spacing="2.6" fill="#4a5568">TEKNOLOJİ</text><defs><radialGradient id="hg"><stop offset="0%" stop-color="#fff" stop-opacity=".4"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient></defs></symbol>
+<symbol id="L-ft" viewBox="0 0 152 38"><circle cx="9" cy="12" r="3.2" fill="#00d4ff" opacity=".5"/><circle cx="19" cy="19" r="5.5" fill="#00d4ff"/><circle cx="9" cy="26" r="3.2" fill="#00d4ff" opacity=".5"/><circle cx="31" cy="11" r="2.2" fill="#00d4ff" opacity=".28"/><circle cx="31" cy="27" r="2.2" fill="#00d4ff" opacity=".28"/><line x1="9" y1="12" x2="19" y2="19" stroke="#00d4ff" stroke-width="1" opacity=".4"/><line x1="9" y1="26" x2="19" y2="19" stroke="#00d4ff" stroke-width="1" opacity=".4"/><line x1="31" y1="11" x2="19" y2="19" stroke="#00d4ff" stroke-width=".7" opacity=".18"/><line x1="31" y1="27" x2="19" y2="19" stroke="#00d4ff" stroke-width=".7" opacity=".18"/><line x1="44" y1="9" x2="44" y2="29" stroke="rgba(255,255,255,.08)" stroke-width=".8"/><text x="52" y="23" font-family="'Segoe UI',system-ui" font-weight="800" font-size="15.5" letter-spacing=".5" fill="white">GITS</text><line x1="52" y1="27" x2="98" y2="27" stroke="rgba(255,255,255,.07)" stroke-width=".7"/><text x="52" y="35" font-family="'Segoe UI',system-ui" font-weight="400" font-size="8.5" letter-spacing="2.2" fill="#3a4252">TEKNOLOJİ</text></symbol>
+</defs></svg>
+<!-- SITE -->
+<div id="site">
+<nav class="nav">
+  <svg width="124" height="32"><use href="#L-nav"/></svg>
+  <ul class="navl">
+    <li><button onclick="gs('ssvc')" id="nav1">Hizmetler</button></li>
+    <li><button onclick="gs('swhy')" id="nav2">Neden Biz</button></li>
+    <li><button onclick="gs('squote')" id="nav3">Teklif Al</button></li>
+    <li><button class="navcta" onclick="gs('scta')" id="nav4">İletişim</button></li>
+  </ul>
+</nav>
+<section class="hero">
+  <div class="hgrid"></div><div class="hglow"></div>
+  <div class="hbadge" id="heroBadge">Global IT Solutions</div>
+  <!-- badge text intentionally uses Latin I -->
+  <div style="margin-bottom:20px"><svg width="200" height="54"><use href="#L-hero"/></svg></div>
+  <h1 id="htit">Kurumsal IT<br>altyapınızı<br><em>güvence altına</em><br>alın.</h1>
+  <p class="hsub" id="hsub">Siber güvenlikten bulut hizmetlerine, L1–L3 destekten mühendislik çözümlerine kadar uçtan uca IT hizmetleri.</p>
+  <div class="hbtns">
+    <button class="btnp" id="heroBtnP" onclick="gs('squote')">Teklif Al</button>
+    <button class="btng" id="heroBtnS" onclick="gs('ssvc')">Hizmetleri Keşfet</button>
+  </div>
+  <div class="hstats">
+    <div><div class="snum" id="s1">200+</div><div class="slbl" id="s1l">Aktif hizmet paketi</div></div>
+    <div><div class="snum" id="s2">99.9%</div><div class="slbl" id="s2l">Uptime garantisi</div></div>
+    <div><div class="snum" id="s3">7/24</div><div class="slbl" id="s3l">Teknik destek</div></div>
+    <div><div class="snum" id="s4">20+</div><div class="slbl" id="s4l">Yıllık deneyim</div></div>
+  </div>
+</section>
+<div class="mq"><div class="mq-track" id="mqTrack"></div></div>
+<section class="sec" id="ssvc" style="background:#0a0c10">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;flex-wrap:wrap;gap:16px">
+    <div><div class="slabel" id="svcLabel">Hizmetlerimiz</div><h2 class="stitle" id="svcTitle">Tüm IT ihtiyaçlarınız<br>tek çatı altında</h2></div>
+    <p id="sdesc" style="max-width:320px;color:#5a6270;font-size:.88rem;line-height:1.68">Güvenlik, altyapı, destek ve danışmanlık alanlarında sertifikalı mühendislerle kurumsal düzeyde hizmet sunuyoruz.</p>
+  </div>
+  <div class="tabs" id="stabs"></div>
+  <div class="sgrid" id="sgrid"></div>
+  <div style="text-align:center;margin-top:26px"><button class="btng" id="svcCta" onclick="gs('squote')">Tüm hizmetler için teklif alın →</button></div>
+</section>
+<section class="sec" id="swhy" style="background:#0d0f14">
+  <div class="slabel" id="whyLabel">Neden GITS?</div>
+  <h2 class="stitle" id="whyTitle">Teknoloji ortağınız,<br>sadece bir satıcı değil</h2>
+  <div class="wgrid">
+    <div style="display:flex;flex-direction:column;gap:22px" id="whyFeats"></div>
+    <div class="mcard">
+      <div class="mcard-title"><span id="mcardTitle">Sistem Sağlık Durumu</span><span id="mcardSub" style="font-size:.66rem;color:rgba(0,212,255,.6)"></span></div>
+      <div id="metricRows"></div>
+      <div class="upt"><div><div class="ul" id="uptL1">Ortalama Uptime</div><div class="ul" id="uptL2" style="font-size:.64rem">Son 12 ay</div></div><div class="uv" id="uptV" style="color:#00d4ff">99.9%</div></div>
+    </div>
+  </div>
+</section>
+<section class="sec" id="squote" style="background:#0a0c10">
+  <div class="slabel" id="quoteLabel">Teklif Formu</div>
+  <h2 class="stitle" id="quoteTitle">Hizmetinizi seçin,<br>teklif alın</h2>
+  <div class="qlayout">
+    <div class="qsbar">
+      <h4 style="font-weight:700;font-size:.85rem;color:#e8eaf0;margin-bottom:8px">Seçilen Hizmetler</h4>
+      <p style="font-size:.77rem;color:#4a5568;line-height:1.65;margin-bottom:12px" id="quoteSideNote">Seçimleriniz burada özetlenir.</p>
+      <div class="qbox"><div class="qboxt">Seçimleriniz</div><div id="qlist"><span class="qemp">Henüz seçim yapılmadı.</span></div><div class="qtot" id="qtot"><span class="qtotl">Toplam</span><span class="qtotv" id="qtotv">—</span></div></div>
+    </div>
+    <div class="qform">
+      <div class="qsec"><div class="qst">👤 İletişim Bilgileri</div>
+        <div class="fgr"><div class="fg"><label>Ad Soyad *</label><input type="text" id="qn" placeholder="Adınız Soyadınız"></div><div class="fg"><label>Şirket</label><input type="text" id="qco" placeholder="Şirket Adı"></div></div>
+        <div class="fgr"><div class="fg"><label>E-posta *</label><input type="email" id="qe" placeholder="ornek@sirket.com"></div><div class="fg"><label>Telefon</label><input type="tel" id="qph" placeholder="+90 5xx xxx xx xx"></div></div>
+      </div>
+      <div class="qsec"><div class="qst">📦 Hizmet Seçimi (Adet Girebilirsiniz)</div>
+        <div class="psrch"><span class="psi">🔍</span><input type="text" id="psrch" placeholder="Hizmet ara..." oninput="window.rqp(this.value)"></div>
+        <div class="pscroll" id="pscroll"></div>
+      </div>
+      <div class="qsec"><div class="qst">⚡ Tek Seferlik / Ek Hizmetler</div>
+        <div class="oogrid" id="oogrid"></div>
+        <div style="margin-top:12px;border-top:1px solid rgba(255,255,255,.06);padding-top:12px">
+          <p style="font-size:.72rem;color:#4a5568;margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:.07em">Listede olmayan özel hizmet / ticket talebi</p>
+          <div id="customSvcList"></div>
+          <button class="ab abG abSm" onclick="addCSvc()" style="margin-top:6px">＋ Özel Hizmet / Ticket Ekle</button>
+        </div>
+      </div>
+      <div class="qsec"><div class="qst">⚙ Destek Seçenekleri *</div>
+        <div class="fgr">
+          <div class="fg"><label>Destek Seviyesi</label><div class="pills" id="plvl"><div class="pill on">L1 — Temel</div><div class="pill">L2 — Orta</div><div class="pill">L3 — İleri</div><div class="pill">Karma</div></div></div>
+          <div class="fg"><label>Destek Saatleri</label><div class="pills" id="phrs"><div class="pill on">8×5</div><div class="pill">12×5</div><div class="pill">7×24</div></div></div>
+        </div>
+        <div class="fgr" style="margin-top:6px">
+          <div class="fg"><label>Destek Türü</label><div class="pills" id="ptyp"><div class="pill on">Uzaktan</div><div class="pill">Yerinde</div><div class="pill">Hibrit</div></div></div>
+          <div class="fg"><label>Sözleşme Süresi</label><div class="pills" id="pcnt"><div class="pill on">Aylık</div><div class="pill">6 Aylık</div><div class="pill">Yıllık</div><div class="pill">2 Yıllık</div></div></div>
+        </div>
+        <div class="fg" style="margin-top:6px"><label>Destek Dili</label><div class="pills" id="plng"><div class="pill on">🇹🇷 Türkçe</div><div class="pill">🇬🇧 İngilizce</div><div class="pill">🇹🇷🇬🇧 Türkçe & İngilizce</div></div></div>
+      </div>
+      <div class="qsec"><div class="qst">📍 Lokasyonlar</div>
+        <div class="locrow"><div class="fg"><label>Lokasyon / Şehir</label><input type="text" id="locinp" placeholder="İstanbul — Levent Ofis" onkeydown="if(event.key==='Enter')addLoc()"></div><button class="locbtn" onclick="addLoc()">＋ Ekle</button></div>
+        <div id="loclist"></div>
+      </div>
+      <div class="qsec"><div class="qst">💳 Ödeme Koşulları ve Bilgilendirme</div>
+        <div class="ptabs">
+          <button class="ptab on" onclick="showPTab('monthly',this)">Aylık Ödeme</button>
+          <button class="ptab" onclick="showPTab('prepay',this)">Ön Ödeme</button>
+          <button class="ptab" onclick="showPTab('annual',this)">Yıllık Ödeme</button>
+        </div>
+        <div class="ptabc on" id="ptab-monthly">
+          <div class="paybox"><h4>Aylık Ödeme Modeli</h4>
+            <p>Hizmet bedeli her ayın ilk 5 iş günü içinde fatura edilir. Ödeme vadesi fatura tarihinden itibaren 10 iş günüdür.</p>
+            <p>Sözleşme süresi boyunca aylık ücret sabittir. Enflasyon/kur farkı yıllık yenileme döneminde güncellenir.</p>
+            <p>Vadesinde ödenmeyen tutulara aylık <strong style="color:#e8eaf0">%2</strong> gecikme faizi uygulanır.</p>
+          </div>
+        </div>
+        <div class="ptabc" id="ptab-prepay">
+          <div class="paybox"><h4>Ön Ödeme Modeli</h4>
+            <p>Tüm hizmet bedeli sözleşme başlangıcında peşin ödenir. Ön ödemeli paketlerde <strong style="color:#00d4ff">%10 indirim</strong> uygulanır.</p>
+            <p>İptal durumunda kullanılmayan süreye karşılık gelen tutar, <strong style="color:#e8eaf0">%15 idari kesinti</strong> sonrası iade edilir.</p>
+          </div>
+        </div>
+        <div class="ptabc" id="ptab-annual">
+          <div class="paybox"><h4>Yıllık Ödeme Modeli</h4>
+            <p>Yıllık sözleşmelerde ödeme 3 eşit taksit halinde yapılabilir (başlangıç, 4. ay, 8. ay) veya peşin ödeme ile <strong style="color:#00d4ff">%8 indirim</strong> uygulanır.</p>
+            <p>Yıllık sözleşme erken feshinde kalan sürenin <strong style="color:#e8eaf0">%20'si</strong> cezai bedel olarak uygulanır.</p>
+          </div>
+        </div>
+        <div class="caybox">
+          <h4>Cayma ve Cezai Koşullar</h4>
+          <p>Hizmet başlangıç tarihinden itibaren <strong style="color:#e8eaf0">14 gün</strong> içinde herhangi bir gerekçe göstermeksizin sözleşmeden cayma hakkı mevcuttur.</p>
+          <p>14 günlük cayma süresinden sonra yapılacak iptallerde; kalan sözleşme süresinin <strong style="color:#e8eaf0">%20'si</strong> cezai bedel olarak tahsil edilir.</p>
+          <p>SLA ihlali (aylık uptime ≤ %95) durumunda ilgili ay hizmet bedelinin <strong style="color:#e8eaf0">%20'si</strong> oranında indirim talep edilebilir. Sorumluluk sınırı hizmet bedelinin <strong style="color:#e8eaf0">3 (üç) katı</strong>dır.</p>
+          <p style="font-size:.72rem;color:#4a5568;margin-top:6px">Detaylar: <a href="#" onclick="showLegal('kvkk');return false" style="color:#00d4ff">KVKK Metni</a> · <a href="#" onclick="showLegal('terms');return false" style="color:#00d4ff">Kullanım Koşulları</a></p>
+        </div>
+        <div class="tcheck">
+          <input type="checkbox" id="termsAccept">
+          <label for="termsAccept"><a href="#" onclick="showLegal('privacy');return false">Gizlilik Politikası</a>'nı, <a href="#" onclick="showLegal('kvkk');return false">KVKK Aydınlatma Metni</a>'ni ve <a href="#" onclick="showLegal('terms');return false">Kullanım Koşulları</a>'nı okudum ve kabul ediyorum.</label>
+        </div>
+      </div>
+      <div class="qsec"><div class="qst">📝 Ek Bilgiler</div>
+        <div class="fg"><label>Talep Detayı</label><textarea id="qnotes" placeholder="Altyapınız, özel gereksinimleriniz ve beklentilerinizi belirtin..."></textarea></div>
+        <button class="qsub" id="qsubBtn" onclick="subQ()">Teklif Talebini Gönder →</button>
+        <div class="fsts" id="formStatus"></div>
+        <p class="qnote" id="quoteNote">En geç 24 saat içinde size özel fiyat teklifimizi iletiriz.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="cta" id="scta">
+  <div class="slabel" id="ctaLabel">İletişim</div>
+  <h2 class="stitle" id="ctaTitle">Hemen başlayalım</h2>
+  <p id="ctatxt">IT altyapınızı bir üst seviyeye taşımak için bugün bizimle iletişime geçin.</p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <button class="btnp" id="ctaBtnP" onclick="gs('squote')">Teklif İste</button>
+    <button class="btng" id="ctaBtnS">Bizi Arayın</button>
+  </div>
+</section>
+<footer class="ft">
+  <div class="ftg">
+    <div><svg width="142" height="36"><use href="#L-ft"/></svg><p id="fabout">Global IT Solutions olarak kurumsal IT hizmetlerinde güvenilir ortağınız.</p></div>
+    <div class="ftcol"><h5 id="ftc1h">Hizmetler</h5><ul id="ftc1"></ul></div>
+    <div class="ftcol"><h5 id="ftc2h">Kurumsal</h5><ul id="ftc2"></ul></div>
+    <div class="ftcol"><h5>Hukuki</h5><ul>
+      <li><a onclick="showLegal('privacy')">Gizlilik Politikası</a></li>
+      <li><a onclick="showLegal('kvkk')">KVKK Aydınlatma Metni</a></li>
+      <li><a onclick="showLegal('terms')">Kullanım Koşulları</a></li>
+    </ul></div>
+  </div>
+  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v4.2</span><span class="admin-hint">· #admin</span></div>
+</footer>
+</div>
+<!-- HUKUKİ SAYFALAR -->
+<div id="legal-privacy" class="page">
+<nav class="nav"><svg width="124" height="32"><use href="#L-nav"/></svg><button class="btng" style="padding:7px 16px;font-size:.8rem" onclick="hideLegal()">← Geri Dön</button></nav>
+<div class="legal-pg on">
+<h1>Gizlilik Politikası</h1><p class="legal-date">Son güncelleme: Mart 2026 — GITS Teknoloji Ltd. Şti.</p>
+<h2>1. Veri Sorumlusu</h2><p>GITS Teknoloji Ltd. Şti. ("GITS") olarak kişisel verilerinizin korunmasını birincil öncelik olarak benimsiyoruz. Bu politika, web sitemizi ve hizmetlerimizi kullanırken toplanan verilerin nasıl işlendiğini açıklar.</p>
+<h2>2. Toplanan Kişisel Veriler</h2><ul><li>Kimlik: Ad, soyad</li><li>İletişim: E-posta, telefon, şirket adı, lokasyon</li><li>Hizmet talep verileri: Seçilen hizmetler, ödeme modeli, destek gereksinimleri</li><li>Teknik: IP adresi, tarayıcı bilgisi, çerez verileri, ziyaret logları</li></ul>
+<h2>3. İşleme Amaçları</h2><ul><li>Hizmet teklifi hazırlamak ve sunmak</li><li>Sözleşme ilişkisinin kurulması ve yönetilmesi</li><li>Müşteri desteği sağlamak</li><li>Yasal yükümlülükleri yerine getirmek</li><li>Hizmet kalitesinin iyileştirilmesi (açık rıza ile)</li></ul>
+<h2>4. Veri Güvenliği</h2><p>Verileriniz Google Firebase altyapısında AES-256 şifrelemesiyle saklanmakta olup ISO/IEC 27001 standartlarına uygun teknik ve idari tedbirlerle korunmaktadır. Yetkisiz erişim, veri ihlali ve kayıplara karşı gerekli önlemler alınmıştır.</p>
+<h2>5. Üçüncü Taraflarla Paylaşım</h2><p>Kişisel verileriniz açık rızanız olmaksızın üçüncü taraflarla ticari amaçla paylaşılmaz. Aşağıdaki durumlarda paylaşım yapılabilir: (a) Google LLC — Firebase altyapı hizmeti, (b) Ödeme kuruluşları — fatura işlemleri, (c) Yetkili kamu kurumları — yasal zorunluluk.</p>
+<h2>6. Veri Saklama Süreleri</h2><ul><li>Müşteri verileri: Aktif hizmet süresi + 10 yıl (TTK md. 82)</li><li>Teklif/iletişim formları: 3 yıl</li><li>Teknik/log verileri: 2 yıl</li><li>Pazarlama verileri: Talep anında silinir</li></ul>
+<h2>7. KVKK Kapsamındaki Haklarınız</h2><p>6698 sayılı KVKK md. 11 kapsamında: verilerinizin işlenip işlenmediğini öğrenme, bilgi talep etme, düzeltme, silme, itiraz etme ve zararın giderilmesini talep etme haklarına sahipsiniz.</p>
+<h2>8. İletişim</h2><p>Sorularınız için: <strong style="color:#00d4ff">kvkk@gitsteknoloji.com</strong></p>
+</div></div>
+
+<div id="legal-kvkk" class="page">
+<nav class="nav"><svg width="124" height="32"><use href="#L-nav"/></svg><button class="btng" style="padding:7px 16px;font-size:.8rem" onclick="hideLegal()">← Geri Dön</button></nav>
+<div class="legal-pg on">
+<h1>KVKK Aydınlatma Metni</h1><p class="legal-date">6698 Sayılı Kişisel Verilerin Korunması Kanunu Kapsamında — Son güncelleme: Mart 2026</p>
+<h2>1. Veri Sorumlusu ve Temsilcisi</h2><p>Veri Sorumlusu: <strong style="color:#e8eaf0">GITS Teknoloji Ltd. Şti.</strong><br>Bu metin, 6698 sayılı KVKK'nın 10. maddesi kapsamında hazırlanmıştır.</p>
+<h2>2. İşlenen Kişisel Veriler</h2><ul><li><strong style="color:#e8eaf0">Kimlik Verileri:</strong> Ad, soyad</li><li><strong style="color:#e8eaf0">İletişim Verileri:</strong> E-posta, telefon, şirket, adres</li><li><strong style="color:#e8eaf0">Talep/İşlem Verileri:</strong> Hizmet talepleri, teklif detayları, ödeme modeli seçimleri</li><li><strong style="color:#e8eaf0">Teknik Veriler:</strong> IP adresi, tarayıcı bilgisi, çerez verileri</li></ul>
+<h2>3. Kişisel Verilerin İşlenme Amaçları ve Hukuki Sebepler</h2><ul><li>Hizmet teklifi hazırlanması — KVKK md. 5/2-c (sözleşme kurulması)</li><li>Sözleşme ifası ve müşteri ilişkileri — KVKK md. 5/2-c</li><li>Yasal yükümlülüklerin yerine getirilmesi — KVKK md. 5/2-ç</li><li>GITS'in meşru menfaatleri (hizmet kalitesi) — KVKK md. 5/2-f</li><li>Pazarlama faaliyetleri — KVKK md. 5/1 (açık rıza ile)</li></ul>
+<h2>4. Kişisel Verilerin Aktarılması</h2><p>Verileriniz; (a) <strong style="color:#e8eaf0">Google LLC</strong> — Firebase bulut altyapısı (KVKK md. 9 yurt dışı aktarım güvenceleri kapsamında), (b) <strong style="color:#e8eaf0">Bankacılık kuruluşları</strong> — ödeme işlemleri, (c) <strong style="color:#e8eaf0">Yetkili kamu kurumları</strong> — yasal zorunluluk halinde aktarılabilir.</p>
+<h2>5. KVKK Madde 11 Kapsamındaki Haklarınız</h2><ul><li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li><li>İşlenmişse buna ilişkin bilgi talep etme</li><li>İşlenme amacını ve amaca uygun kullanılıp kullanılmadığını öğrenme</li><li>Yurt içi/yurt dışı aktarıldığı üçüncü kişileri öğrenme</li><li>Eksik veya yanlış işlenmişse düzeltilmesini isteme</li><li>KVKK md. 7 kapsamında silinmesini veya yok edilmesini isteme</li><li>Aktarılan üçüncü kişilere bildirilmesini isteme</li><li>Otomatik sistemlerle işlenmesi halinde aleyhe sonuçlara itiraz etme</li><li>KVKK'ya aykırı işlenmesi nedeniyle uğranan zararın giderilmesini talep etme</li></ul>
+<h2>6. Başvuru Yöntemi ve Süresi</h2><p>Haklarınızı kullanmak için <strong style="color:#00d4ff">kvkk@gitsteknoloji.com</strong> adresine yazılı başvurabilirsiniz. Başvurular KVKK md. 13 gereği <strong style="color:#e8eaf0">30 gün</strong> içinde sonuçlandırılır.</p>
+<h2>7. Veri Güvenliği ve ISO 27001</h2><p>GITS Teknoloji, ISO/IEC 27001 Bilgi Güvenliği Yönetim Sistemi standartlarına uygun olarak kişisel verileri işlemekte; teknik altyapı, erişim kontrolleri ve idari tedbirler düzenli olarak güncellenmektedir. Veri ihlali durumunda KVKK md. 12/5 gereği <strong style="color:#e8eaf0">72 saat</strong> içinde Kişisel Verileri Koruma Kurulu'na bildirim yapılır.</p>
+</div></div>
+
+<div id="legal-terms" class="page">
+<nav class="nav"><svg width="124" height="32"><use href="#L-nav"/></svg><button class="btng" style="padding:7px 16px;font-size:.8rem" onclick="hideLegal()">← Geri Dön</button></nav>
+<div class="legal-pg on">
+<h1>Kullanım Koşulları ve Hizmet Sözleşmesi</h1><p class="legal-date">Son güncelleme: Mart 2026 — GITS Teknoloji Ltd. Şti.</p>
+<h2>1. Taraflar ve Kapsam</h2><p>Bu sözleşme, <strong style="color:#e8eaf0">GITS Teknoloji Ltd. Şti.</strong> ("Hizmet Sağlayıcı") ile hizmet talep eden gerçek veya tüzel kişi ("Müşteri") arasındadır. Web sitesi kullanımı, teklif süreçleri ve satın alınan tüm IT hizmetlerini kapsar.</p>
+<h2>2. Hizmet Kapsamı ve SLA Taahhüdü</h2><ul><li><strong style="color:#e8eaf0">Standart SLA:</strong> Aylık %99.5 uptime garantisi</li><li><strong style="color:#e8eaf0">Kritik Müdahale Süresi:</strong> 7/24 hizmetlerde maks. 4 saat; 8×5 hizmetlerde maks. 8 iş saati</li><li><strong style="color:#e8eaf0">Planlı Bakım:</strong> En az 48 saat öncesinden bildirim, aylık maks. 4 saat</li><li><strong style="color:#e8eaf0">SLA İhlali Tazminatı:</strong> Uptime %95'in altına düşerse ilgili ay bedelinin %20'si indirim olarak uygulanır</li></ul>
+<h2>3. Ödeme Koşulları</h2><ul><li>Faturalar her ayın 1. günü kesilir; ödeme vadesi 10 iş günüdür</li><li>Vadesinde ödenmeyen tutulara aylık %2 gecikme faizi uygulanır</li><li>30 günü aşan gecikmede hizmet askıya alınabilir</li><li>Ön ödemeli paketlerde %10, yıllık peşin ödemelerde %8 indirim uygulanır</li></ul>
+<h2>4. Cayma Hakkı ve Sözleşme Feshi</h2><ul><li>Hizmet başlangıcından itibaren <strong style="color:#00d4ff">14 gün</strong> içinde cayma hakkı mevcuttur (tüketici sözleşmeleri)</li><li>14 günlük süre sonrasındaki fesihlerde kalan sözleşme süresinin <strong style="color:#e8eaf0">%20'si</strong> cezai bedel olarak uygulanır</li><li>Müşterinin sözleşme ihlali durumunda Hizmet Sağlayıcı 7 gün önceden bildirerek feshedebilir</li><li>Mücbir sebep hallerinde (doğal afet, pandemi, yasal engel) cayma/ceza uygulanmaz</li></ul>
+<h2>5. Gizlilik ve Fikri Mülkiyet</h2><p>Taraflar hizmet süresince ve akabinde 5 yıl boyunca birbirlerinin gizli bilgilerini üçüncü taraflarla paylaşmamayı taahhüt eder. GITS tarafından geliştirilen sistem tasarımları, dökümantasyonlar ve yazılımlar Hizmet Sağlayıcı'ya aittir.</p>
+<h2>6. Sorumluluk Sınırı</h2><p>GITS Teknoloji'nin herhangi bir zarardan sorumluluğu, ilgili dönem hizmet bedelinin <strong style="color:#e8eaf0">3 (üç) katı</strong> ile sınırlıdır. Dolaylı zararlar, gelir kayıpları ve üçüncü kişi talepleri bu limitin dışındadır.</p>
+<h2>7. Uygulanacak Hukuk ve Yetki</h2><p>Bu sözleşme Türk Hukuku'na tabidir. Uyuşmazlıklarda öncelikle arabuluculuk yoluna başvurulur; çözüme kavuşturulamazsa <strong style="color:#e8eaf0">İstanbul Merkez Mahkemeleri ve İcra Daireleri</strong> yetkilidir.</p>
+<h2>8. İletişim</h2><p>Sorularınız için: <strong style="color:#00d4ff">info@gitsteknoloji.com</strong></p>
+</div></div>
+
+<!-- MODALS -->
+<div class="mo" id="sucmo"><div class="mbox"><div class="mico">✓</div><h3>Talebiniz Alındı!</h3><p id="sucMsg">Uzman ekibimiz en geç 24 saat içinde size özel fiyat teklifini sunacaktır.</p><button class="mcls" onclick="document.getElementById('sucmo').classList.remove('on')">Tamam</button></div></div>
+<div class="rdmo" id="rdmo"><div class="rdbox" id="rdbox"></div></div>
+<!-- ADMIN -->
+<div id="adm" class="page" style="position:relative">
+<div class="lscr" id="lscr">
+  <div class="authsc on" id="scLogin"><div class="lbox">
+    <div style="margin-bottom:16px"><svg width="130" height="32"><use href="#L-nav"/></svg></div>
+    <h2>Admin Paneli</h2><p class="lsub">Firebase hesabınızla giriş yapın</p>
+    <div class="lf"><label>E-posta</label><input type="email" id="lu" placeholder="admin@gitsteknoloji.com" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <div class="lf"><label>Şifre</label><input type="password" id="lp" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <button class="lbtn" id="loginBtn" onclick="doLogin()">Giriş Yap</button>
+    <div class="lerr" id="loginErr">Hatalı e-posta veya şifre.</div>
+    <p style="text-align:center;margin-top:10px"><button class="llink" onclick="showAS('scReset')">Şifremi unuttum</button></p>
+  </div></div>
+  <div class="authsc" id="scReset"><div class="lbox">
+    <h2>Şifre Sıfırla</h2><p class="lsub">E-postanıza sıfırlama bağlantısı gönderilecek.</p>
+    <div class="lf"><label>E-posta</label><input type="email" id="resetEmail" placeholder="admin@gitsteknoloji.com"></div>
+    <button class="lbtn" onclick="sendReset()">Sıfırlama E-postası Gönder</button>
+    <div class="lerr" id="resetErr">E-posta gönderilemedi.</div>
+    <div id="resetOk" style="color:#22c55e;font-size:.73rem;text-align:center;margin-top:7px;display:none">✓ Gönderildi!</div>
+    <p style="text-align:center;margin-top:8px"><button class="llink" onclick="showAS('scLogin')">← Geri Dön</button></p>
+  </div></div>
+</div>
+<div class="asb">
+  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v4.2</small></div>
+  <nav class="asbnav" id="admNav"></nav>
+  <div class="asbft">
+    <button onclick="closeAdm()">🌐 Siteye Dön</button>
+    <button onclick="doLogout()" style="color:#ef4444">🚪 Çıkış Yap</button>
+  </div>
+</div>
+<div class="amain">
+  <div class="atb">
+    <h1 id="atit">Gösterge Paneli</h1>
+    <div class="atb-right">
+      <span class="sbadge" id="syncBadge">⬤ Bağlı</span>
+      <div class="uchip" id="userChip"></div>
+      <span class="atb-hash">#admin</span>
+    </div>
+  </div>
+  <div class="acont" id="admContent"></div>
+</div>
+</div>
+
+<div class="fbsync" id="fbSync">⟳ Firebase'e kaydediliyor...</div>
+<div class="toast" id="toast"><span style="color:#22c55e">✓</span><span id="tmsg"></span></div>
+<div class="cfm" id="cfm"><div class="cfmb"><h3 id="cfmTitle">Emin misiniz?</h3><p id="cfmMsg"></p><div class="cfma"><button class="ab abG" onclick="closeCfm()">İptal</button><button class="ab abR" id="cfmOk">Evet</button></div></div></div>
+
+<script>
+/* ═══════════════════════════════════════
+   GITS TEKNOLOJİ v4.2 — localStorage tabanlı
+   Firebase kaldırıldı, tüm veri tarayıcıda saklanır
+   ═══════════════════════════════════════ */
+
+var CY = new Date().getFullYear();
+var CM = {blue:'#00d4ff',green:'#22c55e',yellow:'#f59e0b',red:'#ef4444'};
+var CB = {blue:'linear-gradient(90deg,#0055cc,#00d4ff)',green:'linear-gradient(90deg,#15803d,#22c55e)',yellow:'linear-gradient(90deg,#b45309,#f59e0b)',red:'linear-gradient(90deg,#b91c1c,#ef4444)'};
+
+var ROLES = {
+  superadmin:{label:'Süper Admin',perms:['dash','requests','users','cats','prods','oneoff','marquee','metrics','hero','svc','why','quote','cta','nav','emailjs','bak']},
+  editor:{label:'Editör',perms:['dash','requests','cats','prods','oneoff','marquee','metrics','hero','svc','why','quote','cta','nav']},
+  viewer:{label:'Gözlemci',perms:['dash','requests']}
+};
+
+var NAVDEF = [
+  {id:'dash',icon:'📊',label:'Gösterge Paneli',grp:'Genel'},
+  {id:'requests',icon:'📩',label:'Teklif Talepleri',grp:'Genel'},
+  {id:'users',icon:'👥',label:'Kullanıcı Yönetimi',grp:'Kullanıcılar'},
+  {id:'cats',icon:'🏷',label:'Kategoriler',grp:'Ürün'},
+  {id:'prods',icon:'📦',label:'Hizmetler',grp:'Ürün'},
+  {id:'oneoff',icon:'⚡',label:'Tek Seferlik',grp:'Ürün'},
+  {id:'marquee',icon:'📡',label:'Kayan Band',grp:'Görünüm'},
+  {id:'metrics',icon:'📈',label:'Sistem Sağlık',grp:'Görünüm'},
+  {id:'hero',icon:'🖼',label:'Hero',grp:'İçerik'},
+  {id:'svc',icon:'📋',label:'Hizmetler Bölümü',grp:'İçerik'},
+  {id:'why',icon:'✅',label:'Neden Biz',grp:'İçerik'},
+  {id:'quote',icon:'📝',label:'Teklif Formu',grp:'İçerik'},
+  {id:'cta',icon:'📣',label:'CTA & Footer',grp:'İçerik'},
+  {id:'nav',icon:'🔗',label:'Navigasyon',grp:'İçerik'},
+  {id:'emailjs',icon:'📧',label:'EmailJS Ayarları',grp:'Sistem'},
+  {id:'bak',icon:'💾',label:'Yedek & Sıfırla',grp:'Sistem'},
+];
+
+var DD = {
+cats:[{id:'c1',name:'Güvenlik',icon:'🛡'},{id:'c2',name:'Bulut',icon:'☁'},{id:'c3',name:'Veritabanı',icon:'🗄'},{id:'c4',name:'Network',icon:'🌐'},{id:'c5',name:'Yazılım',icon:'💻'},{id:'c6',name:'Danışmanlık',icon:'💼'},{id:'c7',name:'Destek',icon:'🎫'},{id:'c8',name:'Dijital',icon:'📱'}],
+prods:[
+{id:1,name:'Siber Güvenlik Hizmetleri',cat:'Güvenlik',price:0,desc:'Kurumunuzu dijital tehditlere karşı koruyun.',detail:'Tehdit istihbaratı, güvenlik açığı yönetimi, SOC hizmetleri ve proaktif izleme.',icon:'🛡',marquee:true},
+{id:2,name:'Firewall Bakım & Destek',cat:'Güvenlik',price:0,desc:'Fortinet, Cisco ve Sophos mühendislik desteği.',detail:'Politika yönetimi, firmware güncelleme, log analizi ve 7/24 izleme.',icon:'🔥',marquee:true},
+{id:3,name:'SECaaS Hizmetleri',cat:'Güvenlik',price:0,desc:'Security-as-a-Service esnek güvenlik.',detail:'Bulut tabanlı güvenlik yönetimi; DLP, IDS/IPS ve SIEM entegrasyonu.',icon:'🔐',marquee:true},
+{id:4,name:'ATP & Sandbox',cat:'Güvenlik',price:0,desc:'Advanced Threat Protection ve tehdit analizi.',detail:'Bilinmeyen tehditlerin izole ortamda test edilmesi.',icon:'⚡',marquee:true},
+{id:5,name:'SASE Hizmetleri',cat:'Güvenlik',price:0,desc:'Secure Access Service Edge.',detail:'Bulut tabanlı ağ güvenliği; SD-WAN, CASB ve ZTNA entegrasyonu.',icon:'🌐',marquee:false},
+{id:6,name:'ZTNA / PAM',cat:'Güvenlik',price:0,desc:'Zero Trust & Privileged Access Management.',detail:'Kimlik doğrulama, ayrıcalıklı erişim yönetimi ve sıfır güven mimarisi.',icon:'🔑',marquee:false},
+{id:7,name:'Email Security Gateway',cat:'Güvenlik',price:0,desc:'E-posta güvenliği ve antispam.',detail:'Anti-phishing, spam filtresi, e-posta şifreleme ve DLP.',icon:'📧',marquee:true},
+{id:8,name:'Cloud Danışmanlığı',cat:'Bulut',price:0,desc:'IaaS, PaaS, SaaS geçiş ve yönetim.',detail:'Cloud stratejisi, mimari tasarım, maliyet optimizasyonu ve multi-cloud yönetimi.',icon:'☁',marquee:true},
+{id:9,name:'IaaS / PaaS / SaaS',cat:'Bulut',price:0,desc:'Katmanlı bulut hizmetleri.',detail:'Azure, AWS, GCP üzerinde altyapı, platform ve yazılım hizmetleri.',icon:'🖥',marquee:true},
+{id:10,name:'CDN & SSL',cat:'Bulut',price:0,desc:'İçerik dağıtım ağı ve sertifika yönetimi.',detail:'Global CDN yapılandırması, SSL/TLS sertifika yönetimi.',icon:'🔒',marquee:false},
+{id:11,name:'Veri Tabanı Bakım',cat:'Veritabanı',price:0,desc:'Oracle ve diğer VT optimizasyon.',detail:'Performance tuning, backup/recovery, yama yönetimi ve 7/24 izleme.',icon:'🗄',marquee:true},
+{id:12,name:'Oracle Veritabanı',cat:'Veritabanı',price:0,desc:'Oracle DB kurulum ve bakım.',detail:'RAC, Data Guard, RMAN, AWR analizi ve lisans danışmanlığı.',icon:'🔶',marquee:true},
+{id:13,name:'Veri Kurtarma',cat:'Veritabanı',price:0,desc:'Veri kaybı durumlarında kurtarma.',detail:'Fiziksel/mantıksal bozulma, silinen veri kurtarma, yedek test ve DR planı.',icon:'💾',marquee:true},
+{id:14,name:'Cisco Mühendislik',cat:'Network',price:0,desc:'Cisco altyapısında sertifikalı mühendislik.',detail:'Router/switch konfigürasyonu, MPLS, BGP, OSPF tasarımı.',icon:'🌐',marquee:true},
+{id:15,name:'HPE Aruba / Fortinet',cat:'Network',price:0,desc:'Wireless, wired ve güvenlik network.',detail:'Campus ve branch ağ tasarımı, WiFi optimizasyonu, SD-Branch çözümleri.',icon:'📡',marquee:true},
+{id:16,name:'SCADA & Endüstriyel',cat:'Network',price:0,desc:'Endüstriyel kontrol sistemleri.',detail:'OT/IT güvenliği, endüstriyel protokol entegrasyonu ve izleme sistemleri.',icon:'🏭',marquee:false},
+{id:17,name:'Microsoft Mühendislik',cat:'Yazılım',price:0,desc:'Azure, M365 ve Microsoft ürünleri.',detail:'Active Directory, Exchange, Teams, Azure AD ve Microsoft 365 yönetimi.',icon:'💻',marquee:true},
+{id:18,name:'SAP Danışmanlık',cat:'Yazılım',price:0,desc:'SAP ERP kurulum ve danışmanlık.',detail:'SAP S/4HANA, ECC, ABAP geliştirme, basis ve modül danışmanlığı.',icon:'📋',marquee:false},
+{id:19,name:'LOGO Danışmanlık',cat:'Yazılım',price:0,desc:'LOGO yazılım danışmanlık.',detail:'LOGO Go, Tiger, GO3 kurulum, özelleştirme ve entegrasyon.',icon:'📊',marquee:false},
+{id:20,name:'Veeam & Backup',cat:'Yazılım',price:0,desc:'Veeam backup ve replikasyon.',detail:'Yedekleme politikası, Veeam B&R kurulum, deduplication ve offsite backup.',icon:'📀',marquee:false},
+{id:21,name:'ISO/IEC 27001 Danışmanlık',cat:'Danışmanlık',price:0,desc:'Bilgi güvenliği yönetim sistemi.',detail:'Gap analizi, BGYS kurulum, iç denetim, belgelendirme süreci danışmanlığı.',icon:'📜',marquee:true},
+{id:22,name:'IT Hizmetleri Danışmanlığı',cat:'Danışmanlık',price:0,desc:'Genel IT strateji ve danışmanlık.',detail:'IT roadmap, bütçe planlama, vendor yönetimi ve dijital dönüşüm danışmanlığı.',icon:'💼',marquee:true},
+{id:23,name:'KVKK Uyum Danışmanlığı',cat:'Danışmanlık',price:0,desc:'Kişisel veri koruma uyum.',detail:'Envanter hazırlama, süreç tasarımı, aydınlatma metni ve politika oluşturma.',icon:'⚖',marquee:false},
+{id:24,name:'IT Personel Kiralama',cat:'Destek',price:0,desc:'Deneyimli IT uzmanı temini.',detail:'L1/L2/L3 mühendis, sistem yöneticisi ve güvenlik uzmanı kiralama.',icon:'👥',marquee:true},
+{id:25,name:'Level 1-2-3 Destek',cat:'Destek',price:0,desc:'Tam kapsamlı teknik destek.',detail:'L1 kullanıcı desteği, L2 uygulama/sistem, L3 ileri mühendislik desteği.',icon:'🎫',marquee:true},
+{id:26,name:'Ticket Bazlı Destek',cat:'Destek',price:0,desc:'Esnek ticket sistemli destek.',detail:'ITSM tabanlı olay yönetimi; SLA garantili ticket çözüm hizmetleri.',icon:'🎟',marquee:false},
+{id:27,name:'SEO & Dijital Pazarlama',cat:'Dijital',price:0,desc:'Arama motoru optimizasyonu.',detail:'Teknik SEO, içerik optimizasyonu, backlink stratejisi ve analitik raporlama.',icon:'🔍',marquee:true},
+],
+oneoff:[
+{id:'o1',name:'Firmware Upgrade',price:0,desc:'Cihaz yazılımı güncelleme'},
+{id:'o2',name:'Domain Geçiş / Upgrade',price:0,desc:'Active Directory domain geçiş'},
+{id:'o3',name:'Datacenter Taşıma',price:0,desc:'Veri merkezi fiziksel taşıma'},
+{id:'o4',name:'Sunucu Kurulumu',price:0,desc:'Rack, donanım kurulum'},
+{id:'o5',name:'Storage Kurulumu',price:0,desc:'Depolama sistemi kurulum'},
+{id:'o6',name:'Penetrasyon Testi',price:0,desc:'Güvenlik açığı sızma testi'},
+{id:'o7',name:'ISO 27001 Denetimi',price:0,desc:'Bilgi güvenliği denetim'},
+{id:'o8',name:'IT Bütçe Danışmanlığı',price:0,desc:'Yıllık IT bütçe planlama'},
+{id:'o9',name:'Network Tasarımı',price:0,desc:'Yeni altyapı network tasarımı'},
+{id:'o10',name:'Felaket Kurtarma (DRP)',price:0,desc:'DR planı hazırlama ve test'},
+{id:'o11',name:'Bulut Göç Projesi',price:0,desc:'On-premise den buluta geçiş'},
+{id:'o12',name:'Microsoft 365 Geçiş',price:0,desc:'E-posta ve ofis çözümü geçiş'},
+{id:'o13',name:'Sanallaştırma Kurulumu',price:0,desc:'VMware / Hyper-V kurulum'},
+{id:'o14',name:'IT Eğitim Hizmetleri',price:0,desc:'L1/L2/L3 personel eğitimi'},
+],
+why:[
+{num:'01',title:'Sertifikalı Mühendisler',desc:'Cisco, Fortinet, Microsoft, HPE ve Oracle sertifikalı uzman mühendislerden oluşan bir ekiple çalışın.'},
+{num:'02',title:'Esnek Hizmet Modeli',desc:'Aylık abonelik, ticket bazlı veya proje bazlı — 20 yıllık deneyimle ihtiyacınıza göre özelleştirilmiş çözümler.'},
+{num:'03',title:'7/24 Proaktif İzleme',desc:'Sistemleriniz sürekli izleniyor. Bir sorun oluşmadan önce tespit edip müdahale ediyoruz.'},
+{num:'04',title:'Uçtan Uca Sorumluluk',desc:'Tasarımdan devreye almaya, bakımdan raporlamaya kadar tüm sürecin sorumluluğunu üstleniyoruz.'}
+],
+metrics:{cardTitle:'Sistem Sağlık Durumu',cardSub:'',rows:[{name:'Ağ Güvenliği',val:'98%',pct:98,color:'blue'},{name:'Siber Tehdit Önleme',val:'99.6%',pct:99,color:'green'},{name:'Yedekleme Başarısı',val:'100%',pct:100,color:'green'},{name:'Müdahale Süresi',val:'<15 dk',pct:90,color:'blue'}],uptL1:'Ortalama Uptime',uptL2:'Son 12 ay',uptV:'99.9%',uptC:'blue'},
+cont:{},ej:{pk:'',sid:'',tid:'',to:''},mqSpeed:25
+};
+
+/* ── VERİ (localStorage) ── */
+var STORAGE_KEY = 'gits_data_v36';
+
+function loadData() {
+  try {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      var d = JSON.parse(raw);
+      cats = d.cats || DD.cats.slice();
+      prods = d.prods || DD.prods.slice();
+      oneoff = d.oneoff || DD.oneoff.slice();
+      why = d.why || DD.why.slice();
+      metrics = d.metrics || JSON.parse(JSON.stringify(DD.metrics));
+      cont = d.cont || {};
+      ej = d.ej || {pk:'',sid:'',tid:'',to:''};
+      mqSpeed = d.mqSpeed || 25;
+    } else {
+      resetToDefaults();
+      saveData();
+    }
+    nid = Math.max.apply(null, prods.map(function(p){return +p.id||0;}).concat([299])) + 1;
+  } catch(e) {
+    resetToDefaults();
+  }
+}
+
+function resetToDefaults() {
+  cats = JSON.parse(JSON.stringify(DD.cats));
+  prods = JSON.parse(JSON.stringify(DD.prods));
+  oneoff = JSON.parse(JSON.stringify(DD.oneoff));
+  why = JSON.parse(JSON.stringify(DD.why));
+  metrics = JSON.parse(JSON.stringify(DD.metrics));
+  cont = {};
+  ej = {pk:'',sid:'',tid:'',to:''};
+  mqSpeed = 25;
+}
+
+function saveData() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      cats:cats,prods:prods,oneoff:oneoff,why:why,
+      metrics:metrics,cont:cont,ej:ej,mqSpeed:mqSpeed,
+      upd:new Date().toISOString()
+    }));
+  } catch(e) { console.error('Kayıt hatası:', e); }
+}
+
+/* Teklif talepleri ayrı key'de */
+var REQ_KEY = 'gits_requests_v36';
+function loadRequests() {
+  try { return JSON.parse(localStorage.getItem(REQ_KEY) || '[]'); } catch(e) { return []; }
+}
+function saveRequests(list) {
+  localStorage.setItem(REQ_KEY, JSON.stringify(list));
+}
+
+async function saveAll() {
+  saveData();
+  toast("Kaydedildi ✓");
+  rs();
+}
+
+/* ── DURUM ── */
+var cats=[],prods=[],oneoff=[],why=[],metrics={},cont={},ej={pk:'',sid:'',tid:'',to:''},mqSpeed=25;
+var currentUser=null,cfmCb=null,nid=300,pending=0;
+var selP={},selOO=new Set(),locs=[],customSvcs=[];
+
+/* ── YARDIMCILAR ── */
+function x(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function gv(id){var el=document.getElementById(id);return el?el.value:'';}
+function sv(id,v){var el=document.getElementById(id);if(el)el.value=v;}
+function ci(n){var c=cats.find(function(c){return c.name===n;});return c?c.icon||'':'';}
+function ini(n){return n.split(' ').map(function(w){return w[0];}).join('').toUpperCase().slice(0,2);}
+function hp(p){return currentUser&&ROLES[currentUser.role]&&ROLES[currentUser.role].perms.indexOf(p)>-1;}
+function fmtD(d){try{return new Date(d).toLocaleString('tr-TR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});}catch(e){return d;}}
+
+function gs(id) {
+  var el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior:'smooth'});
+}
+
+function showLegal(p) {
+  var m = {privacy:'#privacy',kvkk:'#kvkk',terms:'#terms'};
+  location.hash = m[p] || '';
+  window.scrollTo(0,0);
+}
+function hideLegal() { location.hash=''; window.scrollTo(0,0); }
+
+/* ── AUTH (localStorage tabanlı) ── */
+var USERS_KEY = 'gits_users_v36';
+var SESSION_KEY = 'gits_session_v36';
+
+function loadUsers() {
+  try { return JSON.parse(localStorage.getItem(USERS_KEY) || '[]'); } catch(e) { return []; }
+}
+function saveUsers(list) {
+  localStorage.setItem(USERS_KEY, JSON.stringify(list));
+}
+function getSession() {
+  try { return JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); } catch(e) { return null; }
+}
+function setSession(user) {
+  localStorage.setItem(SESSION_KEY, JSON.stringify(user));
+}
+function clearSession() {
+  localStorage.removeItem(SESSION_KEY);
+}
+
+function doLogin() {
+  var email = gv('lu').trim();
+  var pass = gv('lp');
+  var btn = document.getElementById('loginBtn');
+  document.getElementById('loginErr').style.display = 'none';
+  btn.disabled = true; btn.textContent = 'Giriş yapılıyor...';
+
+  var users = loadUsers();
+  /* İlk girişte otomatik süper admin oluştur */
+  if (users.length === 0) {
+    var newUser = {email:email, pass:pass, role:'superadmin', name:email.split('@')[0]};
+    users.push(newUser);
+    saveUsers(users);
+  }
+
+  var user = users.find(function(u) { return u.email===email && u.pass===pass; });
+  if (user) {
+    currentUser = {email:user.email, name:user.name||user.email.split('@')[0], role:user.role};
+    setSession(currentUser);
+    document.getElementById('lscr').style.display = 'none';
+    buildNav(); renderChip(); renderDash();
+    updBadge();
+  } else {
+    document.getElementById('loginErr').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Giriş Yap';
+  }
+}
+
+function doLogout() {
+  currentUser = null;
+  clearSession();
+  document.getElementById('lscr').style.display = 'flex';
+  showAS('scLogin');
+}
+
+function showAS(id) {
+  document.querySelectorAll('.authsc').forEach(function(s){s.classList.remove('on');});
+  var el = document.getElementById(id);
+  if (el) el.classList.add('on');
+}
+
+function sendReset() {
+  /* localStorage tabanlı sistemde şifre sıfırlama yok */
+  document.getElementById('resetOk').style.display = 'block';
+  document.getElementById('resetOk').textContent = 'Şifrenizi admin panelinden sıfırlayabilirsiniz.';
+}
+
+/* ── HASH ROUTING ── */
+function checkHash() {
+  var h = location.hash;
+  /* Site HER ZAMAN görünür - asla gizleme */
+  document.getElementById('site').style.display = 'block';
+  document.getElementById('adm').style.display = 'none';
+  ['legal-privacy','legal-kvkk','legal-terms'].forEach(function(id){
+    var el=document.getElementById(id);if(el)el.style.display='none';
+  });
+  if(h==='#admin'){
+    document.getElementById('site').style.display='none';
+    document.getElementById('adm').style.display='flex';
+    var lscr=document.getElementById('lscr');
+    if(lscr)lscr.style.display=currentUser?'none':'flex';
+  } else if(h==='#privacy'){
+    document.getElementById('site').style.display='none';
+    document.getElementById('legal-privacy').style.display='block';
+  } else if(h==='#kvkk'){
+    document.getElementById('site').style.display='none';
+    document.getElementById('legal-kvkk').style.display='block';
+  } else if(h==='#terms'){
+    document.getElementById('site').style.display='none';
+    document.getElementById('legal-terms').style.display='block';
+  }
+}
+window.addEventListener('hashchange', checkHash);
+function closeAdm() { location.hash=''; rs(); }
+
+/* ── ADMIN NAV ── */
+function buildNav() {
+  var nav = document.getElementById('admNav');
+  if (!nav) return;
+  nav.innerHTML = '';
+  var perms = (ROLES[currentUser ? currentUser.role : 'viewer'] || {perms:[]}).perms;
+  var lastG = '';
+  NAVDEF.forEach(function(item) {
+    if (item.grp !== lastG) {
+      var g = document.createElement('div');
+      g.className = 'asbg';
+      g.textContent = item.grp;
+      nav.appendChild(g);
+      lastG = item.grp;
+    }
+    var btn = document.createElement('button');
+    var ok = perms.indexOf(item.id) > -1;
+    btn.className = 'ai' + (ok ? '' : ' locked');
+    btn.dataset.id = item.id;
+    btn.innerHTML = item.icon + ' ' + item.label;
+    if (item.id === 'requests') {
+      var b = document.createElement('span');
+      b.id = 'reqNavBadge'; b.className = 'nbadge'; b.style.display = 'none';
+      btn.appendChild(b);
+    }
+    if (ok) btn.onclick = function() { sp(this.dataset.id); };
+    else btn.title = 'Yetkiniz yok';
+    nav.appendChild(btn);
+  });
+  updBadge();
+}
+
+function renderChip() {
+  var uc = document.getElementById('userChip');
+  if (!uc || !currentUser) return;
+  var r = ROLES[currentUser.role] || {};
+  uc.innerHTML = '<div class="uav">'+ini(currentUser.name)+'</div>' +
+    '<span style="font-size:.78rem;color:#e8eaf0;font-weight:500">'+x(currentUser.name)+'</span>' +
+    '<span style="font-size:.66rem;padding:2px 7px;border-radius:100px;font-weight:600;background:rgba(0,212,255,.12);color:#00d4ff">'+(r.label||'?')+'</span>';
+}
+
+function updBadge() {
+  var reqs = loadRequests();
+  pending = reqs.filter(function(r){return r.status==='new';}).length;
+  var b = document.getElementById('reqNavBadge');
+  if (b) { b.textContent = pending; b.style.display = pending > 0 ? 'block' : 'none'; }
+}
+
+var PT = {dash:'Gösterge Paneli',requests:'Teklif Talepleri',users:'Kullanıcılar',cats:'Kategoriler',prods:'Hizmetler',oneoff:'Tek Seferlik',marquee:'Kayan Band',metrics:'Sistem Sağlık',hero:'Hero',svc:'Hizmetler Bölümü',why:'Neden Biz',quote:'Teklif Formu',cta:'CTA & Footer',nav:'Navigasyon',emailjs:'EmailJS',bak:'Yedek & Sıfırla'};
+
+function sp(id) {
+  if (!hp(id)) {
+    document.getElementById('admContent').innerHTML = '<div style="text-align:center;padding:60px;color:#4a5568"><div style="font-size:2.5rem;margin-bottom:12px">🔒</div><h3>Erişim Kısıtlı</h3></div>';
+    return;
+  }
+  document.querySelectorAll('.ai').forEach(function(b){b.classList.toggle('on', b.dataset.id===id);});
+  document.getElementById('atit').textContent = PT[id] || id;
+  var fn = {dash:renderDash,requests:renderRequests,users:renderUsers,cats:renderCats,prods:renderProds,oneoff:renderOneoff,marquee:renderMarquee,metrics:renderMetrics,hero:renderHero,svc:renderSvc,why:renderWhy,quote:renderQuote,cta:renderCta,nav:renderNav,emailjs:renderEmailJS,bak:renderBak};
+  if (fn[id]) fn[id]();
+}
+
+/* ── DASH ── */
+function renderDash() {
+  var reqs = loadRequests();
+  var newCount = reqs.filter(function(r){return r.status==='new';}).length;
+  document.getElementById('admContent').innerHTML =
+    '<div class="asts">' +
+    '<div class="ast'+(newCount>0?' red':'')+'"><div class="av" style="'+(newCount>0?'color:#ef4444':'')+'">'+newCount+'</div><div class="al">Bekleyen Teklif</div></div>' +
+    '<div class="ast"><div class="av">'+prods.length+'</div><div class="al">Hizmet</div></div>' +
+    '<div class="ast"><div class="av">'+cats.length+'</div><div class="al">Kategori</div></div>' +
+    '<div class="ast"><div class="av">'+(ej.pk?'✓':'✗')+'</div><div class="al">EmailJS</div></div>' +
+    '</div>' +
+    (newCount>0?'<div style="background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.25);border-radius:9px;padding:14px 18px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:1.4rem">🔔</span><div><p style="font-size:.84rem;font-weight:700;color:#f87171">'+newCount+' yeni teklif talebi bekliyor!</p></div></div><button class="ab abR" onclick="sp(\'requests\')">Görüntüle →</button></div>':'') +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">' +
+    '<div class="acard"><div class="ahead"><h3>Oturum Bilgisi</h3></div><div class="abody" style="padding:14px;display:flex;flex-direction:column;gap:7px">' +
+    '<div style="display:flex;justify-content:space-between;padding:7px 11px;background:#141720;border-radius:6px"><span style="font-size:.79rem;color:#c8cdd6">Kullanıcı</span><span style="font-size:.72rem;color:#00d4ff;font-weight:600">'+x(currentUser?currentUser.email:'—')+'</span></div>' +
+    '<div style="display:flex;justify-content:space-between;padding:7px 11px;background:#141720;border-radius:6px"><span style="font-size:.79rem;color:#c8cdd6">Rol</span><span style="font-size:.72rem;color:#00d4ff;font-weight:600">'+(ROLES[currentUser?currentUser.role:'viewer']||{label:'—'}).label+'</span></div>' +
+    '<div style="display:flex;justify-content:space-between;padding:7px 11px;background:#141720;border-radius:6px"><span style="font-size:.79rem;color:#c8cdd6">Veri Depolama</span><span style="font-size:.72rem;color:#22c55e;font-weight:600">✓ localStorage</span></div>' +
+    '</div></div>' +
+    '<div class="acard"><div class="ahead"><h3>Hızlı İşlemler</h3></div><div class="abody" style="display:flex;flex-direction:column;gap:7px;padding:14px">' +
+    '<button class="ab abA" onclick="sp(\'requests\')">📩 Teklif Talepleri</button>' +
+    '<button class="ab abG" onclick="sp(\'prods\')">📦 Hizmet Ekle / Düzenle</button>' +
+    '<button class="ab abG" onclick="sp(\'cats\')">🏷 Kategori Yönet</button>' +
+    '<button class="ab abG" onclick="sp(\'emailjs\')">📧 EmailJS Ayarla</button>' +
+    '<button class="ab abG" onclick="closeAdm()">🌐 Siteyi Görüntüle</button>' +
+    '</div></div></div>';
+}
+
+/* ── REQUESTS ── */
+function renderRequests() {
+  var list = loadRequests().sort(function(a,b){return new Date(b.createdAt)-new Date(a.createdAt);});
+  /* Yeni talepleri okundu yap */
+  if (hp('superadmin') || hp('editor')) {
+    var changed = false;
+    list.forEach(function(r){ if(r.status==='new'){r.status='read';changed=true;} });
+    if (changed) { saveRequests(list); pending=0; updBadge(); }
+  }
+  window._rl = list;
+  var html = '<div class="acard"><div class="ahead"><h3>Teklif Talepleri ('+list.length+')</h3>' +
+    '<select class="tfl" id="rqFilter" onchange="filterRQ()"><option value="">Tüm Durumlar</option><option value="new">Yeni</option><option value="read">Okundu</option><option value="done">Tamamlandı</option></select>' +
+    '</div><div class="abody" style="padding:14px" id="rqList">';
+  if (list.length === 0) {
+    html += '<p style="font-size:.78rem;color:#4a5568;text-align:center;padding:20px;font-style:italic">Henüz teklif talebi yok.</p>';
+  } else {
+    list.forEach(function(r,i){
+      html += '<div class="rqcard '+(r.status==='new'?'new':'')+'" onclick="showRD('+i+')" data-status="'+r.status+'">' +
+        '<div class="rqhdr"><div><div class="rqname">'+x(r.name)+(r.company&&r.company!=='—'?' — '+x(r.company):'')+'</div><div class="rqtime">'+fmtD(r.createdAt)+'</div></div>' +
+        '<div style="display:flex;gap:6px;align-items:center">' +
+        '<span class="rqbadge '+r.status+'">'+(r.status==='new'?'Yeni':r.status==='done'?'Tamamlandı':'Okundu')+'</span>' +
+        (hp('superadmin')||hp('editor')?'<button class="ab abGr abSm" onclick="event.stopPropagation();markDone('+i+')">✓ Tamamla</button>':'') +
+        '</div></div>' +
+        '<div class="rqmeta"><span>📧 '+x(r.email)+'</span><span>📞 '+x(r.phone||'—')+'</span><span>💳 '+x(r.paymentModel||'—')+'</span></div>' +
+        '</div>';
+    });
+  }
+  html += '</div></div>';
+  document.getElementById('admContent').innerHTML = html;
+}
+
+function filterRQ() {
+  var f = gv('rqFilter');
+  document.querySelectorAll('.rqcard').forEach(function(c){
+    c.style.display = (!f || c.dataset.status===f) ? 'block' : 'none';
+  });
+}
+
+function markDone(i) {
+  if (!window._rl) return;
+  window._rl[i].status = 'done';
+  saveRequests(window._rl);
+  toast('Tamamlandı');
+  renderRequests();
+}
+
+function showRD(i) {
+  var r = window._rl ? window._rl[i] : null;
+  if (!r) return;
+  var canSee = hp('superadmin') || hp('editor');
+  var html = '<div class="rdhdr"><div><h2 style="font-size:1.1rem;font-weight:700;color:#fff">'+x(r.name)+'</h2><p style="font-size:.75rem;color:#4a5568;margin-top:3px">'+fmtD(r.createdAt)+'</p></div>' +
+    '<div style="display:flex;gap:7px;align-items:center"><span class="rqbadge '+r.status+'">'+(r.status==='new'?'Yeni':r.status==='done'?'Tamamlandı':'Okundu')+'</span>' +
+    '<button class="ab abG abSm" onclick="document.getElementById(\'rdmo\').classList.remove(\'on\')">✕</button></div></div>';
+  if (canSee) {
+    html += '<div class="rdsec"><h4>İletişim Bilgileri</h4>' +
+      '<div class="rdrow"><span class="rdlabel">Ad Soyad</span><span class="rdval">'+x(r.name)+'</span></div>' +
+      '<div class="rdrow"><span class="rdlabel">E-posta</span><span class="rdval" style="color:#00d4ff">'+x(r.email)+'</span></div>' +
+      '<div class="rdrow"><span class="rdlabel">Telefon</span><span class="rdval">'+x(r.phone||'—')+'</span></div>' +
+      '<div class="rdrow"><span class="rdlabel">Şirket</span><span class="rdval">'+x(r.company||'—')+'</span></div></div>';
+    if (r.services && r.services!=='—') {
+      html += '<div class="rdsec"><h4>Seçilen Hizmetler</h4><div>';
+      r.services.split(',').filter(Boolean).forEach(function(s){html+='<span class="rdchip">'+x(s.trim())+'</span>';});
+      html += '</div></div>';
+    }
+    if (r.oneoff && r.oneoff!=='—') {
+      html += '<div class="rdsec"><h4>Tek Seferlik</h4><div>';
+      r.oneoff.split(',').filter(Boolean).forEach(function(s){html+='<span class="rdchip" style="color:#fbbf24">'+x(s.trim())+'</span>';});
+      html += '</div></div>';
+    }
+    if (r.customServices && r.customServices!=='—') {
+      html += '<div class="rdsec"><h4>Özel Hizmet / Ticket</h4>';
+      r.customServices.split(';').filter(Boolean).forEach(function(s){html+='<div style="padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.78rem;color:#c8cdd6">'+x(s.trim())+'</div>';});
+      html += '</div>';
+    }
+    html += '<div class="rdsec"><h4>Destek Detayları</h4>' +
+      '<div class="rdrow"><span class="rdlabel">Seviye</span><span class="rdval">'+x((r.support||{}).level||'—')+'</span></div>' +
+      '<div class="rdrow"><span class="rdlabel">Saatler</span><span class="rdval">'+x((r.support||{}).hours||'—')+'</span></div>' +
+      '<div class="rdrow"><span class="rdlabel">Tür</span><span class="rdval">'+x((r.support||{}).type||'—')+'</span></div>' +
+      '<div class="rdrow"><span class="rdlabel">Sözleşme</span><span class="rdval">'+x((r.support||{}).contract||'—')+'</span></div>' +
+      '<div class="rdrow"><span class="rdlabel">Ödeme Modeli</span><span class="rdval">'+x(r.paymentModel||'—')+'</span></div>' +
+      '<div class="rdrow"><span class="rdlabel">Destek Dili</span><span class="rdval">'+x(r.supportLang||'—')+'</span></div></div>';
+    if (r.locations && r.locations!=='—') html += '<div class="rdsec"><h4>Lokasyonlar</h4><div class="rdrow"><span class="rdval">'+x(r.locations)+'</span></div></div>';
+    if (r.notes && r.notes!=='—') html += '<div class="rdsec"><h4>Ek Notlar</h4><p style="font-size:.79rem;color:#c8cdd6;line-height:1.65;background:#141720;padding:10px;border-radius:6px">'+x(r.notes)+'</p></div>';
+    html += '<div style="display:flex;gap:8px;margin-top:16px">' +
+      (r.status!=='done'?'<button class="ab abGr" onclick="markDone('+i+');document.getElementById(\'rdmo\').classList.remove(\'on\')">✓ Tamamlandı İşaretle</button>':'') +
+      '<a href="mailto:'+r.email+'?subject=GITS+Teknoloji+Teklif" class="ab abA" style="text-decoration:none">📧 E-posta Gönder</a></div>';
+  } else {
+    html += '<p style="font-size:.82rem;color:#5a6270;text-align:center;padding:20px">Detayları görüntüleme yetkiniz yok.</p>';
+  }
+  document.getElementById('rdbox').innerHTML = html;
+  document.getElementById('rdmo').classList.add('on');
+}
+document.getElementById('rdmo').addEventListener('click', function(e){ if(e.target===this) this.classList.remove('on'); });
+
+/* ── CATS ── */
+function renderCats() {
+  document.getElementById('admContent').innerHTML =
+    '<div class="acard" style="margin-bottom:14px"><div class="ahead"><h3>➕ Yeni Kategori</h3></div><div class="abody">' +
+    '<div class="ag3"><div class="aff" style="margin-bottom:0"><label>Kategori Adı *</label><input type="text" id="ncat" placeholder="Örn: Sanallaştırma"></div>' +
+    '<div class="aff" style="margin-bottom:0"><label>İkon</label><input type="text" id="ncico" placeholder="🖥" maxlength="4"></div>' +
+    '<div class="aff" style="margin-bottom:0"><label>&nbsp;</label><button class="ab abA" onclick="addCat()">Ekle</button></div></div>' +
+    '</div></div>' +
+    '<div class="acard"><div class="ahead"><h3>Kategoriler</h3></div><div class="abody" style="padding:11px 16px"><table class="atbl"><thead><tr><th>İkon</th><th>Ad</th><th>Hizmet Sayısı</th><th></th></tr></thead><tbody id="catbody"></tbody></table></div></div>';
+  renderCatBody();
+}
+function renderCatBody() {
+  var html = '';
+  cats.forEach(function(c) {
+    var cnt = prods.filter(function(p){return p.cat===c.name;}).length;
+    html += '<tr><td><input class="ied" style="width:28px;text-align:center" value="'+x(c.icon||'')+'" onchange="updCat(\''+c.id+'\',\'icon\',this.value)"></td>' +
+      '<td><input class="ied" value="'+x(c.name)+'" onchange="updCat(\''+c.id+'\',\'name\',this.value)" style="min-width:120px"></td>' +
+      '<td style="color:#4a5568;font-size:.75rem">'+cnt+'</td>' +
+      '<td><button class="ab abR abSm" onclick="delCat(\''+c.id+'\')">🗑</button></td></tr>';
+  });
+  document.getElementById('catbody').innerHTML = html;
+}
+function addCat() {
+  var n = gv('ncat').trim();
+  if (!n) return;
+  if (cats.find(function(c){return c.name===n;})) { toast('Mevcut'); return; }
+  cats.push({id:'c'+Date.now(), name:n, icon:gv('ncico').trim()||'📁'});
+  saveAll(); renderCatBody(); sv('ncat',''); sv('ncico','');
+}
+function updCat(id,f,v) {
+  var old = null;
+  var c = cats.find(function(c){if(c.id===id){old=c.name;return true;}});
+  if (!c) return;
+  if (f==='name' && old!==v) prods.forEach(function(p){if(p.cat===old)p.cat=v;});
+  c[f] = v; saveData();
+}
+function delCat(id) {
+  var c = cats.find(function(c){return c.id===id;});
+  cfm('Sil', '"'+(c?c.name:'')+'" silinecek.', function(){
+    cats = cats.filter(function(c){return c.id!==id;});
+    saveAll(); renderCatBody();
+  });
+}
+
+/* ── PRODS ── */
+function renderProds() {
+  var catOpts = cats.map(function(c){return '<option value="'+x(c.name)+'">'+(c.icon||'')+' '+c.name+'</option>';}).join('');
+  var ICONS = ['🛡','🔥','🔐','⚡','🌐','🔑','📧','☁','🖥','🔒','🗄','🔶','💾','📡','💻','📋','📊','📀','📜','💼','⚖','👥','🎫','🎟','🔍','📱','⚙','🔧','🏭','📈','🏆','✅','💡','🚀','🎯','⭐'];
+  var iconBtns = ICONS.map(function(ico){
+    return '<button style="background:#141720;border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:5px 8px;font-size:1.1rem;cursor:pointer" onclick="document.getElementById(\'npico\').value=\''+ico+'\'" title="'+ico+'">'+ico+'</button>';
+  }).join('');
+  document.getElementById('admContent').innerHTML =
+    '<div class="acard" style="margin-bottom:14px"><div class="ahead"><h3>➕ Yeni Hizmet</h3></div><div class="abody">' +
+    '<div style="display:grid;grid-template-columns:2fr 1fr 1fr 60px;gap:8px;align-items:flex-end;margin-bottom:8px">' +
+    '<div class="aff" style="margin-bottom:0"><label>Ad *</label><input type="text" id="npn" placeholder="Hizmet adı..."></div>' +
+    '<div class="aff" style="margin-bottom:0"><label>Kategori</label><select id="npcat">'+catOpts+'</select></div>' +
+    '<div class="aff" style="margin-bottom:0"><label>Fiyat (TL/ay)</label><input type="number" id="npp" placeholder="0=Teklif" min="0"></div>' +
+    '<div class="aff" style="margin-bottom:0"><label>İkon</label><input type="text" id="npico" placeholder="⚙" maxlength="4"></div></div>' +
+    '<div class="aff" style="margin-bottom:8px"><label>Kısa Açıklama</label><input type="text" id="npd" placeholder="Kısa açıklama..."></div>' +
+    '<div class="aff" style="margin-bottom:8px"><label>Detaylı Açıklama (hover\'da görünür)</label><textarea id="npdetail" rows="2" placeholder="Hizmet içeriği..."></textarea></div>' +
+    '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">' +
+    '<label style="font-size:.75rem;color:#c8cdd6;display:flex;align-items:center;gap:6px"><input type="checkbox" id="npmarquee" checked style="accent-color:#00d4ff"> Kayan bantta göster</label>' +
+    '<button class="ab abA" onclick="addProd()">Hizmet Ekle</button></div>' +
+    '<div style="padding-top:8px;border-top:1px solid rgba(255,255,255,.06)">' +
+    '<p style="font-size:.67rem;color:#4a5568;text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px;font-weight:600">Hızlı İkon Seç</p>' +
+    '<div style="display:flex;flex-wrap:wrap;gap:4px">'+iconBtns+'</div></div>' +
+    '</div></div>' +
+    '<div class="acard"><div class="ahead"><h3>Hizmet Listesi</h3>' +
+    '<div class="tbar"><input type="text" class="tsc" id="tsc" placeholder="Ara..." oninput="filterProds()"><select class="tfl" id="tcf" onchange="filterProds()"><option value="">Tüm Kategoriler</option>'+cats.map(function(c){return '<option value="'+x(c.name)+'">'+c.name+'</option>';}).join('')+'</select><span class="tcnt" id="tcnt"></span></div>' +
+    '</div><div class="abody" style="padding:11px 16px"><table class="atbl"><thead><tr><th>İkon</th><th>Ad</th><th>Kategori</th><th>Açıklama</th><th>Detay</th><th>Fiyat</th><th>Band</th><th></th></tr></thead><tbody id="ptbody"></tbody></table></div></div>';
+  renderProdsBody();
+}
+function renderProdsBody() {
+  var s = (gv('tsc')||'').toLowerCase(), cf = gv('tcf')||'';
+  var fl = prods.filter(function(p){return(!s||p.name.toLowerCase().indexOf(s)>-1||(p.desc||'').toLowerCase().indexOf(s)>-1)&&(!cf||p.cat===cf);});
+  document.getElementById('tcnt').textContent = fl.length+'/'+prods.length;
+  var html = '';
+  fl.forEach(function(p){
+    var catOpts = cats.map(function(c){return '<option value="'+x(c.name)+'"'+(c.name===p.cat?' selected':'')+'>'+(c.icon||'')+' '+c.name+'</option>';}).join('');
+    html += '<tr>' +
+      '<td><input class="ied" style="width:28px;text-align:center" value="'+x(p.icon||'')+'" onchange="updProd('+p.id+',\'icon\',this.value)"></td>' +
+      '<td><input class="ied" value="'+x(p.name)+'" onchange="updProd('+p.id+',\'name\',this.value)" style="min-width:130px"></td>' +
+      '<td><select style="background:#141720;border:1px solid rgba(255,255,255,.1);border-radius:4px;color:#e8eaf0;font-size:.74rem;padding:3px 6px" onchange="updProd('+p.id+',\'cat\',this.value)">'+catOpts+'</select></td>' +
+      '<td><input class="ied" value="'+x(p.desc||'')+'" onchange="updProd('+p.id+',\'desc\',this.value)" style="min-width:110px" placeholder="Kısa"></td>' +
+      '<td><input class="ied" value="'+x(p.detail||'')+'" onchange="updProd('+p.id+',\'detail\',this.value)" style="min-width:130px;color:#4a8090" placeholder="Detay (hover)"></td>' +
+      '<td><input type="number" class="pied" value="'+(p.price||0)+'" min="0" onchange="updProd('+p.id+',\'price\',this.value)"></td>' +
+      '<td style="text-align:center"><button class="mqsw '+(p.marquee!==false?'on':'')+'" style="margin:0 auto" onclick="tglMQP('+p.id+')"></button></td>' +
+      '<td><button class="ab abR abSm" onclick="delProd('+p.id+')">🗑</button></td></tr>';
+  });
+  document.getElementById('ptbody').innerHTML = html;
+}
+function filterProds() { renderProdsBody(); }
+function addProd() {
+  var n = gv('npn').trim();
+  if (!n) { toast('Ad zorunlu'); return; }
+  var mq = document.getElementById('npmarquee').checked;
+  prods.push({id:nid++,name:n,cat:gv('npcat'),price:parseFloat(gv('npp'))||0,desc:gv('npd').trim(),detail:gv('npdetail').trim(),icon:gv('npico').trim()||'⚙',marquee:mq});
+  saveAll(); renderProdsBody();
+  ['npn','npp','npd','npdetail','npico'].forEach(function(id){sv(id,'');});
+  toast('Eklendi');
+}
+function updProd(id,f,v) {
+  var p = prods.find(function(p){return p.id===id;});
+  if (!p) return;
+  p[f] = f==='price' ? parseFloat(v)||0 : v;
+  saveData();
+}
+function tglMQP(id) {
+  var p = prods.find(function(p){return p.id===id;});
+  if (!p) return;
+  p.marquee = p.marquee===false;
+  saveAll(); renderProdsBody(); buildMQ();
+}
+function delProd(id) {
+  cfm('Sil','Bu hizmet silinecek.',function(){
+    prods = prods.filter(function(p){return p.id!==id;});
+    saveAll(); renderProdsBody();
+  });
+}
+
+/* ── ONEOFF ── */
+function renderOneoff() {
+  document.getElementById('admContent').innerHTML =
+    '<div class="acard" style="margin-bottom:14px"><div class="ahead"><h3>➕ Yeni Tek Seferlik</h3></div><div class="abody">' +
+    '<div class="ag4"><div class="aff" style="margin-bottom:0"><label>Ad *</label><input type="text" id="oon" placeholder="Hizmet adı..."></div>' +
+    '<div class="aff" style="margin-bottom:0"><label>Fiyat (TL)</label><input type="number" id="oop" placeholder="0=Teklif" min="0"></div>' +
+    '<div class="aff" style="margin-bottom:0"><label>Açıklama</label><input type="text" id="ood" placeholder="Kısa açıklama..."></div>' +
+    '<div class="aff" style="margin-bottom:0"><label>&nbsp;</label><button class="ab abA" onclick="addOO()">Ekle</button></div></div>' +
+    '</div></div>' +
+    '<div class="acard"><div class="ahead"><h3>Tek Seferlik Hizmetler</h3><span id="oocnt" style="font-size:.7rem;color:#4a5568"></span></div>' +
+    '<div class="abody" style="padding:11px 16px"><table class="atbl"><thead><tr><th>Ad</th><th>Açıklama</th><th>Fiyat</th><th></th></tr></thead><tbody id="ootbody"></tbody></table></div></div>';
+  renderOOBody();
+}
+function renderOOBody() {
+  document.getElementById('oocnt').textContent = oneoff.length+' hizmet';
+  var html = '';
+  oneoff.forEach(function(o){
+    html += '<tr><td><input class="ied" value="'+x(o.name)+'" onchange="updOO(\''+o.id+'\',\'name\',this.value)" style="min-width:160px"></td>' +
+      '<td><input class="ied" value="'+x(o.desc||'')+'" onchange="updOO(\''+o.id+'\',\'desc\',this.value)" style="min-width:160px"></td>' +
+      '<td><input type="number" class="pied" value="'+(o.price||0)+'" min="0" onchange="updOO(\''+o.id+'\',\'price\',this.value)"></td>' +
+      '<td><button class="ab abR abSm" onclick="delOO(\''+o.id+'\')">🗑</button></td></tr>';
+  });
+  document.getElementById('ootbody').innerHTML = html;
+}
+function addOO() {
+  var n = gv('oon').trim();
+  if (!n) return;
+  oneoff.push({id:'o'+Date.now(),name:n,price:parseFloat(gv('oop'))||0,desc:gv('ood').trim()});
+  saveAll(); renderOOBody(); ['oon','oop','ood'].forEach(function(id){sv(id,'');});
+}
+function updOO(id,f,v) {
+  var o = oneoff.find(function(o){return o.id===id;});
+  if (!o) return;
+  o[f] = f==='price' ? parseFloat(v)||0 : v;
+  saveData();
+}
+function delOO(id) {
+  cfm('Sil','',function(){oneoff=oneoff.filter(function(o){return o.id!==id;});saveAll();renderOOBody();});
+}
+
+/* ── MARQUEE ── */
+function renderMarquee() {
+  var spd = [{l:'Çok Yavaş',v:50},{l:'Yavaş',v:35},{l:'Normal',v:25},{l:'Hızlı',v:15},{l:'Çok Hızlı',v:8}];
+  document.getElementById('admContent').innerHTML =
+    '<div class="acard" style="margin-bottom:14px"><div class="ahead"><h3>⚙ Hız</h3></div><div class="abody">' +
+    '<div style="display:flex;gap:7px;flex-wrap:wrap">'+spd.map(function(s){return '<button class="ab '+(mqSpeed===s.v?'abA':'abG')+'" onclick="setMQSpd('+s.v+')">'+s.l+'</button>';}).join('')+'</div>' +
+    '<div style="display:flex;gap:7px;margin-top:10px"><button class="ab abGr abSm" onclick="tglAllMQ(true)">✓ Tümünü Göster</button><button class="ab abR abSm" onclick="tglAllMQ(false)">✗ Tümünü Gizle</button>' +
+    '<span style="font-size:.75rem;color:#4a5568;margin-left:auto;line-height:2">Görünen: <strong style="color:#00d4ff">'+prods.filter(function(p){return p.marquee!==false;}).length+'</strong></span></div>' +
+    '</div></div>' +
+    '<div class="acard"><div class="ahead"><h3>Görünürlük</h3></div><div class="abody" style="padding:14px" id="mqList"></div></div>';
+  renderMQList();
+}
+function renderMQList() {
+  var el = document.getElementById('mqList'); if (!el) return;
+  var grps = {};
+  prods.forEach(function(p){if(!grps[p.cat])grps[p.cat]=[];grps[p.cat].push(p);});
+  var h = '';
+  Object.keys(grps).forEach(function(cat){
+    h += '<div style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#3a4252;padding:10px 0 5px;border-top:1px solid rgba(255,255,255,.05)">'+ci(cat)+' '+cat+'</div>';
+    grps[cat].forEach(function(p){
+      var vis = p.marquee!==false;
+      h += '<div class="mqtr'+(vis?'':'" style="opacity:.45')+'"><div><div style="font-size:.8rem;color:#c8cdd6">'+(p.icon||'')+' '+x(p.name)+'</div></div>' +
+        '<span style="font-size:.65rem;font-weight:600;padding:2px 7px;border-radius:100px;'+(vis?'background:rgba(0,212,255,.1);color:#00d4ff;border:1px solid rgba(0,212,255,.2)':'background:rgba(107,114,128,.1);color:#6b7280;border:1px solid rgba(107,114,128,.2)')+'">'+( vis?'Görünür':'Gizli')+'</span>' +
+        '<button class="mqsw '+(vis?'on':'')+'" onclick="tglMQ('+p.id+')"></button></div>';
+    });
+  });
+  el.innerHTML = h;
+}
+function tglMQ(id) { var p=prods.find(function(p){return p.id===id;});if(!p)return;p.marquee=p.marquee===false;saveAll();renderMQList();buildMQ(); }
+function tglAllMQ(s) { prods.forEach(function(p){p.marquee=s;});saveAll();renderMarquee();buildMQ(); }
+function setMQSpd(v) { mqSpeed=v;saveAll();renderMarquee();buildMQ(); }
+
+/* ── METRICS ── */
+function renderMetrics() {
+  document.getElementById('admContent').innerHTML =
+    '<div class="acard" style="margin-bottom:14px"><div class="ahead"><h3>Kart Başlığı</h3></div><div class="abody">' +
+    '<div class="ag2"><div class="aff"><label>Başlık</label><input type="text" id="mct" value="'+x(metrics.cardTitle||'')+'"></div>' +
+    '<div class="aff"><label>Alt Başlık</label><input type="text" id="mcs" value="'+x(metrics.cardSub||'')+'"></div></div></div></div>' +
+    '<div class="acard" style="margin-bottom:14px"><div class="ahead"><h3>Metrik Satırları</h3><button class="ab abA abSm" onclick="addMR()">＋</button></div>' +
+    '<div class="abody" style="padding:14px"><div id="mrRows"></div></div></div>' +
+    '<div class="acard" style="margin-bottom:14px"><div class="ahead"><h3>Uptime</h3></div><div class="abody">' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px">' +
+    '<div class="aff"><label>Etiket 1</label><input type="text" id="ul1" value="'+x(metrics.uptL1||'')+'"></div>' +
+    '<div class="aff"><label>Etiket 2</label><input type="text" id="ul2" value="'+x(metrics.uptL2||'')+'"></div>' +
+    '<div class="aff"><label>Değer</label><input type="text" id="uv" value="'+x(metrics.uptV||'')+'"></div>' +
+    '<div class="aff"><label>Renk</label><select id="uc"><option value="blue"'+(metrics.uptC==='blue'?' selected':'')+'>Mavi</option><option value="green"'+(metrics.uptC==='green'?' selected':'')+'>Yeşil</option></select></div>' +
+    '</div></div></div>' +
+    '<button class="ab abA" onclick="saveMet()">💾 Kaydet</button>';
+  renderMRs();
+}
+function renderMRs() {
+  var el = document.getElementById('mrRows'); if (!el) return;
+  var html = '';
+  (metrics.rows||[]).forEach(function(r,i){
+    html += '<div class="merr"><input class="ied" value="'+x(r.name)+'" onchange="metrics.rows['+i+'].name=this.value">' +
+      '<input class="mi2" value="'+x(r.val)+'" onchange="metrics.rows['+i+'].val=this.value">' +
+      '<input type="number" class="mip" value="'+(r.pct||0)+'" min="0" max="100" onchange="metrics.rows['+i+'].pct=+this.value">' +
+      '<div class="mic"><select onchange="metrics.rows['+i+'].color=this.value"><option value="blue"'+(r.color==='blue'?' selected':'')+'>Mavi</option><option value="green"'+(r.color==='green'?' selected':'')+'>Yeşil</option><option value="yellow"'+(r.color==='yellow'?' selected':'')+'>Sarı</option><option value="red"'+(r.color==='red'?' selected':'')+'>Kırmızı</option></select></div>' +
+      '<button class="ab abR abSm" onclick="metrics.rows.splice('+i+',1);renderMRs()">🗑</button></div>';
+  });
+  el.innerHTML = html;
+}
+function addMR() { metrics.rows.push({name:'Metrik',val:'100%',pct:100,color:'blue'});renderMRs(); }
+function saveMet() { metrics.cardTitle=gv('mct');metrics.cardSub=gv('mcs');metrics.uptL1=gv('ul1');metrics.uptL2=gv('ul2');metrics.uptV=gv('uv');metrics.uptC=gv('uc');saveAll(); }
+
+/* ── CONTENT PANELS ── */
+function cPanel(fields,saveFn) {
+  document.getElementById('admContent').innerHTML =
+    '<div class="acard"><div class="ahead"><h3>Düzenle</h3></div><div class="abody">'+fields+'</div></div>' +
+    '<button class="ab abA" style="margin-top:12px" onclick="'+saveFn+'()">💾 Kaydet</button>';
+}
+function renderHero() {
+  cPanel('<div class="ag2"><div class="aff"><label>Badge</label><input type="text" id="cBadge" value="'+x(cont.badge||'Global IT Solutions')+'"></div><div class="aff"><label>Birincil Buton</label><input type="text" id="cBP" value="'+x(cont.heroBtnP||'Teklif Al')+'"></div></div><div class="aff"><label>İkincil Buton</label><input type="text" id="cBS" value="'+x(cont.heroBtnS||'Hizmetleri Keşfet')+'"></div><div class="aff"><label>Ana Başlık</label><textarea id="cHT" rows="3">'+x(cont.heroTitle||'')+'</textarea></div><div class="aff"><label>Alt Metin</label><textarea id="cHS" rows="2">'+x(cont.heroSub||'')+'</textarea></div>','saveHero');
+}
+function saveHero() { Object.assign(cont,{badge:gv('cBadge'),heroBtnP:gv('cBP'),heroBtnS:gv('cBS'),heroTitle:gv('cHT'),heroSub:gv('cHS')});saveAll(); }
+function renderSvc() {
+  cPanel('<div class="ag2"><div class="aff"><label>Üst Etiket</label><input type="text" id="cSL" value="'+x(cont.svcLabel||'Hizmetlerimiz')+'"></div><div class="aff"><label>Başlık</label><input type="text" id="cST" value="'+x(cont.svcTitle||'')+'"></div></div><div class="aff"><label>Açıklama</label><textarea id="cSD" rows="2">'+x(cont.svcDesc||'')+'</textarea></div><div class="aff"><label>Alt CTA</label><input type="text" id="cSC" value="'+x(cont.svcCta||'Tüm hizmetler için teklif alın →')+'"></div>','saveSvc');
+}
+function saveSvc() { Object.assign(cont,{svcLabel:gv('cSL'),svcTitle:gv('cST'),svcDesc:gv('cSD'),svcCta:gv('cSC')});saveAll(); }
+function renderWhy() {
+  document.getElementById('admContent').innerHTML =
+    '<div class="acard" style="margin-bottom:12px"><div class="ahead"><h3>Başlıklar</h3></div><div class="abody">' +
+    '<div class="ag2"><div class="aff"><label>Üst Etiket</label><input type="text" id="cWL" value="'+x(cont.whyLabel||'Neden GITS?')+'"></div>' +
+    '<div class="aff"><label>Başlık</label><input type="text" id="cWT" value="'+x(cont.whyTitle||'')+'"></div></div></div></div>' +
+    '<div class="acard"><div class="ahead"><h3>Özellikler</h3><button class="ab abA abSm" onclick="addWF()">＋</button></div><div class="abody" id="whyRows" style="padding:14px"></div></div>' +
+    '<button class="ab abA" style="margin-top:12px" onclick="saveWhy()">💾 Kaydet</button>';
+  renderWFRows();
+}
+function renderWFRows() {
+  var html = '';
+  why.forEach(function(f,i){
+    html += '<div class="whyr"><div class="whyrh"><span>'+x(f.num)+'</span><button class="ab abR abSm" onclick="why.splice('+i+',1);renderWFRows()">🗑</button></div>' +
+      '<div class="ag2" style="margin-bottom:6px">' +
+      '<div class="aff" style="margin-bottom:0"><label>Başlık</label><input style="background:#0f1117;border:1px solid rgba(255,255,255,.08);border-radius:5px;color:#e8eaf0;font-size:.8rem;padding:7px 10px;outline:none;width:100%" value="'+x(f.title)+'" onchange="why['+i+'].title=this.value"></div>' +
+      '<div class="aff" style="margin-bottom:0"><label>No</label><input style="background:#0f1117;border:1px solid rgba(255,255,255,.08);border-radius:5px;color:#e8eaf0;font-size:.8rem;padding:7px 10px;outline:none;width:100%" value="'+x(f.num)+'" onchange="why['+i+'].num=this.value"></div></div>' +
+      '<div class="aff" style="margin-bottom:0"><label>Açıklama</label><textarea style="background:#0f1117;border:1px solid rgba(255,255,255,.08);border-radius:5px;color:#e8eaf0;font-size:.8rem;padding:7px 10px;outline:none;width:100%;resize:vertical" rows="2" onchange="why['+i+'].desc=this.value">'+x(f.desc)+'</textarea></div></div>';
+  });
+  document.getElementById('whyRows').innerHTML = html;
+}
+function addWF() { why.push({num:'0'+(why.length+1),title:'Yeni',desc:'...'});renderWFRows(); }
+function saveWhy() { cont.whyLabel=gv('cWL');cont.whyTitle=gv('cWT');saveAll(); }
+function renderQuote() {
+  cPanel('<div class="ag2"><div class="aff"><label>Üst Etiket</label><input type="text" id="cQL" value="'+x(cont.quoteLabel||'Teklif Formu')+'"></div><div class="aff"><label>Başlık</label><input type="text" id="cQT" value="'+x(cont.quoteTitle||'')+'"></div></div><div class="aff"><label>Yan Panel Notu</label><input type="text" id="cQN" value="'+x(cont.quoteSideNote||'')+'"></div><div class="aff"><label>Başarı Mesajı</label><textarea id="cQS" rows="2">'+x(cont.quoteSuccess||'')+'</textarea></div>','saveQuote');
+}
+function saveQuote() { Object.assign(cont,{quoteLabel:gv('cQL'),quoteTitle:gv('cQT'),quoteSideNote:gv('cQN'),quoteSuccess:gv('cQS')});saveAll(); }
+function renderCta() {
+  cPanel('<div class="ag2"><div class="aff"><label>CTA Etiketi</label><input type="text" id="cCL" value="'+x(cont.ctaLabel||'İletişim')+'"></div><div class="aff"><label>Başlık</label><input type="text" id="cCT" value="'+x(cont.ctaTitle||'')+'"></div></div><div class="aff"><label>Açıklama</label><textarea id="cCC" rows="2">'+x(cont.ctaTxt||'')+'</textarea></div><div class="ag2"><div class="aff"><label>Birincil Buton</label><input type="text" id="cCBP" value="'+x(cont.ctaBtnP||'Teklif İste')+'"></div><div class="aff"><label>İkincil Buton</label><input type="text" id="cCBS" value="'+x(cont.ctaBtnS||'Bizi Arayın')+'"></div></div><hr style="border-color:rgba(255,255,255,.07);margin:14px 0"><div class="aff"><label>Şirket Açıklaması</label><textarea id="cFA" rows="2">'+x(cont.footerAbout||'')+'</textarea></div><div class="ag2"><div class="aff"><label>K1 Başlık</label><input type="text" id="cF1h" value="'+x(cont.ftc1h||'Hizmetler')+'"></div><div class="aff"><label>K1 Linkler</label><textarea id="cF1" rows="3">'+(cont.ftc1||['Siber Güvenlik','Cloud Hizmetleri','Firewall','Teknik Destek']).join('\n')+'</textarea></div></div><div class="ag2"><div class="aff"><label>K2 Başlık</label><input type="text" id="cF2h" value="'+x(cont.ftc2h||'Kurumsal')+'"></div><div class="aff"><label>K2 Linkler</label><textarea id="cF2" rows="3">'+(cont.ftc2||['Hakkımızda','Blog','Referanslar','Kariyer']).join('\n')+'</textarea></div></div>','saveCta');
+}
+function saveCta() { Object.assign(cont,{ctaLabel:gv('cCL'),ctaTitle:gv('cCT'),ctaTxt:gv('cCC'),ctaBtnP:gv('cCBP'),ctaBtnS:gv('cCBS'),footerAbout:gv('cFA'),ftc1h:gv('cF1h'),ftc2h:gv('cF2h'),ftc1:gv('cF1').split('\n').filter(Boolean),ftc2:gv('cF2').split('\n').filter(Boolean)});saveAll(); }
+function renderNav() {
+  cPanel('<div class="cgrid"><div class="aff"><label>Link 1</label><input type="text" id="n1" value="'+x(cont.nav1||'Hizmetler')+'"></div><div class="aff"><label>Link 2</label><input type="text" id="n2" value="'+x(cont.nav2||'Neden Biz')+'"></div><div class="aff"><label>Link 3</label><input type="text" id="n3" value="'+x(cont.nav3||'Teklif Al')+'"></div><div class="aff"><label>CTA</label><input type="text" id="n4" value="'+x(cont.nav4||'İletişim')+'"></div></div>','saveNav');
+}
+function saveNav() { Object.assign(cont,{nav1:gv('n1'),nav2:gv('n2'),nav3:gv('n3'),nav4:gv('n4')});saveAll(); }
+function renderUsers() {
+  var ul = loadUsers();
+  var html = '<div class="acard"><div class="ahead"><h3>Kullanıcılar</h3><button class="ab abA abSm" onclick="invU()">＋ Ekle</button></div>' +
+    '<div style="overflow-x:auto"><table class="atbl"><thead><tr><th>E-posta</th><th>Ad</th><th>Rol</th><th>Şifre</th><th></th></tr></thead><tbody>';
+  ul.forEach(function(u){
+    html += '<tr><td>'+x(u.email)+'</td><td>'+x(u.name||'—')+'</td>' +
+      '<td><select style="background:#141720;border:1px solid rgba(255,255,255,.1);border-radius:4px;color:#e8eaf0;font-size:.75rem;padding:3px 7px" onchange="chRole(\''+u.email+'\',this.value)">'+
+      ['superadmin','editor','viewer'].map(function(r){return '<option value="'+r+'"'+(u.role===r?' selected':'')+'>'+(ROLES[r]||{label:r}).label+'</option>';}).join('') +
+      '</select></td>' +
+      '<td><input type="password" class="ied" value="'+x(u.pass||'')+'" onchange="chPass(\''+u.email+'\',this.value)" placeholder="••••••" style="width:80px"></td>' +
+      '<td>'+(u.email!==currentUser.email?'<button class="ab abR abSm" onclick="rmUser(\''+u.email+'\')">🗑</button>':'<span style="font-size:.72rem;color:#4a5568">Siz</span>')+'</td></tr>';
+  });
+  html += '</tbody></table></div><p style="font-size:.75rem;color:#4a5568;margin:12px 16px">Kullanıcı ekleyince e-posta ve şifre belirleyin.</p></div>';
+  document.getElementById('admContent').innerHTML = html;
+}
+function chRole(e,r) { var ul=loadUsers();saveUsers(ul.map(function(u){return u.email===e?Object.assign({},u,{role:r}):u;}));toast('Güncellendi');renderUsers(); }
+function chPass(e,p) { var ul=loadUsers();saveUsers(ul.map(function(u){return u.email===e?Object.assign({},u,{pass:p}):u;}));saveData(); }
+function rmUser(e) { cfm('Kaldır','"'+e+'" kaldırılacak.',function(){saveUsers(loadUsers().filter(function(u){return u.email!==e;}));toast('Kaldırıldı');renderUsers();}); }
+function invU() {
+  var e=prompt('E-posta:');if(!e)return;
+  var p=prompt('Şifre:');if(!p)return;
+  var r=prompt('Rol (superadmin/editor/viewer):','editor');
+  if(!ROLES[r]){alert('Geçersiz rol');return;}
+  var ul=loadUsers();
+  if(ul.find(function(u){return u.email===e;})){toast('Mevcut');return;}
+  ul.push({email:e,pass:p,role:r,name:e.split('@')[0]});
+  saveUsers(ul);toast('Eklendi');renderUsers();
+}
+function renderEmailJS() {
+  document.getElementById('admContent').innerHTML =
+    '<div style="background:rgba(0,212,255,.04);border:1px solid rgba(0,212,255,.15);border-radius:8px;padding:14px;margin-bottom:12px"><p style="font-size:.79rem;color:#5a6270;line-height:1.65">Template değişkenleri: <code style="background:#181c24;padding:2px 7px;border-radius:3px;font-size:.73rem">{{from_name}} {{from_email}} {{phone}} {{company}} {{services}} {{oneoff}} {{custom_svcs}} {{support_level}} {{support_hours}} {{support_type}} {{contract}} {{payment_model}} {{support_lang}} {{locations}} {{notes}} {{to_email}}</code></p></div>' +
+    '<div class="acard"><div class="ahead"><h3>🔑 Kimlik Bilgileri</h3></div><div class="abody">' +
+    '<div class="aff"><label>Public Key</label><input type="text" id="ejPK" value="'+x(ej.pk)+'" placeholder="user_xxxxxxx"></div>' +
+    '<div class="aff"><label>Service ID</label><input type="text" id="ejSID" value="'+x(ej.sid)+'" placeholder="service_xxxxxxx"></div>' +
+    '<div class="aff"><label>Template ID</label><input type="text" id="ejTID" value="'+x(ej.tid)+'" placeholder="template_xxxxxxx"></div>' +
+    '<div class="aff"><label>Alıcı E-posta</label><input type="email" id="ejTO" value="'+x(ej.to)+'" placeholder="teklif@gitsteknoloji.com"></div>' +
+    '<div id="ejMsg" style="font-size:.75rem;margin-top:7px"></div></div></div>' +
+    '<div style="display:flex;gap:8px;margin-top:10px"><button class="ab abA" onclick="saveEJ()">💾 Kaydet</button></div>';
+}
+function saveEJ() { ej={pk:gv('ejPK').trim(),sid:gv('ejSID').trim(),tid:gv('ejTID').trim(),to:gv('ejTO').trim()};saveAll(); }
+function renderBak() {
+  document.getElementById('admContent').innerHTML =
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">' +
+    '<div class="acard"><div class="ahead"><h3>💾 Yedek Al</h3></div><div class="abody"><button class="ab abGr" onclick="expBak()">📥 İndir</button></div></div>' +
+    '<div class="acard"><div class="ahead"><h3>🔄 Fabrika Sıfırla</h3></div><div class="abody"><button class="ab abR" onclick="doReset()">🗑 Sıfırla</button></div></div></div>';
+}
+function expBak() {
+  var b = new Blob([JSON.stringify({cats:cats,prods:prods,oneoff:oneoff,why:why,metrics:metrics,cont:cont,mqSpeed:mqSpeed,date:new Date().toISOString()},null,2)],{type:'application/json'});
+  var a = document.createElement('a');a.href=URL.createObjectURL(b);a.download='gits-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();
+}
+function doReset() {
+  cfm('Sıfırla','Tüm içerik varsayılana dönecek.',function(){
+    resetToDefaults(); saveAll(); renderBak();
+  });
+}
+
+/* ── SİTE RENDER ── */
+function sel(id){return document.getElementById(id);}
+function setText(id,v){var e=sel(id);if(e)e.textContent=v;}
+function setHTML(id,v){var e=sel(id);if(e)e.innerHTML=v;}
+
+function rs() {
+  var c = cont;
+  if(c.badge) setText('heroBadge',c.badge);
+  if(c.heroTitle) setHTML('htit',c.heroTitle);
+  if(c.heroSub) setText('hsub',c.heroSub);
+  if(c.heroBtnP) setText('heroBtnP',c.heroBtnP);
+  if(c.heroBtnS) setText('heroBtnS',c.heroBtnS);
+  ['s1','s1l','s2','s2l','s3','s3l','s4','s4l'].forEach(function(k){if(c[k])setText(k,c[k]);});
+  if(c.svcLabel) setText('svcLabel',c.svcLabel);
+  if(c.svcTitle) setHTML('svcTitle',c.svcTitle);
+  if(c.svcDesc) setText('sdesc',c.svcDesc);
+  if(c.svcCta) setText('svcCta',c.svcCta);
+  if(c.whyLabel) setText('whyLabel',c.whyLabel);
+  if(c.whyTitle) setHTML('whyTitle',c.whyTitle);
+  var wf=sel('whyFeats');
+  if(wf) wf.innerHTML=why.map(function(f){return '<div class="why-feat"><div class="why-feat-num">'+x(f.num)+'</div><div class="why-feat-body"><h4>'+x(f.title)+'</h4><p>'+x(f.desc)+'</p></div></div>';}).join('');
+  if(c.quoteLabel) setText('quoteLabel',c.quoteLabel);
+  if(c.quoteTitle) setHTML('quoteTitle',c.quoteTitle);
+  if(c.quoteSideNote) setText('quoteSideNote',c.quoteSideNote);
+  if(c.ctaLabel) setText('ctaLabel',c.ctaLabel);
+  if(c.ctaTitle) setHTML('ctaTitle',c.ctaTitle);
+  if(c.ctaTxt) setText('ctatxt',c.ctaTxt);
+  if(c.ctaBtnP) setText('ctaBtnP',c.ctaBtnP);
+  if(c.ctaBtnS) setText('ctaBtnS',c.ctaBtnS);
+  if(c.footerAbout) setText('fabout',c.footerAbout);
+  var fc=sel('ftcopy');if(fc)fc.innerHTML='© <span class="ft-year">'+CY+'</span> '+x(c.ftcopyPrefix||'GITS Teknoloji Ltd. Şti. — Tüm hakları saklıdır.');
+  if(c.fttagline) setText('fttagline',c.fttagline);
+  if(c.ftc1h) setText('ftc1h',c.ftc1h);
+  if(c.ftc2h) setText('ftc2h',c.ftc2h);
+  function frl(id,arr){var e=sel(id);if(e&&arr)e.innerHTML=arr.map(function(l){return '<li><a>'+x(l)+'</a></li>';}).join('');}
+  frl('ftc1',c.ftc1);frl('ftc2',c.ftc2);
+  if(c.nav1) setText('nav1',c.nav1);
+  if(c.nav2) setText('nav2',c.nav2);
+  if(c.nav3) setText('nav3',c.nav3);
+  if(c.nav4) setText('nav4',c.nav4);
+  try{renderMetricCard();}catch(e){}
+  try{buildSvc();}catch(e){}
+  try{buildOO();}catch(e){}
+  try{buildMQ();}catch(e){}
+  try{buildQP();}catch(e){}
+}
+
+function renderMetricCard() {
+  var m = metrics;
+  document.getElementById('mcardTitle').textContent = m.cardTitle||'Sistem Sağlık Durumu';
+  document.getElementById('mcardSub').textContent = m.cardSub||'';
+  document.getElementById('metricRows').innerHTML = (m.rows||[]).map(function(r){
+    var pct = Math.min(100,Math.max(0,r.pct||0));
+    return '<div class="mrow"><div class="mt2"><span class="mn">'+x(r.name)+'</span><span style="font-size:.81rem;font-weight:700;color:'+(CM[r.color]||CM.blue)+'">'+x(r.val)+'</span></div><div class="mb"><div class="mf" style="width:'+pct+'%;background:'+(CB[r.color]||CB.blue)+'"></div></div></div>';
+  }).join('');
+  document.getElementById('uptL1').textContent = m.uptL1||'Ortalama Uptime';
+  document.getElementById('uptL2').textContent = m.uptL2||'Son 12 ay';
+  document.getElementById('uptV').textContent = m.uptV||'99.9%';
+  document.getElementById('uptV').style.color = CM[m.uptC]||CM.blue;
+}
+
+function buildSvc() {
+  var te = document.getElementById('stabs'), ge = document.getElementById('sgrid');
+  if (!te || !ge) return;
+  var ac = ['Tümü'].concat(cats.map(function(c){return c.name;}).filter(function(n){return prods.some(function(p){return p.cat===n;});}));
+  te.innerHTML = ac.map(function(c,i){
+    return '<button class="tab'+(i===0?' on':'')+'" onclick="fsvc(this,\''+c.replace(/'/g,"\\'")+'\')">'+c+'</button>';
+  }).join('');
+  ge.innerHTML = prods.map(function(p){
+    return '<div class="sc on" data-cat="'+x(p.cat)+'" style="display:block">' +
+      '<div class="sico">'+(p.icon||'⚙')+'</div><span class="sarr">↗</span>' +
+      '<h3>'+x(p.name)+'</h3><p>'+x(p.desc||'')+'</p>' +
+      (p.detail?'<div class="sc-detail">'+x(p.detail)+'</div>':'') +
+      '<div class="spr">'+(p.price>0?Number(p.price).toLocaleString('tr-TR')+' TL/ay':'Teklif bazlı')+'</div></div>';
+  }).join('');
+}
+function fsvc(btn,cat) {
+  document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+  document.querySelectorAll('.sc').forEach(function(c){
+    if (cat==='Tümü' || c.dataset.cat===cat) {
+      c.style.display='block';
+    } else {
+      c.style.display='none';
+    }
+  });
+}
+
+function buildMQ() {
+  var items = prods.filter(function(p){return p.marquee!==false;});
+  var t = document.getElementById('mqTrack');
+  if (!t||!items.length) { if(t) t.innerHTML=''; return; }
+  var h = items.map(function(p){return '<span class="mq-item">'+(p.icon||'')+' '+x(p.name)+' <span class="mq-sep">✦</span></span>';}).join('');
+  t.innerHTML = h+h;
+  var dur = Math.max(8, mqSpeed*(items.length/15));
+  t.style.setProperty('--mq-dur', dur.toFixed(1)+'s');
+  t.classList.add('running');
+}
+
+function buildOO() {
+  document.getElementById('oogrid').innerHTML = oneoff.map(function(o){
+    var sel = selOO.has(o.id) ? ' sel' : '';
+    return '<div class="oo'+sel+'" id="oo'+o.id+'" onclick="toOO(\'' + o.id + '\')">' +
+      '<div class="oocb"></div><div><div class="oon">'+x(o.name)+'</div>' +
+      '<div class="oop">'+(o.price>0?Number(o.price).toLocaleString('tr-TR')+' TL':'Teklif bazlı')+'</div>' +
+      (o.desc?'<div style="font-size:.69rem;color:#3a4252;margin-top:2px">'+x(o.desc)+'</div>':'')+
+      '</div></div>';
+  }).join('');
+}
+function toOO(id) {
+  if(selOO.has(id)) selOO.delete(id); else selOO.add(id);
+  var el=document.getElementById('oo'+id);
+  if(el) el.classList.toggle('sel',selOO.has(id));
+  qs();
+}
+
+function buildQP() { rqp(''); }
+function rqp(sr) {
+  if(typeof sr!=='string') sr='';
+  sr = sr.toLowerCase();
+  var fl = sr ? prods.filter(function(p){return p.name.toLowerCase().indexOf(sr)>-1||p.cat.toLowerCase().indexOf(sr)>-1||(p.desc||'').toLowerCase().indexOf(sr)>-1;}) : prods;
+  var sc = document.getElementById('pscroll'); if(!sc) return;
+  if(!fl.length) { sc.innerHTML='<div style="font-size:.77rem;color:#4a5568;text-align:center;padding:16px;font-style:italic">Sonuç bulunamadı.</div>'; return; }
+  var cns=[]; fl.forEach(function(p){if(cns.indexOf(p.cat)===-1)cns.push(p.cat);});
+  var html='';
+  cns.forEach(function(cat){
+    html+='<div class="cglbl">'+ci(cat)+' '+cat+'</div>';
+    fl.filter(function(p){return p.cat===cat;}).forEach(function(p){
+      html+='<div class="pr'+(selP[p.id]?' sel':'')+'" id="qpr'+p.id+'">' +
+        '<div><div class="prn">'+(p.icon||'')+' '+x(p.name)+'</div><div class="prc">'+x(p.cat)+'</div></div>' +
+        '<div class="prp">'+(p.price>0?Number(p.price).toLocaleString('tr-TR')+' TL':'Teklif')+'</div>' +
+        '<input type="number" class="prq" id="qty'+p.id+'" min="1" value="'+(selP[p.id]||1)+'" style="display:'+(selP[p.id]?'block':'none')+'" onchange="uq('+p.id+',this.value)">' +
+        '<button class="prt'+(selP[p.id]?' on':'')+'" onclick="tp('+p.id+')">'+(selP[p.id]?'✓':'+')+'</button></div>';
+    });
+  });
+  sc.innerHTML = html;
+}
+function tp(id){if(selP[id])delete selP[id];else selP[id]=1;rqp((document.getElementById('psrch')||{value:''}).value);qs();}
+function uq(id,v){selP[id]=Math.max(1,parseInt(v)||1);qs();}
+
+function addCSvc(){customSvcs.push({id:'cs'+Date.now(),name:'',qty:1});renderCSvcs();}
+function renderCSvcs(){
+  document.getElementById('customSvcList').innerHTML=customSvcs.map(function(s,i){
+    return '<div class="csrow"><input type="text" value="'+x(s.name)+'" placeholder="Hizmet/Ticket açıklaması..." oninput="customSvcs['+i+'].name=this.value;qs()">' +
+      '<input type="number" class="csqty" value="'+s.qty+'" min="1" oninput="customSvcs['+i+'].qty=+this.value||1;qs()">' +
+      '<button class="csrm" onclick="customSvcs.splice('+i+',1);renderCSvcs();qs()">×</button></div>';
+  }).join('');
+}
+
+document.querySelectorAll('.pills').forEach(function(g){
+  g.querySelectorAll('.pill').forEach(function(p){
+    p.addEventListener('click',function(){
+      g.querySelectorAll('.pill').forEach(function(z){z.classList.remove('on');});
+      p.classList.add('on'); qs();
+    });
+  });
+});
+
+function qs(){
+  var list=document.getElementById('qlist'),tw=document.getElementById('qtot'),tv=document.getElementById('qtotv');
+  var rows=[],tot=0,hp2=false;
+  Object.keys(selP).forEach(function(id){
+    var p=prods.find(function(p){return p.id==id;});if(!p)return;
+    var qty=selP[id],s=p.price*qty;
+    rows.push('<div class="qi"><span style="flex:1">'+(p.icon||'')+' '+x(p.name)+(qty>1?' ×'+qty:'')+'</span><b>'+(p.price>0?Number(s).toLocaleString('tr-TR')+' TL':'Teklif')+'</b></div>');
+    if(p.price>0){tot+=s;hp2=true;}
+  });
+  selOO.forEach(function(id){
+    var o=oneoff.find(function(o){return o.id===id;});if(!o)return;
+    rows.push('<div class="qi"><span style="flex:1">⚡ '+x(o.name)+'</span><b>'+(o.price>0?Number(o.price).toLocaleString('tr-TR')+' TL':'Teklif')+'</b></div>');
+    if(o.price>0){tot+=o.price;hp2=true;}
+  });
+  customSvcs.filter(function(s){return s.name.trim();}).forEach(function(s){
+    rows.push('<div class="qi"><span style="flex:1">✏ '+x(s.name)+(s.qty>1?' ×'+s.qty:'')+'</span><b style="color:#fbbf24">Özel</b></div>');
+  });
+  if(rows.length){list.innerHTML=rows.join('');tw.style.display='flex';tv.textContent=hp2?Number(tot).toLocaleString('tr-TR')+' TL':'Teklif Bazlı';}
+  else{list.innerHTML='<span class="qemp">Henüz seçim yapılmadı.</span>';tw.style.display='none';}
+}
+
+function addLoc(){var i=document.getElementById('locinp'),v=i.value.trim();if(!v)return;locs.push(v);i.value='';renderLocs();}
+function rmLoc(i){locs.splice(i,1);renderLocs();}
+function renderLocs(){document.getElementById('loclist').innerHTML=locs.map(function(l,i){return '<div class="lc">'+x(l)+'<button class="lrm" onclick="rmLoc('+i+')">×</button></div>';}).join('');}
+
+function showPTab(id,btn){
+  document.querySelectorAll('.ptab').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');
+  document.querySelectorAll('.ptabc').forEach(function(c){c.classList.remove('on');});
+  var el=document.getElementById('ptab-'+id);if(el)el.classList.add('on');
+}
+
+function subQ(){
+  var n=gv('qn').trim(),e=gv('qe').trim();
+  if(!n||!e){alert('Ad Soyad ve E-posta zorunludur.');return;}
+  if(!Object.keys(selP).length&&!selOO.size&&!customSvcs.filter(function(s){return s.name.trim();}).length){alert('En az bir hizmet seçin.');return;}
+  if(!document.getElementById('termsAccept').checked){alert('Devam etmek için koşulları kabul etmeniz gerekiyor.');return;}
+  var svcs=[];Object.keys(selP).forEach(function(id){var p=prods.find(function(p){return p.id==id;});if(p)svcs.push(p.name+(selP[id]>1?' (×'+selP[id]+')':''));});
+  var oos=[];selOO.forEach(function(id){var o=oneoff.find(function(o){return o.id===id;});if(o)oos.push(o.name);});
+  var csvc=customSvcs.filter(function(s){return s.name.trim();}).map(function(s){return s.name+(s.qty>1?' (×'+s.qty+')':'');}).join('; ');
+  var lvl=(document.querySelector('#plvl .pill.on')||{textContent:'—'}).textContent;
+  var hrs=(document.querySelector('#phrs .pill.on')||{textContent:'—'}).textContent;
+  var typ=(document.querySelector('#ptyp .pill.on')||{textContent:'—'}).textContent;
+  var cnt=(document.querySelector('#pcnt .pill.on')||{textContent:'—'}).textContent;
+  var lng=(document.querySelector('#plng .pill.on')||{textContent:'—'}).textContent;
+  var pModel=(document.querySelector('.ptab.on')||{textContent:'Aylık Ödeme'}).textContent;
+  var rd={name:n,email:e,phone:gv('qph')||'—',company:gv('qco')||'—',
+    services:svcs.join(', ')||'—',oneoff:oos.join(', ')||'—',customServices:csvc||'—',
+    support:{level:lvl,hours:hrs,type:typ,contract:cnt},
+    supportLang:lng,paymentModel:pModel,
+    locations:locs.join(', ')||'—',notes:gv('qnotes')||'—',
+    status:'new',createdAt:new Date().toISOString()};
+  /* localStorage'a kaydet */
+  var list=loadRequests();list.unshift(rd);saveRequests(list);
+  updBadge();
+  var st=document.getElementById('formStatus');
+  /* EmailJS varsa gönder */
+  if(ej.pk&&ej.sid&&ej.tid&&typeof emailjs!=='undefined'){
+    st.className='fsts sending';st.style.display='flex';st.innerHTML='⏳ Gönderiliyor...';
+    document.getElementById('qsubBtn').disabled=true;
+    emailjs.init(ej.pk);
+    emailjs.send(ej.sid,ej.tid,{from_name:n,from_email:e,phone:gv('qph')||'—',company:gv('qco')||'—',services:svcs.join(', ')||'—',oneoff:oos.join(', ')||'—',custom_svcs:csvc||'—',support_level:lvl,support_hours:hrs,support_type:typ,contract:cnt,support_lang:lng,payment_model:pModel,locations:locs.join(', ')||'—',notes:gv('qnotes')||'—',to_email:ej.to})
+    .then(function(){st.className='fsts success';st.innerHTML='✓ Gönderildi!';document.getElementById('qsubBtn').disabled=false;setTimeout(function(){showSuc();st.style.display='none';},1000);})
+    .catch(function(err){st.className='fsts error';st.innerHTML='✗ '+(err.text||err.message);document.getElementById('qsubBtn').disabled=false;});
+  } else {
+    showSuc();
+  }
+}
+
+function showSuc(){
+  document.getElementById('sucMsg').textContent=cont.quoteSuccess||'Uzman ekibimiz en geç 24 saat içinde size özel fiyat teklifini sunacaktır.';
+  document.getElementById('sucmo').classList.add('on');
+  selP={};selOO=new Set();locs=[];customSvcs=[];
+  rqp('');buildOO();qs();renderLocs();renderCSvcs();
+  ['qn','qco','qe','qph','qnotes'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('termsAccept').checked=false;
+}
+
+function closeCfm(){document.getElementById('cfm').classList.remove('on');}
+function cfm(title,msg,cb){document.getElementById('cfmTitle').textContent=title;document.getElementById('cfmMsg').textContent=msg;cfmCb=cb;document.getElementById('cfm').classList.add('on');}
+document.getElementById('cfmOk').addEventListener('click',function(){closeCfm();if(cfmCb)cfmCb();cfmCb=null;});
+var toastT;
+function toast(m){document.getElementById('tmsg').textContent=m;var t=document.getElementById('toast');t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('on');},2500);}
+
+/* ── INIT ── */
+/* Eski versiyonlardan kalan bozuk veriyi temizle */
+(function(){
+  var ver = localStorage.getItem('gits_version');
+  if(ver !== '4.2') {
+    /* Eski Firebase/v2/v3 verilerini temizle */
+    ['gits_config','gits_prods','gits_cats',
+     'gits_data','gits_data_v1','gits_data_v2','gits_data_v3',
+     'gits_data_v30','gits_data_v31','gits_data_v32','gits_data_v33',
+     'gits_data_v34','gits_data_v35'].forEach(function(k){
+      localStorage.removeItem(k);
+    });
+    localStorage.setItem('gits_version','4.2');
+  }
+})();
+document.getElementById('site').style.display = 'block';
+loadData();
+rs();
+if(location.hash && location.hash !== '#') checkHash();
+
+/* Oturum kontrolü */
+var sess = getSession();
+if(sess){
+  currentUser = sess;
+  if(location.hash==='#admin'){
+    document.getElementById('lscr').style.display='none';
+    buildNav();renderChip();renderDash();updBadge();
+  }
+}
+
+</script>
+</body>
+</html>
