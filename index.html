@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GITS Teknoloji — Global IT Solutions | v4.3</title>
+<title>GITS Teknoloji — Global IT Solutions | v4.4</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}html,body{background:#0a0c10;color:#e8eaf0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6}
@@ -323,10 +323,10 @@ a[id^="nav"]:hover{color:#fff}
 <nav class="nav">
   <svg width="124" height="32"><use href="#L-nav"/></svg>
   <ul class="navl">
-    <li><a href="#ssvc" id="nav1">Hizmetler</a></li>
-    <li><a href="#swhy" id="nav2">Neden Biz</a></li>
-    <li><a href="#squote" id="nav3">Teklif Al</a></li>
-    <li><a href="#scta" class="navcta" id="nav4">İletişim</a></li>
+    <li><button onclick="window.location.hash='ssvc'" id="nav1">Hizmetler</button></li>
+    <li><button onclick="window.location.hash='swhy'" id="nav2">Neden Biz</button></li>
+    <li><button onclick="window.location.hash='squote'" id="nav3">Teklif Al</button></li>
+    <li><button class="navcta" onclick="window.location.hash='scta'" id="nav4">İletişim</button></li>
   </ul>
 </nav>
 <section class="hero">
@@ -337,8 +337,8 @@ a[id^="nav"]:hover{color:#fff}
   <h1 id="htit">Kurumsal IT<br>altyapınızı<br><em>güvence altına</em><br>alın.</h1>
   <p class="hsub" id="hsub">Siber güvenlikten bulut hizmetlerine, L1–L3 destekten mühendislik çözümlerine kadar uçtan uca IT hizmetleri.</p>
   <div class="hbtns">
-    <a href="#squote" class="btnp" id="heroBtnP">Teklif Al</a>
-    <a href="#ssvc" class="btng" id="heroBtnS">Hizmetleri Keşfet</a>
+    <button class="btnp" id="heroBtnP" onclick="window.location.hash='squote'">Teklif Al</button>
+    <button class="btng" id="heroBtnS" onclick="window.location.hash='ssvc'">Hizmetleri Keşfet</button>
   </div>
   <div class="hstats">
     <div><div class="snum" id="s1">200+</div><div class="slbl" id="s1l">Aktif hizmet paketi</div></div>
@@ -355,7 +355,7 @@ a[id^="nav"]:hover{color:#fff}
   </div>
   <div class="tabs" id="stabs"></div>
   <div class="sgrid" id="sgrid"></div>
-  <div style="text-align:center;margin-top:26px"><a href="#squote" class="btng" id="svcCta">Tüm hizmetler için teklif alın →</a></div>
+  <div style="text-align:center;margin-top:26px"><button class="btng" id="svcCta" onclick="window.location.hash='squote'">Tüm hizmetler için teklif alın →</button></div>
 </section>
 <section class="sec" id="swhy" style="background:#0d0f14">
   <div class="slabel" id="whyLabel">Neden GITS?</div>
@@ -461,7 +461,7 @@ a[id^="nav"]:hover{color:#fff}
   <h2 class="stitle" id="ctaTitle">Hemen başlayalım</h2>
   <p id="ctatxt">IT altyapınızı bir üst seviyeye taşımak için bugün bizimle iletişime geçin.</p>
   <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-    <a href="#squote" class="btnp" id="ctaBtnP">Teklif İste</a>
+    <button class="btnp" id="ctaBtnP" onclick="window.location.hash='squote'">Teklif İste</button>
     <button class="btng" id="ctaBtnS">Bizi Arayın</button>
   </div>
 </section>
@@ -476,7 +476,7 @@ a[id^="nav"]:hover{color:#fff}
       <li><a onclick="showLegal('terms')">Kullanım Koşulları</a></li>
     </ul></div>
   </div>
-  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v4.3</span><span class="admin-hint">· #admin</span></div>
+  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v4.4</span><span class="admin-hint">· #admin</span></div>
 </footer>
 </div>
 <!-- HUKUKİ SAYFALAR -->
@@ -546,7 +546,7 @@ a[id^="nav"]:hover{color:#fff}
   </div></div>
 </div>
 <div class="asb">
-  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v4.3</small></div>
+  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v4.4</small></div>
   <nav class="asbnav" id="admNav"></nav>
   <div class="asbft">
     <button onclick="closeAdm()">🌐 Siteye Dön</button>
@@ -572,7 +572,7 @@ a[id^="nav"]:hover{color:#fff}
 
 <script>
 /* ═══════════════════════════════════════
-   GITS TEKNOLOJİ v4.3 — localStorage tabanlı
+   GITS TEKNOLOJİ v4.4 — localStorage tabanlı
    Firebase kaldırıldı, tüm veri tarayıcıda saklanır
    ═══════════════════════════════════════ */
 
