@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GITS Teknoloji — Global IT Solutions | v4.9</title>
+<title>GITS Teknoloji — Global IT Solutions | v5.0</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}html,body{background:#0a0c10;color:#e8eaf0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6}
@@ -262,6 +262,8 @@ button{cursor:pointer;font-family:inherit}input,select,textarea{font-family:inhe
 .rqbadge.new{background:rgba(239,68,68,.15);color:#ef4444;border:1px solid rgba(239,68,68,.3)}
 .rqbadge.read{background:rgba(107,114,128,.1);color:#6b7280;border:1px solid rgba(107,114,128,.2)}
 .rqbadge.done{background:rgba(34,197,94,.1);color:#22c55e;border:1px solid rgba(34,197,94,.2)}
+.rqbadge.rejected{background:rgba(245,158,11,.1);color:#f59e0b;border:1px solid rgba(245,158,11,.2)}
+.rqbadge.archived{background:rgba(107,114,128,.08);color:#4a5568;border:1px solid rgba(107,114,128,.15)}
 /* Request detail modal */
 .rdmo{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:none;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto;backdrop-filter:blur(4px)}
 .rdmo.on{display:flex}
@@ -476,7 +478,7 @@ a[id^="nav"]:hover{color:#fff}
       <li><a onclick="showLegal('terms')">Kullanım Koşulları</a></li>
     </ul></div>
   </div>
-  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v4.9</span><span class="admin-hint">· #admin</span></div>
+  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v5.0</span><span class="admin-hint">· #admin</span></div>
 </footer>
 </div>
 <!-- HUKUKİ SAYFALAR -->
@@ -546,7 +548,7 @@ a[id^="nav"]:hover{color:#fff}
   </div></div>
 </div>
 <div class="asb">
-  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v4.9</small></div>
+  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v5.0</small></div>
   <nav class="asbnav" id="admNav"></nav>
   <div class="asbft">
     <button onclick="closeAdm()">🌐 Siteye Dön</button>
@@ -572,7 +574,7 @@ a[id^="nav"]:hover{color:#fff}
 
 <script>
 /* ═══════════════════════════════════════
-   GITS TEKNOLOJİ v4.9 — localStorage tabanlı
+   GITS TEKNOLOJİ v5.0 — localStorage tabanlı
    Firebase kaldırıldı, tüm veri tarayıcıda saklanır
    ═══════════════════════════════════════ */
 
@@ -944,35 +946,113 @@ function renderDash() {
 }
 
 /* ── REQUESTS ── */
+function statusLabel(s) {
+  return s==='new'?'Yeni':s==='done'?'Tamamlandı':s==='rejected'?'Teklif Verilmeyecek':s==='archived'?'Arşiv':'Okundu';
+}
+function statusClass(s) {
+  return s==='new'?'new':s==='done'?'done':s==='rejected'?'rejected':s==='archived'?'archived':'read';
+}
+
 function renderRequests() {
-  var list = loadRequests().sort(function(a,b){return new Date(b.createdAt)-new Date(a.createdAt);});
+  var all = loadRequests().sort(function(a,b){return new Date(b.createdAt)-new Date(a.createdAt);});
+  var canAct = hp('superadmin') || hp('editor');
+
   /* Yeni talepleri okundu yap */
-  if (hp('superadmin') || hp('editor')) {
+  if (canAct) {
     var changed = false;
-    list.forEach(function(r){ if(r.status==='new'){r.status='read';changed=true;} });
-    if (changed) { saveRequests(list); pending=0; updBadge(); }
+    all.forEach(function(r){ if(r.status==='new'){r.status='read';changed=true;} });
+    if (changed) { saveRequests(all); pending=0; updBadge(); }
   }
-  window._rl = list;
-  var html = '<div class="acard"><div class="ahead"><h3>Teklif Talepleri ('+list.length+')</h3>' +
-    '<select class="tfl" id="rqFilter" onchange="filterRQ()"><option value="">Tüm Durumlar</option><option value="new">Yeni</option><option value="read">Okundu</option><option value="done">Tamamlandı</option></select>' +
-    '</div><div class="abody" style="padding:14px" id="rqList">';
-  if (list.length === 0) {
-    html += '<p style="font-size:.78rem;color:#4a5568;text-align:center;padding:20px;font-style:italic">Henüz teklif talebi yok.</p>';
-  } else {
+  window._rl = all;
+
+  /* Aktif vs arşiv ayır */
+  var active = all.filter(function(r){ return r.status !== 'archived'; });
+  var archived = all.filter(function(r){ return r.status === 'archived'; });
+
+  /* Yıl bazlı grupla */
+  function byYear(list) {
+    var years = {};
     list.forEach(function(r,i){
-      html += '<div class="rqcard '+(r.status==='new'?'new':'')+'" onclick="showRD('+i+')" data-status="'+r.status+'">' +
-        '<div class="rqhdr"><div><div class="rqname">'+x(r.name)+(r.company&&r.company!=='—'?' — '+x(r.company):'')+'</div><div class="rqtime">'+fmtD(r.createdAt)+'</div></div>' +
-        '<div style="display:flex;gap:6px;align-items:center">' +
-        '<span class="rqbadge '+r.status+'">'+(r.status==='new'?'Yeni':r.status==='done'?'Tamamlandı':'Okundu')+'</span>' +
-        (hp('superadmin')||hp('editor')?'<button class="ab abGr abSm" onclick="event.stopPropagation();markDone('+i+')">✓ Tamamla</button>':'') +
-        '</div></div>' +
-        '<div class="rqmeta"><span>📧 '+x(r.email)+'</span><span>📞 '+x(r.phone||'—')+'</span><span>💳 '+x(r.paymentModel||'—')+'</span></div>' +
-        '</div>';
+      var y = new Date(r.createdAt).getFullYear();
+      if(!years[y]) years[y] = [];
+      years[y].push({r:r, i:all.indexOf(r)});
+    });
+    return years;
+  }
+
+  function rqCardHTML(r, i, canAct) {
+    return '<div class="rqcard" onclick="showRD('+i+')" data-status="'+r.status+'" style="border-left:3px solid '+(r.status==='new'?'#ef4444':r.status==='done'?'#22c55e':r.status==='rejected'?'#f59e0b':r.status==='archived'?'#6b7280':'rgba(255,255,255,.1)')+'">' +
+      '<div class="rqhdr"><div><div class="rqname">'+x(r.name)+(r.company&&r.company!=='—'?' — '+x(r.company):'')+'</div><div class="rqtime">'+fmtD(r.createdAt)+'</div></div>' +
+      '<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap">' +
+      '<span class="rqbadge '+statusClass(r.status)+'">'+statusLabel(r.status)+'</span>' +
+      (canAct && r.status!=='done' && r.status!=='rejected' && r.status!=='archived' ? '<button class="ab abGr abSm" onclick="event.stopPropagation();setStatus('+i+',\'done\')">✓ Tamamla</button>' : '') +
+      (canAct && r.status!=='rejected' && r.status!=='archived' ? '<button class="ab abY abSm" onclick="event.stopPropagation();setStatus('+i+',\'rejected\')">✗ Red</button>' : '') +
+      (canAct && (r.status==='done'||r.status==='rejected') ? '<button class="ab abG abSm" onclick="event.stopPropagation();setStatus('+i+',\'archived\')">📦 Arşiv</button>' : '') +
+      '</div></div>' +
+      '<div class="rqmeta"><span>📧 '+x(r.email)+'</span><span>📞 '+x(r.phone||'—')+'</span><span>💳 '+x(r.paymentModel||'—')+'</span>'+(r.adminNote?'<span style="color:#fbbf24">📝 Not var</span>':'')+'</div>' +
+      '</div>';
+  }
+
+  var html = '<div class="acard"><div class="ahead"><h3>Aktif Talepler ('+active.length+')</h3>' +
+    '<div style="display:flex;gap:6px"><select class="tfl" id="rqFilter" onchange="filterRQ()"><option value="">Tümü</option><option value="read">Okundu</option><option value="done">Tamamlandı</option><option value="rejected">Red</option></select>' +
+    (canAct?'<button class="ab abY abSm" onclick="archiveAll()">📦 Yılı Arşivle</button>':'') +
+    '</div></div><div class="abody" style="padding:14px" id="rqList">';
+
+  if (active.length === 0) {
+    html += '<p style="font-size:.78rem;color:#4a5568;text-align:center;padding:20px;font-style:italic">Aktif talep yok.</p>';
+  } else {
+    var activeByYear = byYear(active);
+    Object.keys(activeByYear).sort(function(a,b){return b-a;}).forEach(function(y){
+      html += '<div style="font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4a5568;padding:10px 0 6px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:8px">'+y+' — '+activeByYear[y].length+' talep</div>';
+      activeByYear[y].forEach(function(item){ html += rqCardHTML(item.r, item.i, canAct); });
     });
   }
   html += '</div></div>';
+
+  /* Arşiv bölümü */
+  if (archived.length > 0) {
+    html += '<div class="acard" style="margin-top:14px"><div class="ahead"><h3>📦 Arşiv ('+archived.length+')</h3></div><div class="abody" style="padding:14px">';
+    var archByYear = byYear(archived);
+    Object.keys(archByYear).sort(function(a,b){return b-a;}).forEach(function(y){
+      html += '<div style="font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4a5568;padding:10px 0 6px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:8px;cursor:pointer" onclick="toggleYear(\'arch'+y+'\')">' +
+        y+' Arşivi — '+archByYear[y].length+' talep ▾</div>';
+      html += '<div id="arch'+y+'" style="display:none">';
+      archByYear[y].forEach(function(item){ html += rqCardHTML(item.r, item.i, canAct); });
+      html += '</div>';
+    });
+    html += '</div></div>';
+  }
+
   document.getElementById('admContent').innerHTML = html;
 }
+
+window.toggleYear = function(id) {
+  var el = document.getElementById(id);
+  if (el) el.style.display = el.style.display==='none' ? 'block' : 'none';
+};
+
+window.setStatus = function(i, status) {
+  if (!window._rl) return;
+  window._rl[i].status = status;
+  saveRequests(window._rl);
+  toast(statusLabel(status)+' olarak işaretlendi');
+  renderRequests();
+};
+
+window.archiveAll = function() {
+  var list = loadRequests();
+  var thisYear = new Date().getFullYear();
+  var prevYear = thisYear - 1;
+  var changed = 0;
+  list.forEach(function(r){
+    var y = new Date(r.createdAt).getFullYear();
+    if (y <= prevYear && (r.status==='done'||r.status==='rejected')) {
+      r.status='archived'; changed++;
+    }
+  });
+  if (changed > 0) { saveRequests(list); toast(changed+' talep arşivlendi'); renderRequests(); }
+  else toast('Arşivlenecek talep yok');
+};
 
 function filterRQ() {
   var f = gv('rqFilter');
@@ -982,11 +1062,7 @@ function filterRQ() {
 }
 
 function markDone(i) {
-  if (!window._rl) return;
-  window._rl[i].status = 'done';
-  saveRequests(window._rl);
-  toast('Tamamlandı');
-  renderRequests();
+  setStatus(i, 'done');
 }
 
 function showRD(i) {
@@ -994,15 +1070,21 @@ function showRD(i) {
   if (!r) return;
   var role = currentUser ? currentUser.role : 'viewer';
   var canSee = (role === 'superadmin' || role === 'editor');
+  var canAct = canSee;
+
   var html = '<div class="rdhdr"><div><h2 style="font-size:1.1rem;font-weight:700;color:#fff">'+x(r.name)+'</h2><p style="font-size:.75rem;color:#4a5568;margin-top:3px">'+fmtD(r.createdAt)+'</p></div>' +
-    '<div style="display:flex;gap:7px;align-items:center"><span class="rqbadge '+r.status+'">'+(r.status==='new'?'Yeni':r.status==='done'?'Tamamlandı':'Okundu')+'</span>' +
+    '<div style="display:flex;gap:7px;align-items:center"><span class="rqbadge '+statusClass(r.status)+'">'+statusLabel(r.status)+'</span>' +
     '<button class="ab abG abSm" onclick="document.getElementById(\'rdmo\').classList.remove(\'on\')">✕</button></div></div>';
-  if (canSee) {
+
+  if (!canSee) {
+    html += '<p style="font-size:.82rem;color:#5a6270;text-align:center;padding:20px">Detayları görüntüleme yetkiniz yok.</p>';
+  } else {
     html += '<div class="rdsec"><h4>İletişim Bilgileri</h4>' +
       '<div class="rdrow"><span class="rdlabel">Ad Soyad</span><span class="rdval">'+x(r.name)+'</span></div>' +
       '<div class="rdrow"><span class="rdlabel">E-posta</span><span class="rdval" style="color:#00d4ff">'+x(r.email)+'</span></div>' +
       '<div class="rdrow"><span class="rdlabel">Telefon</span><span class="rdval">'+x(r.phone||'—')+'</span></div>' +
       '<div class="rdrow"><span class="rdlabel">Şirket</span><span class="rdval">'+x(r.company||'—')+'</span></div></div>';
+
     if (r.services && r.services!=='—') {
       html += '<div class="rdsec"><h4>Seçilen Hizmetler</h4><div>';
       r.services.split(',').filter(Boolean).forEach(function(s){html+='<span class="rdchip">'+x(s.trim())+'</span>';});
@@ -1025,17 +1107,38 @@ function showRD(i) {
       '<div class="rdrow"><span class="rdlabel">Sözleşme</span><span class="rdval">'+x((r.support||{}).contract||'—')+'</span></div>' +
       '<div class="rdrow"><span class="rdlabel">Ödeme Modeli</span><span class="rdval">'+x(r.paymentModel||'—')+'</span></div>' +
       '<div class="rdrow"><span class="rdlabel">Destek Dili</span><span class="rdval">'+x(r.supportLang||'—')+'</span></div></div>';
+
     if (r.locations && r.locations!=='—') html += '<div class="rdsec"><h4>Lokasyonlar</h4><div class="rdrow"><span class="rdval">'+x(r.locations)+'</span></div></div>';
-    if (r.notes && r.notes!=='—') html += '<div class="rdsec"><h4>Ek Notlar</h4><p style="font-size:.79rem;color:#c8cdd6;line-height:1.65;background:#141720;padding:10px;border-radius:6px">'+x(r.notes)+'</p></div>';
-    html += '<div style="display:flex;gap:8px;margin-top:16px">' +
-      (r.status!=='done'?'<button class="ab abGr" onclick="markDone('+i+');document.getElementById(\'rdmo\').classList.remove(\'on\')">✓ Tamamlandı İşaretle</button>':'') +
-      '<a href="mailto:'+r.email+'?subject=GITS+Teknoloji+Teklif" class="ab abA" style="text-decoration:none">📧 E-posta Gönder</a></div>';
-  } else {
-    html += '<p style="font-size:.82rem;color:#5a6270;text-align:center;padding:20px">Detayları görüntüleme yetkiniz yok.</p>';
+    if (r.notes && r.notes!=='—') html += '<div class="rdsec"><h4>Müşteri Notu</h4><p style="font-size:.79rem;color:#c8cdd6;line-height:1.65;background:#141720;padding:10px;border-radius:6px">'+x(r.notes)+'</p></div>';
+
+    /* Admin notu */
+    html += '<div class="rdsec"><h4>Admin Notu</h4>' +
+      '<textarea id="adminNoteTA" style="background:#141720;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#e8eaf0;font-size:.8rem;padding:9px;width:100%;resize:vertical;min-height:60px;outline:none">'+x(r.adminNote||'')+'</textarea>' +
+      '<button class="ab abG abSm" style="margin-top:6px" onclick="saveAdminNote('+i+')">💾 Notu Kaydet</button></div>';
+
+    /* Aksiyon butonları */
+    html += '<div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">';
+    if (canAct) {
+      if (r.status!=='done') html += '<button class="ab abGr" onclick="setStatus('+i+',\'done\');document.getElementById(\'rdmo\').classList.remove(\'on\')">✓ Tamamlandı</button>';
+      if (r.status!=='rejected') html += '<button class="ab abY" onclick="setStatus('+i+',\'rejected\');document.getElementById(\'rdmo\').classList.remove(\'on\')">✗ Teklif Verilmeyecek</button>';
+      if (r.status==='done'||r.status==='rejected') html += '<button class="ab abG" onclick="setStatus('+i+',\'archived\');document.getElementById(\'rdmo\').classList.remove(\'on\')">📦 Arşivle</button>';
+    }
+    html += '<a href="mailto:'+r.email+'?subject=GITS+Teknoloji+Teklif" class="ab abA" style="text-decoration:none">📧 E-posta Gönder</a>';
+    html += '</div>';
   }
+
   document.getElementById('rdbox').innerHTML = html;
   document.getElementById('rdmo').classList.add('on');
 }
+
+window.saveAdminNote = function(i) {
+  if (!window._rl) return;
+  var note = document.getElementById('adminNoteTA') ? document.getElementById('adminNoteTA').value : '';
+  window._rl[i].adminNote = note;
+  saveRequests(window._rl);
+  toast('Not kaydedildi');
+};
+
 document.getElementById('rdmo').addEventListener('click', function(e){ if(e.target===this) this.classList.remove('on'); });
 
 /* ── CATS ── */
