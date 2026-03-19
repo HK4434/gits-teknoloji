@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GITS Teknoloji — Global IT Solutions | v5.2</title>
+<title>GITS Teknoloji — Global IT Solutions | v5.3</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}html,body{background:#0a0c10;color:#e8eaf0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6}
@@ -312,6 +312,9 @@ a[id^="nav"] {
 }
 a[id^="nav"]:hover{color:#fff}
 </style>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 </head>
 <body>
 <!-- SVG LOGO -->
@@ -478,7 +481,7 @@ a[id^="nav"]:hover{color:#fff}
       <li><a onclick="showLegal('terms')">Kullanım Koşulları</a></li>
     </ul></div>
   </div>
-  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v5.2</span><span class="admin-hint">· #admin</span></div>
+  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v5.3</span><span class="admin-hint">· #admin</span></div>
 </footer>
 </div>
 <!-- HUKUKİ SAYFALAR -->
@@ -548,7 +551,7 @@ a[id^="nav"]:hover{color:#fff}
   </div></div>
 </div>
 <div class="asb">
-  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v5.2</small></div>
+  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v5.3</small></div>
   <nav class="asbnav" id="admNav"></nav>
   <div class="asbft">
     <button onclick="closeAdm()">🌐 Siteye Dön</button>
@@ -573,8 +576,27 @@ a[id^="nav"]:hover{color:#fff}
 <div class="cfm" id="cfm"><div class="cfmb"><h3 id="cfmTitle">Emin misiniz?</h3><p id="cfmMsg"></p><div class="cfma"><button class="ab abG" onclick="closeCfm()">İptal</button><button class="ab abR" id="cfmOk">Evet</button></div></div></div>
 
 <script>
+/* Firebase init */
+var _fbApp = null, _db = null, _auth = null, _fbReady = false;
+try {
+  _fbApp = firebase.initializeApp({
+    apiKey:"AIzaSyAD3iG4xLO9poDKtCfz1NLoW18ZiXm_l2I",
+    authDomain:"gits-teknoloji.firebaseapp.com",
+    projectId:"gits-teknoloji",
+    storageBucket:"gits-teknoloji.firebasestorage.app",
+    messagingSenderId:"788131891269",
+    appId:"1:788131891269:web:13ee88df29fde84941fb2c"
+  });
+  _db = firebase.firestore();
+  _auth = firebase.auth();
+  _fbReady = true;
+  console.log('Firebase OK');
+} catch(e) {
+  console.warn('Firebase yüklenemedi, localStorage kullanılıyor:', e.message);
+}
+
 /* ═══════════════════════════════════════
-   GITS TEKNOLOJİ v5.2 — localStorage tabanlı
+   GITS TEKNOLOJİ v5.3 — localStorage tabanlı
    Firebase kaldırıldı, tüm veri tarayıcıda saklanır
    ═══════════════════════════════════════ */
 
@@ -668,6 +690,36 @@ cont:{},ej:{pk:'',sid:'',tid:'',to:''},mqSpeed:25
 var STORAGE_KEY = 'gits_data_v36';
 
 function loadData() {
+  if (_fbReady && _db) {
+    _db.collection('site').doc('config').get().then(function(doc) {
+      if (doc.exists) {
+        var d = doc.data();
+        cats = d.cats || DD.cats.slice();
+        prods = d.prods || DD.prods.slice();
+        oneoff = d.oneoff || DD.oneoff.slice();
+        why = d.why || DD.why.slice();
+        metrics = d.metrics || JSON.parse(JSON.stringify(DD.metrics));
+        cont = d.cont || {};
+        ej = d.ej || {pk:'',sid:'',tid:'',to:''};
+        mqSpeed = d.mqSpeed || 25;
+        nid = Math.max.apply(null, prods.map(function(p){return +p.id||0;}).concat([299])) + 1;
+        /* localStorage'a da kaydet (offline backup) */
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); } catch(e) {}
+      } else {
+        resetToDefaults();
+        saveData();
+      }
+      rs();
+    }).catch(function(e) {
+      console.warn('Firestore okuma hatası:', e.message);
+      _loadFromLocal();
+    });
+  } else {
+    _loadFromLocal();
+  }
+}
+
+function _loadFromLocal() {
   try {
     var raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
@@ -702,13 +754,22 @@ function resetToDefaults() {
 }
 
 function saveData() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      cats:cats,prods:prods,oneoff:oneoff,why:why,
-      metrics:metrics,cont:cont,ej:ej,mqSpeed:mqSpeed,
-      upd:new Date().toISOString()
-    }));
-  } catch(e) { console.error('Kayıt hatası:', e); }
+  var data = {cats:cats,prods:prods,oneoff:oneoff,why:why,metrics:metrics,cont:cont,ej:ej,mqSpeed:mqSpeed,upd:new Date().toISOString()};
+  /* localStorage */
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+  /* Firebase */
+  if (_fbReady && _db) {
+    _db.collection('site').doc('config').set(data, {merge:true})
+      .then(function(){ setBadge('ok'); })
+      .catch(function(e){ console.warn('Firebase kayıt hatası:', e.message); setBadge('err'); });
+  }
+}
+
+function setBadge(s) {
+  var b = document.getElementById('syncBadge');
+  if (!b) return;
+  if (s==='ok') { b.textContent='⬤ Bağlı'; b.className='sbadge'; }
+  else { b.textContent='⚠ Çevrimdışı'; b.className='sbadge offline'; }
 }
 
 /* Teklif talepleri ayrı key'de */
@@ -717,7 +778,28 @@ function loadRequests() {
   try { return JSON.parse(localStorage.getItem(REQ_KEY) || '[]'); } catch(e) { return []; }
 }
 function saveRequests(list) {
-  localStorage.setItem(REQ_KEY, JSON.stringify(list));
+  /* localStorage */
+  try { localStorage.setItem(REQ_KEY, JSON.stringify(list)); } catch(e) {}
+  /* Firebase */
+  if (_fbReady && _db) {
+    _db.collection('site').doc('quote_list').set({items:list}, {merge:true})
+      .catch(function(e){ console.warn('Talep kayıt hatası:', e.message); });
+  }
+}
+function loadRequestsFromFB(cb) {
+  if (_fbReady && _db) {
+    _db.collection('site').doc('quote_list').get().then(function(doc) {
+      var list = doc.exists ? (doc.data().items || []) : [];
+      /* localStorage'a da yaz */
+      try { localStorage.setItem(REQ_KEY, JSON.stringify(list)); } catch(e) {}
+      cb(list);
+    }).catch(function(e) {
+      console.warn('Talep okuma hatası:', e.message);
+      cb(loadRequests());
+    });
+  } else {
+    cb(loadRequests());
+  }
 }
 
 async function saveAll() {
@@ -779,28 +861,48 @@ function doLogin() {
   document.getElementById('loginErr').style.display = 'none';
   btn.disabled = true; btn.textContent = 'Giriş yapılıyor...';
 
-  var users = loadUsers();
-  /* İlk girişte otomatik süper admin oluştur */
-  if (users.length === 0) {
-    var newUser = {email:email, pass:pass, role:'superadmin', name:email.split('@')[0]};
-    users.push(newUser);
-    saveUsers(users);
-  }
-
-  var user = users.find(function(u) { return u.email===email && u.pass===pass; });
-  if (user) {
-    currentUser = {email:user.email, name:user.name||user.email.split('@')[0], role:user.role};
-    setSession(currentUser);
-    document.getElementById('lscr').style.display = 'none';
-    buildNav(); renderChip(); renderDash();
-    updBadge();
+  if (_fbReady && _auth) {
+    /* Firebase Auth */
+    _auth.signInWithEmailAndPassword(email, pass)
+      .then(function(cred) {
+        var users = loadUsers();
+        var ud = users.find(function(u){return u.email===email;});
+        var role = ud ? ud.role : (users.length===0 ? 'superadmin' : 'viewer');
+        if (users.length === 0) {
+          users.push({email:email, role:'superadmin', name:email.split('@')[0]});
+          saveUsers(users);
+        }
+        currentUser = {email:email, name:email.split('@')[0], role:role};
+        setSession(currentUser);
+        document.getElementById('lscr').style.display = 'none';
+        buildNav(); renderChip(); renderDash(); updBadge();
+      })
+      .catch(function(e) {
+        document.getElementById('loginErr').style.display = 'block';
+        btn.disabled = false; btn.textContent = 'Giriş Yap';
+      });
   } else {
-    document.getElementById('loginErr').style.display = 'block';
-    btn.disabled = false; btn.textContent = 'Giriş Yap';
+    /* localStorage Auth fallback */
+    var users = loadUsers();
+    if (users.length === 0) {
+      users.push({email:email, pass:pass, role:'superadmin', name:email.split('@')[0]});
+      saveUsers(users);
+    }
+    var user = users.find(function(u){return u.email===email && u.pass===pass;});
+    if (user) {
+      currentUser = {email:user.email, name:user.name||user.email.split('@')[0], role:user.role};
+      setSession(currentUser);
+      document.getElementById('lscr').style.display = 'none';
+      buildNav(); renderChip(); renderDash(); updBadge();
+    } else {
+      document.getElementById('loginErr').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Giriş Yap';
+    }
   }
 }
 
 function doLogout() {
+  if (_fbReady && _auth) { _auth.signOut().catch(function(){}); }
   currentUser = null;
   clearSession();
   document.getElementById('lscr').style.display = 'flex';
@@ -954,7 +1056,10 @@ function statusClass(s) {
 }
 
 function renderRequests() {
-  var all = loadRequests().sort(function(a,b){return new Date(b.createdAt)-new Date(a.createdAt);});
+  loadRequestsFromFB(function(all) { _renderRequestsWithData(all); });
+}
+function _renderRequestsWithData(all) {
+  all = all.sort(function(a,b){return new Date(b.createdAt)-new Date(a.createdAt);});
   var canAct = hp('superadmin') || hp('editor');
 
   /* Yeni talepleri okundu yap */
@@ -1760,6 +1865,23 @@ function initButtons() {
 }
 
 /* ── INIT ── */
+/* Firebase Auth state */
+if (_fbReady && _auth) {
+  _auth.onAuthStateChanged(function(fbUser) {
+    if (fbUser && !currentUser) {
+      var users = loadUsers();
+      var ud = users.find(function(u){return u.email===fbUser.email;});
+      var role = ud ? ud.role : (users.length===0 ? 'superadmin' : 'viewer');
+      currentUser = {email:fbUser.email, name:fbUser.email.split('@')[0], role:role};
+      setSession(currentUser);
+      if (location.hash==='#admin') {
+        document.getElementById('lscr').style.display='none';
+        buildNav(); renderChip(); renderDash(); updBadge();
+      }
+    }
+  });
+}
+
 /* Eski versiyonlardan kalan bozuk veriyi temizle */
 (function(){
   var ver = localStorage.getItem('gits_version');
