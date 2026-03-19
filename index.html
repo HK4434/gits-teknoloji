@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GITS Teknoloji — Global IT Solutions | v5.1</title>
+<title>GITS Teknoloji — Global IT Solutions | v5.2</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}html,body{background:#0a0c10;color:#e8eaf0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6}
@@ -478,7 +478,7 @@ a[id^="nav"]:hover{color:#fff}
       <li><a onclick="showLegal('terms')">Kullanım Koşulları</a></li>
     </ul></div>
   </div>
-  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v5.1</span><span class="admin-hint">· #admin</span></div>
+  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v5.2</span><span class="admin-hint">· #admin</span></div>
 </footer>
 </div>
 <!-- HUKUKİ SAYFALAR -->
@@ -548,7 +548,7 @@ a[id^="nav"]:hover{color:#fff}
   </div></div>
 </div>
 <div class="asb">
-  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v5.1</small></div>
+  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v5.2</small></div>
   <nav class="asbnav" id="admNav"></nav>
   <div class="asbft">
     <button onclick="closeAdm()">🌐 Siteye Dön</button>
@@ -574,7 +574,7 @@ a[id^="nav"]:hover{color:#fff}
 
 <script>
 /* ═══════════════════════════════════════
-   GITS TEKNOLOJİ v5.1 — localStorage tabanlı
+   GITS TEKNOLOJİ v5.2 — localStorage tabanlı
    Firebase kaldırıldı, tüm veri tarayıcıda saklanır
    ═══════════════════════════════════════ */
 
@@ -981,18 +981,23 @@ function renderRequests() {
   }
 
   function rqCardHTML(r, i, canAct) {
-    var borderColor = r.status==='new'?'#ef4444':r.status==='done'?'#22c55e':r.status==='rejected'?'#f59e0b':r.status==='archived'?'#6b7280':'rgba(255,255,255,.1)';
+    var bc = r.status==='new'?'#ef4444':r.status==='done'?'#22c55e':r.status==='rejected'?'#f59e0b':r.status==='archived'?'#6b7280':'rgba(255,255,255,.1)';
     var badge = '<span class="rqbadge '+statusClass(r.status)+'" style="font-size:.6rem;padding:1px 6px;margin-left:6px">'+statusLabel(r.status)+'</span>';
-    return '<div class="rqcard" onclick="showRD('+i+')" data-status="'+r.status+'" style="border-left:3px solid '+borderColor+'">' +
-      '<div class="rqhdr"><div><div class="rqname">'+x(r.name)+(r.company&&r.company!=='—'?' — '+x(r.company):'')+badge+'</div><div class="rqtime">'+fmtD(r.createdAt)+'</div></div>' +
-      '<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap">' +
-      (canAct && r.status!=='done' && r.status!=='rejected' && r.status!=='archived' ? '<button class="ab abGr abSm" onclick="event.stopPropagation();setStatus('+i+','done')">✓ Tamamla</button>' : '') +
-      (canAct && r.status!=='rejected' && r.status!=='archived' ? '<button class="ab abY abSm" onclick="event.stopPropagation();setStatus('+i+','rejected')">✗ Red</button>' : '') +
-      (canAct && (r.status==='done'||r.status==='rejected') && r.status!=='archived' ? '<button class="ab abG abSm" onclick="event.stopPropagation();setStatus('+i+','archived')">📦 Arşiv</button>' : '') +
-      (canAct && r.status==='archived' ? '<button class="ab abA abSm" onclick="event.stopPropagation();setStatus('+i+','read')">↩ Aktife Al</button>' : '') +
-      '</div></div>' +
-      '<div class="rqmeta"><span>📧 '+x(r.email)+'</span><span>📞 '+x(r.phone||'—')+'</span><span>💳 '+x(r.paymentModel||'—')+'</span>'+(r.adminNote?'<span style="color:#fbbf24">📝 Not var</span>':'')+' </div>' +
-      '</div>';
+    var h = '<div class="rqcard" onclick="showRD('+i+')" data-status="'+r.status+'" style="border-left:3px solid '+bc+'">';
+    h += '<div class="rqhdr"><div><div class="rqname">'+x(r.name)+(r.company&&r.company!=='—'?' — '+x(r.company):'')+badge+'</div><div class="rqtime">'+fmtD(r.createdAt)+'</div></div>';
+    h += '<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap">';
+    if (canAct && r.status!=='done' && r.status!=='rejected' && r.status!=='archived')
+      h += '<button class="ab abGr abSm" onclick="event.stopPropagation();setStatus('+i+",\'done\')"+'">✓ Tamamla</button>';
+    if (canAct && r.status!=='rejected' && r.status!=='archived')
+      h += '<button class="ab abY abSm" onclick="event.stopPropagation();setStatus('+i+",\'rejected\')"+'">✗ Red</button>';
+    if (canAct && (r.status==='done'||r.status==='rejected') && r.status!=='archived')
+      h += '<button class="ab abG abSm" onclick="event.stopPropagation();setStatus('+i+",\'archived\')"+'">📦 Arşiv</button>';
+    if (canAct && r.status==='archived')
+      h += '<button class="ab abA abSm" onclick="event.stopPropagation();setStatus('+i+",\'read\')"+'">↩ Aktife Al</button>';
+    h += '</div></div>';
+    h += '<div class="rqmeta"><span>📧 '+x(r.email)+'</span><span>📞 '+x(r.phone||'—')+'</span><span>💳 '+x(r.paymentModel||'—')+'</span>'+(r.adminNote?'<span style="color:#fbbf24">📝 Not var</span>':'')+' </div>';
+    h += '</div>';
+    return h;
   }
 
   var html = '<div class="acard"><div class="ahead"><h3>Aktif Talepler ('+active.length+')</h3>' +
