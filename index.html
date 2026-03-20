@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GITS Teknoloji — Global IT Solutions | v5.8</title>
+<title>GITS Teknoloji — Global IT Solutions | v5.9</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}html,body{background:#0a0c10;color:#e8eaf0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6}
@@ -490,7 +490,7 @@ a[id^="nav"]:hover{color:#fff}
       <li><a onclick="showLegal('terms')">Kullanım Koşulları</a></li>
     </ul></div>
   </div>
-  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v5.8</span><span class="admin-hint">· #admin</span></div>
+  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v5.9</span><span class="admin-hint">· #admin</span></div>
 </footer>
 </div>
 <!-- HUKUKİ SAYFALAR -->
@@ -560,7 +560,7 @@ a[id^="nav"]:hover{color:#fff}
   </div></div>
 </div>
 <div class="asb">
-  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v5.8</small></div>
+  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v5.9</small></div>
   <nav class="asbnav" id="admNav"></nav>
   <div class="asbft">
     <button onclick="closeAdm()">🌐 Siteye Dön</button>
@@ -605,7 +605,7 @@ try {
 }
 
 /* ═══════════════════════════════════════
-   GITS TEKNOLOJİ v5.8 — localStorage tabanlı
+   GITS TEKNOLOJİ v5.9 — localStorage tabanlı
    Firebase kaldırıldı, tüm veri tarayıcıda saklanır
    ═══════════════════════════════════════ */
 
@@ -1525,9 +1525,40 @@ function cPanel(fields,saveFn) {
     '<button class="ab abA" style="margin-top:12px" onclick="'+saveFn+'()">💾 Kaydet</button>';
 }
 function renderHero() {
-  cPanel('<div class="ag2"><div class="aff"><label>Badge</label><input type="text" id="cBadge" value="'+x(cont.badge||'Global IT Solutions')+'"></div><div class="aff"><label>Birincil Buton</label><input type="text" id="cBP" value="'+x(cont.heroBtnP||'Teklif Al')+'"></div></div><div class="aff"><label>İkincil Buton</label><input type="text" id="cBS" value="'+x(cont.heroBtnS||'Hizmetleri Keşfet')+'"></div><div class="aff"><label>Ana Başlık</label><textarea id="cHT" rows="3">'+x(cont.heroTitle||'')+'</textarea></div><div class="aff"><label>Alt Metin</label><textarea id="cHS" rows="2">'+x(cont.heroSub||'')+'</textarea></div>','saveHero');
+  cPanel(
+    '<div class="ag2"><div class="aff"><label>Badge</label><input type="text" id="cBadge" value="'+x(cont.badge||'Global IT Solutions')+'"></div><div class="aff"><label>Birincil Buton</label><input type="text" id="cBP" value="'+x(cont.heroBtnP||'Teklif Al')+'"></div></div>' +
+    '<div class="aff"><label>İkincil Buton</label><input type="text" id="cBS" value="'+x(cont.heroBtnS||'Hizmetleri Keşfet')+'"></div>' +
+    '<div class="aff"><label>Ana Başlık</label><textarea id="cHT" rows="3">'+x(cont.heroTitle||'')+'</textarea></div>' +
+    '<div class="aff"><label>Alt Metin</label><textarea id="cHS" rows="2">'+x(cont.heroSub||'')+'</textarea></div>' +
+    '<hr style="border-color:rgba(255,255,255,.07);margin:14px 0">' +
+    '<p style="font-size:.7rem;color:#4a5568;text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:10px">İstatistikler</p>' +
+    '<div class="ag2">' +
+    '<div class="aff"><label>İstat 1 — Değer</label><input type="text" id="cs1" value="'+x(cont.s1||'200+')+'" placeholder="200+"></div>' +
+    '<div class="aff"><label>İstat 1 — Etiket</label><input type="text" id="cs1l" value="'+x(cont.s1l||'Aktif hizmet paketi')+'"></div>' +
+    '</div><div class="ag2">' +
+    '<div class="aff"><label>İstat 2 — Değer</label><input type="text" id="cs2" value="'+x(cont.s2||'99.9%')+'" placeholder="99.9%"></div>' +
+    '<div class="aff"><label>İstat 2 — Etiket</label><input type="text" id="cs2l" value="'+x(cont.s2l||'Uptime garantisi')+'"></div>' +
+    '</div><div class="ag2">' +
+    '<div class="aff"><label>İstat 3 — Değer</label><input type="text" id="cs3" value="'+x(cont.s3||'7/24')+'" placeholder="7/24"></div>' +
+    '<div class="aff"><label>İstat 3 — Etiket</label><input type="text" id="cs3l" value="'+x(cont.s3l||'Teknik destek')+'"></div>' +
+    '</div><div class="ag2">' +
+    '<div class="aff"><label>İstat 4 — Değer</label><input type="text" id="cs4" value="'+x(cont.s4||'20+')+'" placeholder="20+"></div>' +
+    '<div class="aff"><label>İstat 4 — Etiket</label><input type="text" id="cs4l" value="'+x(cont.s4l||'Yıllık deneyim')+'"></div>' +
+    '</div>',
+    'saveHero'
+  );
 }
-function saveHero() { Object.assign(cont,{badge:gv('cBadge'),heroBtnP:gv('cBP'),heroBtnS:gv('cBS'),heroTitle:gv('cHT'),heroSub:gv('cHS')});saveAll(); }
+function saveHero() {
+  Object.assign(cont,{
+    badge:gv('cBadge'),heroBtnP:gv('cBP'),heroBtnS:gv('cBS'),
+    heroTitle:gv('cHT'),heroSub:gv('cHS'),
+    s1:gv('cs1'),s1l:gv('cs1l'),
+    s2:gv('cs2'),s2l:gv('cs2l'),
+    s3:gv('cs3'),s3l:gv('cs3l'),
+    s4:gv('cs4'),s4l:gv('cs4l')
+  });
+  saveAll();
+}
 function renderSvc() {
   cPanel('<div class="ag2"><div class="aff"><label>Üst Etiket</label><input type="text" id="cSL" value="'+x(cont.svcLabel||'Hizmetlerimiz')+'"></div><div class="aff"><label>Başlık</label><input type="text" id="cST" value="'+x(cont.svcTitle||'')+'"></div></div><div class="aff"><label>Açıklama</label><textarea id="cSD" rows="2">'+x(cont.svcDesc||'')+'</textarea></div><div class="aff"><label>Alt CTA</label><input type="text" id="cSC" value="'+x(cont.svcCta||'Tüm hizmetler için teklif alın →')+'"></div>','saveSvc');
 }
