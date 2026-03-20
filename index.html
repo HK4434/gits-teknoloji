@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GITS Teknoloji — Global IT Solutions | v5.6</title>
+<title>GITS Teknoloji — Global IT Solutions | v5.7</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}html,body{background:#0a0c10;color:#e8eaf0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6}
@@ -420,6 +420,7 @@ a[id^="nav"]:hover{color:#fff}
           <button class="ptab on" onclick="showPTab('monthly',this)">Aylık Ödeme</button>
           <button class="ptab" onclick="showPTab('prepay',this)">Ön Ödeme</button>
           <button class="ptab" onclick="showPTab('annual',this)">Yıllık Ödeme</button>
+          <button class="ptab" onclick="showPTab('project',this)">Proje Bazlı</button>
         </div>
         <div class="ptabc on" id="ptab-monthly">
           <div class="paybox"><h4>Aylık Ödeme Modeli</h4>
@@ -438,6 +439,14 @@ a[id^="nav"]:hover{color:#fff}
           <div class="paybox"><h4>Yıllık Ödeme Modeli</h4>
             <p>Yıllık sözleşmelerde ödeme 3 eşit taksit halinde yapılabilir (başlangıç, 4. ay, 8. ay) veya peşin ödeme ile <strong style="color:#00d4ff">%8 indirim</strong> uygulanır.</p>
             <p>Yıllık sözleşme erken feshinde kalan sürenin <strong style="color:#e8eaf0">%20'si</strong> cezai bedel olarak uygulanır.</p>
+          </div>
+        </div>
+        <div class="ptabc" id="ptab-project">
+          <div class="paybox"><h4>Proje Bazlı Ödeme Modeli</h4>
+            <p>Tek seferlik ve proje bazlı hizmetlerde ödeme iki aşamada yapılır: Proje başlangıcında <strong style="color:#00d4ff">%50 ön ödeme</strong>, proje tesliminde kalan <strong style="color:#00d4ff">%50</strong>.</p>
+            <p>Proje kapsamı ve teslim tarihi sözleşmede belirlenir. Kapsam değişikliklerinde ek ücret teklifi sunulur, müşteri onayı alınır.</p>
+            <p>Teslim sonrası <strong style="color:#e8eaf0">30 gün</strong> garanti süresi uygulanır. Bu süre içinde tespit edilen hatalar ücretsiz giderilir.</p>
+            <p>Proje iptali durumunda ön ödeme iade edilmez. Tamamlanan iş oranında ek ücret talep edilebilir.</p>
           </div>
         </div>
         <div class="caybox">
@@ -481,7 +490,7 @@ a[id^="nav"]:hover{color:#fff}
       <li><a onclick="showLegal('terms')">Kullanım Koşulları</a></li>
     </ul></div>
   </div>
-  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v5.6</span><span class="admin-hint">· #admin</span></div>
+  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v5.7</span><span class="admin-hint">· #admin</span></div>
 </footer>
 </div>
 <!-- HUKUKİ SAYFALAR -->
@@ -551,7 +560,7 @@ a[id^="nav"]:hover{color:#fff}
   </div></div>
 </div>
 <div class="asb">
-  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v5.6</small></div>
+  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v5.7</small></div>
   <nav class="asbnav" id="admNav"></nav>
   <div class="asbft">
     <button onclick="closeAdm()">🌐 Siteye Dön</button>
@@ -596,7 +605,7 @@ try {
 }
 
 /* ═══════════════════════════════════════
-   GITS TEKNOLOJİ v5.6 — localStorage tabanlı
+   GITS TEKNOLOJİ v5.7 — localStorage tabanlı
    Firebase kaldırıldı, tüm veri tarayıcıda saklanır
    ═══════════════════════════════════════ */
 
