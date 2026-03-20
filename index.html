@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GITS Teknoloji — Global IT Solutions | v6.2</title>
+<title>GITS Teknoloji — Global IT Solutions | v6.3</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}html,body{background:#0a0c10;color:#e8eaf0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6}
@@ -490,7 +490,7 @@ a[id^="nav"]:hover{color:#fff}
       <li><a onclick="showLegal('terms')">Kullanım Koşulları</a></li>
     </ul></div>
   </div>
-  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v6.2</span><span class="admin-hint">· #admin</span></div>
+  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v6.3</span><span class="admin-hint">· #admin</span></div>
 </footer>
 </div>
 <!-- HUKUKİ SAYFALAR -->
@@ -560,7 +560,7 @@ a[id^="nav"]:hover{color:#fff}
   </div></div>
 </div>
 <div class="asb">
-  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v6.2</small></div>
+  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v6.3</small></div>
   <nav class="asbnav" id="admNav"></nav>
   <div class="asbft">
     <button onclick="closeAdm()">🌐 Siteye Dön</button>
@@ -605,7 +605,7 @@ try {
 }
 
 /* ═══════════════════════════════════════
-   GITS TEKNOLOJİ v6.2 — localStorage tabanlı
+   GITS TEKNOLOJİ v6.3 — localStorage tabanlı
    Firebase kaldırıldı, tüm veri tarayıcıda saklanır
    ═══════════════════════════════════════ */
 
@@ -639,7 +639,10 @@ var NAVDEF = [
 ];
 
 var DD = {
-cats:[{id:'c1',name:'Güvenlik',icon:'🛡'},{id:'c2',name:'Bulut',icon:'☁'},{id:'c3',name:'Veritabanı',icon:'🗄'},{id:'c4',name:'Network',icon:'🌐'},{id:'c5',name:'Yazılım',icon:'💻'},{id:'c6',name:'Danışmanlık',icon:'💼'},{id:'c7',name:'Destek',icon:'🎫'},{id:'c8',name:'Dijital',icon:'📱'}],
+cats:[{id:'c1',name:'Güvenlik',icon:'🛡'},{id:'c2',name:'Bulut',icon:'☁'},{id:'c3',name:'Veritabanı',icon:'🗄'},{id:'c4',name:'Network',icon:'🌐'},{id:'c5',name:'Yazılım',icon:'💻'},{id:'c6',name:'Danışmanlık',icon:'💼'},{id:'c7',name:'Destek',icon:'🎫'},{id:'c8',name:'Dijital',icon:'📱'},
+{id:'c9',name:'Altyapı',icon:'🏗'},
+{id:'c10',name:'Yedekleme & DR',icon:'🔄'},
+{id:'c11',name:'ERP & İş Uygulamaları',icon:'📊'}],
 prods:[
 {id:1,name:'Siber Güvenlik Hizmetleri',cat:'Güvenlik',price:0,desc:'Kurumunuzu dijital tehditlere karşı koruyun.',detail:'Tehdit istihbaratı, güvenlik açığı yönetimi, SOC hizmetleri ve proaktif izleme.',icon:'🛡',marquee:true},
 {id:2,name:'Firewall Bakım & Destek',cat:'Güvenlik',price:0,desc:'Fortinet, Cisco ve Sophos mühendislik desteği.',detail:'Politika yönetimi, firmware güncelleme, log analizi ve 7/24 izleme.',icon:'🔥',marquee:true},
@@ -668,6 +671,20 @@ prods:[
 {id:25,name:'Level 1-2-3 Destek',cat:'Destek',price:0,desc:'Tam kapsamlı teknik destek.',detail:'L1 kullanıcı desteği, L2 uygulama/sistem, L3 ileri mühendislik desteği.',icon:'🎫',marquee:true},
 {id:26,name:'Ticket Bazlı Destek',cat:'Destek',price:0,desc:'Esnek ticket sistemli destek.',detail:'ITSM tabanlı olay yönetimi; SLA garantili ticket çözüm hizmetleri.',icon:'🎟',marquee:false},
 {id:27,name:'SEO & Dijital Pazarlama',cat:'Dijital',price:0,desc:'Arama motoru optimizasyonu.',detail:'Teknik SEO, içerik optimizasyonu, backlink stratejisi ve analitik raporlama.',icon:'🔍',marquee:true},
+{id:28,name:'Sunucu Kurulum & Yönetim',cat:'Altyapı',price:0,desc:'Fiziksel ve sanal sunucu kurulum, bakım.',detail:'Rack sunucu kurulumu, donanım yapılandırması, BIOS/firmware güncelleme, performans izleme ve bakım.',icon:'🖥',marquee:true},
+{id:29,name:'Sanallaştırma (VMware/Hyper-V)',cat:'Altyapı',price:0,desc:'Sanallaştırma altyapısı kurulum ve yönetim.',detail:'VMware vSphere, Hyper-V kurulum, sanal makine yönetimi, vMotion, yüksek erişilebilirlik yapılandırması.',icon:'🏗',marquee:true},
+{id:30,name:'Storage Çözümleri',cat:'Altyapı',price:0,desc:'SAN, NAS ve depolama sistemleri.',detail:'HPE, NetApp, Dell EMC storage kurulum ve yönetimi; RAID yapılandırması, kapasite planlama.',icon:'💾',marquee:false},
+{id:31,name:'Datacenter Tasarım & Kurulum',cat:'Altyapı',price:0,desc:'Veri merkezi tasarım ve fiziksel kurulum.',detail:'Rack düzenleme, kablolama, soğutma, güç yönetimi ve datacenter standartlarına uygun kurulum.',icon:'🏭',marquee:false},
+{id:32,name:'HCI (Hiper-Yakınsak Altyapı)',cat:'Altyapı',price:0,desc:'Nutanix, VMware vSAN çözümleri.',detail:'Hiperconverged altyapı tasarımı, kurulumu ve yönetimi; ölçeklenebilir ve yüksek performanslı altyapı.',icon:'⚡',marquee:false},
+{id:33,name:'Yedekleme Çözümleri',cat:'Yedekleme & DR',price:0,desc:'Kurumsal yedekleme stratejisi ve uygulaması.',detail:'Veeam, Veritas, Commvault ile yedekleme politikası tasarımı, uygulama, test ve raporlama.',icon:'🔄',marquee:true},
+{id:34,name:'Felaket Kurtarma (DR) Planlaması',cat:'Yedekleme & DR',price:0,desc:'İş sürekliliği ve DR stratejisi.',detail:'RTO/RPO analizi, DR site kurulumu, failover testleri, iş sürekliliği planı hazırlama ve tatbikat.',icon:'🚨',marquee:true},
+{id:35,name:'Offsite & Cloud Backup',cat:'Yedekleme & DR',price:0,desc:'Uzak lokasyon ve bulut yedekleme.',detail:'Azure Backup, AWS S3, tape/disk offsite yedekleme; şifreli ve coğrafi olarak dağıtık yedek çözümleri.',icon:'☁',marquee:false},
+{id:36,name:'Yedek Test & Doğrulama',cat:'Yedekleme & DR',price:0,desc:'Yedeklerin düzenli test ve doğrulaması.',detail:'Periyodik yedek restore testleri, veri bütünlüğü kontrolü, raporlama ve SLA uyum takibi.',icon:'✅',marquee:false},
+{id:37,name:'SAP Danışmanlık & Destek',cat:'ERP & İş Uygulamaları',price:0,desc:'SAP ERP kurulum, geliştirme ve destek.',detail:'SAP S/4HANA, ECC, ABAP geliştirme, basis yönetimi, modül danışmanlığı ve 7/24 destek.',icon:'📊',marquee:true},
+{id:38,name:'LOGO ERP Danışmanlık',cat:'ERP & İş Uygulamaları',price:0,desc:'LOGO Go, Tiger, GO3 ERP çözümleri.',detail:'Kurulum, özelleştirme, entegrasyon, kullanıcı eğitimi ve teknik destek hizmetleri.',icon:'📋',marquee:true},
+{id:39,name:'Microsoft Dynamics',cat:'ERP & İş Uygulamaları',price:0,desc:'Dynamics 365 ERP/CRM çözümleri.',detail:'Dynamics 365 Business Central, Finance, Sales kurulum, özelleştirme ve destek.',icon:'🪟',marquee:false},
+{id:40,name:'ERP Entegrasyon Hizmetleri',cat:'ERP & İş Uygulamaları',price:0,desc:'ERP sistemleri arası entegrasyon.',detail:'API entegrasyonu, middleware çözümleri, veri taşıma ve farklı sistemler arası senkronizasyon.',icon:'🔗',marquee:false},
+{id:41,name:'ERP Veri Taşıma & Göç',cat:'ERP & İş Uygulamaları',price:0,desc:'Eski sistemden yeni ERP\'ye geçiş.',detail:'Veri analizi, dönüşüm, temizleme ve yeni sisteme aktarım; sıfır kayıp veri taşıma garantisi.',icon:'🔄',marquee:false},
 ],
 oneoff:[
 {id:'o1',name:'Firmware Upgrade',price:0,desc:'Cihaz yazılımı güncelleme'},
