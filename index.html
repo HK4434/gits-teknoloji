@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GITS Teknoloji — Global IT Solutions | v6.3</title>
+<title>GITS Teknoloji — Global IT Solutions | v6.4</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}html,body{background:#0a0c10;color:#e8eaf0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6}
@@ -490,7 +490,7 @@ a[id^="nav"]:hover{color:#fff}
       <li><a onclick="showLegal('terms')">Kullanım Koşulları</a></li>
     </ul></div>
   </div>
-  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v6.3</span><span class="admin-hint">· #admin</span></div>
+  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v6.4</span><span class="admin-hint">· #admin</span></div>
 </footer>
 </div>
 <!-- HUKUKİ SAYFALAR -->
@@ -560,7 +560,7 @@ a[id^="nav"]:hover{color:#fff}
   </div></div>
 </div>
 <div class="asb">
-  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v6.3</small></div>
+  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v6.4</small></div>
   <nav class="asbnav" id="admNav"></nav>
   <div class="asbft">
     <button onclick="closeAdm()">🌐 Siteye Dön</button>
@@ -605,7 +605,7 @@ try {
 }
 
 /* ═══════════════════════════════════════
-   GITS TEKNOLOJİ v6.3 — localStorage tabanlı
+   GITS TEKNOLOJİ v6.4 — localStorage tabanlı
    Firebase kaldırıldı, tüm veri tarayıcıda saklanır
    ═══════════════════════════════════════ */
 
@@ -642,7 +642,12 @@ var DD = {
 cats:[{id:'c1',name:'Güvenlik',icon:'🛡'},{id:'c2',name:'Bulut',icon:'☁'},{id:'c3',name:'Veritabanı',icon:'🗄'},{id:'c4',name:'Network',icon:'🌐'},{id:'c5',name:'Yazılım',icon:'💻'},{id:'c6',name:'Danışmanlık',icon:'💼'},{id:'c7',name:'Destek',icon:'🎫'},{id:'c8',name:'Dijital',icon:'📱'},
 {id:'c9',name:'Altyapı',icon:'🏗'},
 {id:'c10',name:'Yedekleme & DR',icon:'🔄'},
-{id:'c11',name:'ERP & İş Uygulamaları',icon:'📊'}],
+{id:'c11',name:'ERP & İş Uygulamaları',icon:'📊'},
+{id:'c12',name:'Yapay Zeka & Otomasyon',icon:'🤖'},
+{id:'c13',name:'İletişim & UC',icon:'📡'},
+{id:'c14',name:'ITSM & Proje Yönetimi',icon:'📋'},
+{id:'c15',name:'Dijital Dönüşüm',icon:'🌍'},
+{id:'c16',name:'Eğitim & Sertifikasyon',icon:'🎓'}],
 prods:[
 {id:1,name:'Siber Güvenlik Hizmetleri',cat:'Güvenlik',price:0,desc:'Kurumunuzu dijital tehditlere karşı koruyun.',detail:'Tehdit istihbaratı, güvenlik açığı yönetimi, SOC hizmetleri ve proaktif izleme.',icon:'🛡',marquee:true},
 {id:2,name:'Firewall Bakım & Destek',cat:'Güvenlik',price:0,desc:'Fortinet, Cisco ve Sophos mühendislik desteği.',detail:'Politika yönetimi, firmware güncelleme, log analizi ve 7/24 izleme.',icon:'🔥',marquee:true},
@@ -685,6 +690,27 @@ prods:[
 {id:39,name:'Microsoft Dynamics',cat:'ERP & İş Uygulamaları',price:0,desc:'Dynamics 365 ERP/CRM çözümleri.',detail:'Dynamics 365 Business Central, Finance, Sales kurulum, özelleştirme ve destek.',icon:'🪟',marquee:false},
 {id:40,name:'ERP Entegrasyon Hizmetleri',cat:'ERP & İş Uygulamaları',price:0,desc:'ERP sistemleri arası entegrasyon.',detail:'API entegrasyonu, middleware çözümleri, veri taşıma ve farklı sistemler arası senkronizasyon.',icon:'🔗',marquee:false},
 {id:41,name:'ERP Veri Taşıma & Göç',cat:'ERP & İş Uygulamaları',price:0,desc:'Eski sistemden yeni ERP\'ye geçiş.',detail:'Veri analizi, dönüşüm, temizleme ve yeni sisteme aktarım; sıfır kayıp veri taşıma garantisi.',icon:'🔄',marquee:false},
+{id:42,name:'AI Danışmanlık & Strateji',cat:'Yapay Zeka & Otomasyon',price:0,desc:'Kurumsal AI yol haritası ve strateji.',detail:'AI olgunluk analizi, kullanım senaryoları belirleme, teknoloji seçimi ve uygulama yol haritası hazırlama.',icon:'🤖',marquee:true},
+{id:43,name:'RPA (Robotik Süreç Otomasyonu)',cat:'Yapay Zeka & Otomasyon',price:0,desc:'İş süreçlerini robotlarla otomatize edin.',detail:'UiPath, Blue Prism, Automation Anywhere ile tekrarlayan süreçlerin otomasyonu; maliyet ve hata azaltma.',icon:'⚙',marquee:true},
+{id:44,name:'ChatBot & Sanal Asistan',cat:'Yapay Zeka & Otomasyon',price:0,desc:'AI destekli müşteri hizmetleri botları.',detail:'Kurumsal chatbot tasarımı, NLP entegrasyonu, çok kanallı (web, WhatsApp, Teams) dağıtım ve yönetim.',icon:'💬',marquee:false},
+{id:45,name:'AIOps & Akıllı İzleme',cat:'Yapay Zeka & Otomasyon',price:0,desc:'AI ile IT operasyonları yönetimi.',detail:'Makine öğrenmesi ile anomali tespiti, öngörücü bakım, otomatik olay yönetimi ve kapasite planlama.',icon:'📈',marquee:false},
+{id:46,name:'Makine Öğrenmesi Entegrasyonu',cat:'Yapay Zeka & Otomasyon',price:0,desc:'ML modellerini iş süreçlerine entegre edin.',detail:'Veri analizi, model geliştirme, mevcut sistemlere ML entegrasyonu ve sürekli model iyileştirme.',icon:'🧠',marquee:false},
+{id:47,name:'IP Telefon & VoIP',cat:'İletişim & UC',price:0,desc:'Kurumsal IP telefon altyapısı.',detail:'Cisco, Avaya, Yealink IP telefon kurulumu; PBX yönetimi, trunk bağlantıları ve SIP entegrasyonu.',icon:'📞',marquee:true},
+{id:48,name:'Microsoft Teams Yönetimi',cat:'İletişim & UC',price:0,desc:'Teams kurulum, yönetim ve entegrasyon.',detail:'Teams Phone, toplantı odası sistemleri, Direct Routing, güvenlik politikaları ve kullanıcı yönetimi.',icon:'🪟',marquee:true},
+{id:49,name:'Video Konferans Altyapısı',cat:'İletişim & UC',price:0,desc:'Toplantı odası ve uzaktan konferans.',detail:'Cisco Webex, Poly, Logitech toplantı odası sistemleri; kurulum, yapılandırma ve teknik destek.',icon:'📹',marquee:false},
+{id:50,name:'UCaaS Çözümleri',cat:'İletişim & UC',price:0,desc:'Unified Communications as a Service.',detail:'Bulut tabanlı birleşik iletişim; ses, video, mesajlaşma ve dosya paylaşımını tek platformda yönetin.',icon:'☁',marquee:false},
+{id:51,name:'ITIL Süreç Danışmanlığı',cat:'ITSM & Proje Yönetimi',price:0,desc:'ITIL 4 uyumlu süreç tasarımı.',detail:'Olay, problem, değişiklik ve konfigürasyon yönetimi süreçlerinin ITIL 4 çerçevesinde tasarımı ve uygulaması.',icon:'📋',marquee:true},
+{id:52,name:'ServiceNow Danışmanlık',cat:'ITSM & Proje Yönetimi',price:0,desc:'ServiceNow ITSM kurulum ve özelleştirme.',detail:'ServiceNow uygulama tasarımı, modül kurulumu, özelleştirme, entegrasyon ve kullanıcı eğitimi.',icon:'🔧',marquee:false},
+{id:53,name:'IT Proje Yönetimi (PMO)',cat:'ITSM & Proje Yönetimi',price:0,desc:'Kurumsal IT projelerinde PMO hizmeti.',detail:'PMP/PRINCE2 sertifikalı proje yöneticileri ile kapsam, zaman, maliyet ve risk yönetimi.',icon:'📊',marquee:true},
+{id:54,name:'Değişiklik & Konfigürasyon Yönetimi',cat:'ITSM & Proje Yönetimi',price:0,desc:'IT değişikliklerini kontrollü yönetin.',detail:'Change Advisory Board (CAB) kurulumu, CMDB tasarımı, değişiklik süreçleri ve otomasyon.',icon:'🔄',marquee:false},
+{id:55,name:'Dijital Dönüşüm Danışmanlığı',cat:'Dijital Dönüşüm',price:0,desc:'Uçtan uca dijital dönüşüm yol haritası.',detail:'Mevcut durum analizi, dijital olgunluk değerlendirmesi, teknoloji seçimi ve dönüşüm programı yönetimi.',icon:'🌍',marquee:true},
+{id:56,name:'Legacy Sistem Modernizasyonu',cat:'Dijital Dönüşüm',price:0,desc:'Eski sistemleri modern altyapıya taşıyın.',detail:'Uygulama yeniden yazma, microservices mimarisine geçiş, API katmanı oluşturma ve aşamalı modernizasyon.',icon:'🔄',marquee:true},
+{id:57,name:'API & Entegrasyon Hizmetleri',cat:'Dijital Dönüşüm',price:0,desc:'Sistemlerinizi birbirine bağlayın.',detail:'REST/SOAP API geliştirme, middleware çözümleri, ESB entegrasyonu ve gerçek zamanlı veri akışı tasarımı.',icon:'🔗',marquee:false},
+{id:58,name:'Süreç Dijitalleştirme',cat:'Dijital Dönüşüm',price:0,desc:'Kağıt süreçleri dijitale taşıyın.',detail:'Elektronik form, e-imza, dijital arşiv ve iş akışı otomasyonu ile kağıtsız ofis dönüşümü.',icon:'💡',marquee:false},
+{id:59,name:'Teknik IT Eğitimleri',cat:'Eğitim & Sertifikasyon',price:0,desc:'Cisco, Microsoft, CompTIA eğitimleri.',detail:'CCNA, CCNP, MCSA, Azure, AWS sertifikasyon hazırlık eğitimleri; sınıf ve online formatında.',icon:'🎓',marquee:true},
+{id:60,name:'Siber Güvenlik Farkındalık Eğitimi',cat:'Eğitim & Sertifikasyon',price:0,desc:'Çalışanlarınızı siber tehditlere karşı eğitin.',detail:'Phishing simülasyonları, sosyal mühendislik farkındalığı, şifre güvenliği ve veri koruma eğitimleri.',icon:'🛡',marquee:true},
+{id:61,name:'ITIL & ITSM Eğitimleri',cat:'Eğitim & Sertifikasyon',price:0,desc:'ITIL 4 Foundation ve pratisyener eğitimleri.',detail:'ITIL 4 Foundation, ITIL 4 CDS, ISO 20000 bilinçlendirme ve sınav hazırlık eğitimleri.',icon:'📚',marquee:false},
+{id:62,name:'Özel Kurumsal Eğitim Programları',cat:'Eğitim & Sertifikasyon',price:0,desc:'Şirketinize özel IT eğitim programları.',detail:'İhtiyaç analizi, özel müfredat hazırlama, sınıf/online/karma format ve sertifika.',icon:'🏆',marquee:false},
 ],
 oneoff:[
 {id:'o1',name:'Firmware Upgrade',price:0,desc:'Cihaz yazılımı güncelleme'},
