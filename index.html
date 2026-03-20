@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GITS Teknoloji — Global IT Solutions | v5.3</title>
+<title>GITS Teknoloji — Global IT Solutions | v5.4</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}html,body{background:#0a0c10;color:#e8eaf0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6}
@@ -481,7 +481,7 @@ a[id^="nav"]:hover{color:#fff}
       <li><a onclick="showLegal('terms')">Kullanım Koşulları</a></li>
     </ul></div>
   </div>
-  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v5.3</span><span class="admin-hint">· #admin</span></div>
+  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v5.4</span><span class="admin-hint">· #admin</span></div>
 </footer>
 </div>
 <!-- HUKUKİ SAYFALAR -->
@@ -551,7 +551,7 @@ a[id^="nav"]:hover{color:#fff}
   </div></div>
 </div>
 <div class="asb">
-  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v5.3</small></div>
+  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v5.4</small></div>
   <nav class="asbnav" id="admNav"></nav>
   <div class="asbft">
     <button onclick="closeAdm()">🌐 Siteye Dön</button>
@@ -596,7 +596,7 @@ try {
 }
 
 /* ═══════════════════════════════════════
-   GITS TEKNOLOJİ v5.3 — localStorage tabanlı
+   GITS TEKNOLOJİ v5.4 — localStorage tabanlı
    Firebase kaldırıldı, tüm veri tarayıcıda saklanır
    ═══════════════════════════════════════ */
 
@@ -1058,26 +1058,18 @@ function statusClass(s) {
 function renderRequests() {
   loadRequestsFromFB(function(all) { _renderRequestsWithData(all); });
 }
+
 function _renderRequestsWithData(all) {
   all = all.sort(function(a,b){return new Date(b.createdAt)-new Date(a.createdAt);});
   var canAct = hp('superadmin') || hp('editor');
-
-  /* Yeni talepleri okundu yap */
-  if (canAct) {
-    var changed = false;
-    all.forEach(function(r){ if(r.status==='new'){r.status='read';changed=true;} });
-    if (changed) { saveRequests(all); pending=0; updBadge(); }
-  }
   window._rl = all;
 
-  /* Aktif vs arşiv ayır */
   var active = all.filter(function(r){ return r.status !== 'archived'; });
   var archived = all.filter(function(r){ return r.status === 'archived'; });
 
-  /* Yıl bazlı grupla */
   function byYear(list) {
     var years = {};
-    list.forEach(function(r,i){
+    list.forEach(function(r){
       var y = new Date(r.createdAt).getFullYear();
       if(!years[y]) years[y] = [];
       years[y].push({r:r, i:all.indexOf(r)});
@@ -1086,28 +1078,41 @@ function _renderRequestsWithData(all) {
   }
 
   function rqCardHTML(r, i, canAct) {
-    var bc = r.status==='new'?'#ef4444':r.status==='done'?'#22c55e':r.status==='rejected'?'#f59e0b':r.status==='archived'?'#6b7280':'rgba(255,255,255,.1)';
+    var bc = r.status==='new'?'#ef4444':r.status==='done'?'#22c55e':r.status==='rejected'?'#f59e0b':r.status==='archived'?'#6b7280':'#4a5568';
     var badge = '<span class="rqbadge '+statusClass(r.status)+'" style="font-size:.6rem;padding:1px 6px;margin-left:6px">'+statusLabel(r.status)+'</span>';
     var h = '<div class="rqcard" onclick="showRD('+i+')" data-status="'+r.status+'" style="border-left:3px solid '+bc+'">';
     h += '<div class="rqhdr"><div><div class="rqname">'+x(r.name)+(r.company&&r.company!=='—'?' — '+x(r.company):'')+badge+'</div><div class="rqtime">'+fmtD(r.createdAt)+'</div></div>';
     h += '<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap">';
-    if (canAct && r.status!=='done' && r.status!=='rejected' && r.status!=='archived')
-      h += '<button class="ab abGr abSm" onclick="event.stopPropagation();setStatus('+i+",\'done\')"+'">✓ Tamamla</button>';
+    if (canAct && r.status==='read')
+      h += '<button class="ab abG abSm" onclick="event.stopPropagation();setStatus('+i+",'new')"+'" title="Okunmadı olarak işaretle">◉ Okunmadı</button>';
+    if (canAct && r.status==='new')
+      h += '<button class="ab abG abSm" onclick="event.stopPropagation();setStatus('+i+",'read')"+'" title="Okundu olarak işaretle">✓ Okundu</button>';
+    if (canAct && r.status!=='done' && r.status!=='archived')
+      h += '<button class="ab abGr abSm" onclick="event.stopPropagation();setStatus('+i+",'done')"+'">✓ Tamamla</button>';
     if (canAct && r.status!=='rejected' && r.status!=='archived')
-      h += '<button class="ab abY abSm" onclick="event.stopPropagation();setStatus('+i+",\'rejected\')"+'">✗ Red</button>';
-    if (canAct && (r.status==='done'||r.status==='rejected') && r.status!=='archived')
-      h += '<button class="ab abG abSm" onclick="event.stopPropagation();setStatus('+i+",\'archived\')"+'">📦 Arşiv</button>';
+      h += '<button class="ab abY abSm" onclick="event.stopPropagation();setStatus('+i+",'rejected')"+'">✗ Red</button>';
+    if (canAct && (r.status==='done'||r.status==='rejected'))
+      h += '<button class="ab abG abSm" onclick="event.stopPropagation();setStatus('+i+",'archived')"+'">📦 Arşiv</button>';
     if (canAct && r.status==='archived')
-      h += '<button class="ab abA abSm" onclick="event.stopPropagation();setStatus('+i+",\'read\')"+'">↩ Aktife Al</button>';
+      h += '<button class="ab abA abSm" onclick="event.stopPropagation();setStatus('+i+",'read')"+'">↩ Aktife Al</button>';
     h += '</div></div>';
-    h += '<div class="rqmeta"><span>📧 '+x(r.email)+'</span><span>📞 '+x(r.phone||'—')+'</span><span>💳 '+x(r.paymentModel||'—')+'</span>'+(r.adminNote?'<span style="color:#fbbf24">📝 Not var</span>':'')+' </div>';
+    h += '<div class="rqmeta"><span>📧 '+x(r.email)+'</span><span>📞 '+x(r.phone||'—')+'</span><span>💳 '+x(r.paymentModel||'—')+'</span>'+(r.adminNote?'<span style="color:#fbbf24">📝 Not</span>':'')+' </div>';
     h += '</div>';
     return h;
   }
 
-  var html = '<div class="acard"><div class="ahead"><h3>Aktif Talepler ('+active.length+')</h3>' +
+  var newCount = active.filter(function(r){return r.status==='new';}).length;
+  var html = '<div class="acard"><div class="ahead">' +
+    '<h3>Aktif Talepler ('+active.length+')'+(newCount>0?' <span style="background:#ef4444;color:#fff;font-size:.65rem;padding:2px 8px;border-radius:100px;margin-left:6px">'+newCount+' yeni</span>':'')+'</h3>' +
     '<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">' +
-    '<select class="tfl" id="rqFilter" onchange="filterRQ()"><option value="">Tüm Durumlar</option><option value="read">Okundu</option><option value="done">Tamamlandı</option><option value="rejected">Teklif Verilmeyecek</option><option value="archived">Arşiv</option></select>' +
+    '<select class="tfl" id="rqFilter" onchange="filterRQ()">' +
+    '<option value="">Tüm Durumlar</option>' +
+    '<option value="new">Yeni</option>' +
+    '<option value="read">Okundu</option>' +
+    '<option value="done">Tamamlandı</option>' +
+    '<option value="rejected">Teklif Verilmeyecek</option>' +
+    '<option value="archived">Arşiv</option>' +
+    '</select>' +
     (canAct?'<button class="ab abY abSm" onclick="archiveAll()">📦 Yılı Arşivle</button>':'') +
     '</div></div><div class="abody" style="padding:14px" id="rqList">';
 
@@ -1122,14 +1127,14 @@ function _renderRequestsWithData(all) {
   }
   html += '</div></div>';
 
-  /* Arşiv bölümü */
   if (archived.length > 0) {
     html += '<div class="acard" style="margin-top:14px"><div class="ahead"><h3>📦 Arşiv ('+archived.length+')</h3></div><div class="abody" style="padding:14px">';
     var archByYear = byYear(archived);
     Object.keys(archByYear).sort(function(a,b){return b-a;}).forEach(function(y){
-      html += '<div style="font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4a5568;padding:10px 0 6px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:8px;cursor:pointer" onclick="toggleYear(\'arch'+y+'\')">' +
+      var archId = 'arch'+y;
+      html += '<div style="font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4a5568;padding:10px 0 6px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:8px;cursor:pointer" onclick="toggleYear(\''+archId+'\')">' +
         y+' Arşivi — '+archByYear[y].length+' talep ▾</div>';
-      html += '<div id="arch'+y+'" style="display:none">';
+      html += '<div id="'+archId+'" style="display:none">';
       archByYear[y].forEach(function(item){ html += rqCardHTML(item.r, item.i, canAct); });
       html += '</div>';
     });
@@ -1148,14 +1153,15 @@ window.setStatus = function(i, status) {
   if (!window._rl) return;
   window._rl[i].status = status;
   saveRequests(window._rl);
+  pending = window._rl.filter(function(r){return r.status==='new';}).length;
+  updBadge();
   toast(statusLabel(status)+' olarak işaretlendi');
   renderRequests();
 };
 
 window.archiveAll = function() {
   var list = loadRequests();
-  var thisYear = new Date().getFullYear();
-  var prevYear = thisYear - 1;
+  var prevYear = new Date().getFullYear() - 1;
   var changed = 0;
   list.forEach(function(r){
     var y = new Date(r.createdAt).getFullYear();
@@ -1169,28 +1175,17 @@ window.archiveAll = function() {
 
 function filterRQ() {
   var f = gv('rqFilter');
-  if (f === 'archived') {
-    /* Arşiv seçilince arşiv bölümündeki tüm yılları aç */
+  if (f === 'archived' || f === 'rejected') {
     document.querySelectorAll('[id^="arch"]').forEach(function(el){ el.style.display='block'; });
-    document.querySelectorAll('.rqcard').forEach(function(c){
-      c.style.display = (c.dataset.status==='archived') ? 'block' : 'none';
-    });
-  } else if (f === 'rejected') {
-    /* Red seçilince hem aktif hem arşivde göster */
-    document.querySelectorAll('[id^="arch"]').forEach(function(el){ el.style.display='block'; });
-    document.querySelectorAll('.rqcard').forEach(function(c){
-      c.style.display = (c.dataset.status==='rejected') ? 'block' : 'none';
-    });
-  } else {
-    document.querySelectorAll('.rqcard').forEach(function(c){
-      c.style.display = (!f || c.dataset.status===f) ? 'block' : 'none';
-    });
   }
+  document.querySelectorAll('.rqcard').forEach(function(c){
+    if (!f) c.style.display = 'block';
+    else if (f === 'rejected') c.style.display = (c.dataset.status==='rejected') ? 'block' : 'none';
+    else c.style.display = (c.dataset.status===f) ? 'block' : 'none';
+  });
 }
 
-function markDone(i) {
-  setStatus(i, 'done');
-}
+function markDone(i) { setStatus(i, 'done'); }
 
 function showRD(i) {
   var r = window._rl ? window._rl[i] : null;
@@ -1198,6 +1193,14 @@ function showRD(i) {
   var role = currentUser ? currentUser.role : 'viewer';
   var canSee = (role === 'superadmin' || role === 'editor');
   var canAct = canSee;
+  /* Otomatik okundu */
+  if (r.status === 'new') {
+    window._rl[i].status = 'read';
+    saveRequests(window._rl);
+    pending = window._rl.filter(function(x){return x.status==='new';}).length;
+    updBadge();
+    r = window._rl[i];
+  }
 
   var html = '<div class="rdhdr"><div><h2 style="font-size:1.1rem;font-weight:700;color:#fff">'+x(r.name)+'</h2><p style="font-size:.75rem;color:#4a5568;margin-top:3px">'+fmtD(r.createdAt)+'</p></div>' +
     '<div style="display:flex;gap:7px;align-items:center"><span class="rqbadge '+statusClass(r.status)+'">'+statusLabel(r.status)+'</span>' +
