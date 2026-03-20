@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GITS Teknoloji — Global IT Solutions | v6.1</title>
+<title>GITS Teknoloji — Global IT Solutions | v6.2</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}html,body{background:#0a0c10;color:#e8eaf0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6}
@@ -490,7 +490,7 @@ a[id^="nav"]:hover{color:#fff}
       <li><a onclick="showLegal('terms')">Kullanım Koşulları</a></li>
     </ul></div>
   </div>
-  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v6.1</span><span class="admin-hint">· #admin</span></div>
+  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v6.2</span><span class="admin-hint">· #admin</span></div>
 </footer>
 </div>
 <!-- HUKUKİ SAYFALAR -->
@@ -560,7 +560,7 @@ a[id^="nav"]:hover{color:#fff}
   </div></div>
 </div>
 <div class="asb">
-  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v6.1</small></div>
+  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v6.2</small></div>
   <nav class="asbnav" id="admNav"></nav>
   <div class="asbft">
     <button onclick="closeAdm()">🌐 Siteye Dön</button>
@@ -605,7 +605,7 @@ try {
 }
 
 /* ═══════════════════════════════════════
-   GITS TEKNOLOJİ v6.1 — localStorage tabanlı
+   GITS TEKNOLOJİ v6.2 — localStorage tabanlı
    Firebase kaldırıldı, tüm veri tarayıcıda saklanır
    ═══════════════════════════════════════ */
 
@@ -1700,8 +1700,18 @@ function rs() {
   if(c.fttagline) setText('fttagline',c.fttagline);
   if(c.ftc1h) setText('ftc1h',c.ftc1h);
   if(c.ftc2h) setText('ftc2h',c.ftc2h);
-  function frl(id,arr){var e=sel(id);if(e&&arr)e.innerHTML=arr.map(function(l){return '<li><a>'+x(l)+'</a></li>';}).join('');}
-  frl('ftc1',c.ftc1);frl('ftc2',c.ftc2);
+  /* Footer linkleri - K1 hizmetlere, K2 iletişime scroll */
+  var ftc1Links = c.ftc1 || ['Siber Güvenlik','Cloud Hizmetleri','Firewall','Teknik Destek'];
+  var ftc2Links = c.ftc2 || ['Hakkımızda','Blog','Referanslar','Kariyer'];
+  var e1 = sel('ftc1');
+  if(e1) e1.innerHTML = ftc1Links.map(function(l){
+    return '<li><a onclick="document.getElementById(\'ssvc\').scrollIntoView({behavior:\'smooth\'});return false" href="#ssvc" style="cursor:pointer">'+x(l)+'</a></li>';
+  }).join('');
+  var e2 = sel('ftc2');
+  if(e2) e2.innerHTML = ftc2Links.map(function(l){
+    var target = (l==='Referanslar'||l==='Hakkımızda') ? 'swhy' : 'scta';
+    return '<li><a onclick="document.getElementById(\''+target+'\').scrollIntoView({behavior:\'smooth\'});return false" href="#'+target+'" style="cursor:pointer">'+x(l)+'</a></li>';
+  }).join('');
   if(c.nav1) setText('nav1',c.nav1);
   if(c.nav2) setText('nav2',c.nav2);
   if(c.nav3) setText('nav3',c.nav3);
