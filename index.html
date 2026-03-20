@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GITS Teknoloji — Global IT Solutions | v5.4</title>
+<title>GITS Teknoloji — Global IT Solutions | v5.5</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}html,body{background:#0a0c10;color:#e8eaf0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6}
@@ -481,7 +481,7 @@ a[id^="nav"]:hover{color:#fff}
       <li><a onclick="showLegal('terms')">Kullanım Koşulları</a></li>
     </ul></div>
   </div>
-  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v5.4</span><span class="admin-hint">· #admin</span></div>
+  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v5.5</span><span class="admin-hint">· #admin</span></div>
 </footer>
 </div>
 <!-- HUKUKİ SAYFALAR -->
@@ -551,7 +551,7 @@ a[id^="nav"]:hover{color:#fff}
   </div></div>
 </div>
 <div class="asb">
-  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v5.4</small></div>
+  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v5.5</small></div>
   <nav class="asbnav" id="admNav"></nav>
   <div class="asbft">
     <button onclick="closeAdm()">🌐 Siteye Dön</button>
@@ -596,7 +596,7 @@ try {
 }
 
 /* ═══════════════════════════════════════
-   GITS TEKNOLOJİ v5.4 — localStorage tabanlı
+   GITS TEKNOLOJİ v5.5 — localStorage tabanlı
    Firebase kaldırıldı, tüm veri tarayıcıda saklanır
    ═══════════════════════════════════════ */
 
@@ -703,13 +703,17 @@ function loadData() {
         ej = d.ej || {pk:'',sid:'',tid:'',to:''};
         mqSpeed = d.mqSpeed || 25;
         nid = Math.max.apply(null, prods.map(function(p){return +p.id||0;}).concat([299])) + 1;
-        /* localStorage'a da kaydet (offline backup) */
         try { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); } catch(e) {}
       } else {
         resetToDefaults();
         saveData();
       }
       rs();
+      /* Eğer admin paneli açıksa dashboard'ı güncelle */
+      if (location.hash==='#admin' && currentUser) {
+        var activePanel = document.querySelector('.ai.on');
+        if (!activePanel || activePanel.dataset.id==='dash') renderDash();
+      }
     }).catch(function(e) {
       console.warn('Firestore okuma hatası:', e.message);
       _loadFromLocal();
@@ -1022,29 +1026,32 @@ function sp(id) {
 
 /* ── DASH ── */
 function renderDash() {
-  var reqs = loadRequests();
-  var newCount = reqs.filter(function(r){return r.status==='new';}).length;
-  document.getElementById('admContent').innerHTML =
-    '<div class="asts">' +
-    '<div class="ast'+(newCount>0?' red':'')+'"><div class="av" style="'+(newCount>0?'color:#ef4444':'')+'">'+newCount+'</div><div class="al">Bekleyen Teklif</div></div>' +
-    '<div class="ast"><div class="av">'+prods.length+'</div><div class="al">Hizmet</div></div>' +
-    '<div class="ast"><div class="av">'+cats.length+'</div><div class="al">Kategori</div></div>' +
-    '<div class="ast"><div class="av">'+(ej.pk?'✓':'✗')+'</div><div class="al">EmailJS</div></div>' +
-    '</div>' +
-    (newCount>0?'<div style="background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.25);border-radius:9px;padding:14px 18px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:1.4rem">🔔</span><div><p style="font-size:.84rem;font-weight:700;color:#f87171">'+newCount+' yeni teklif talebi bekliyor!</p></div></div><button class="ab abR" onclick="sp(\'requests\')">Görüntüle →</button></div>':'') +
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">' +
-    '<div class="acard"><div class="ahead"><h3>Oturum Bilgisi</h3></div><div class="abody" style="padding:14px;display:flex;flex-direction:column;gap:7px">' +
-    '<div style="display:flex;justify-content:space-between;padding:7px 11px;background:#141720;border-radius:6px"><span style="font-size:.79rem;color:#c8cdd6">Kullanıcı</span><span style="font-size:.72rem;color:#00d4ff;font-weight:600">'+x(currentUser?currentUser.email:'—')+'</span></div>' +
-    '<div style="display:flex;justify-content:space-between;padding:7px 11px;background:#141720;border-radius:6px"><span style="font-size:.79rem;color:#c8cdd6">Rol</span><span style="font-size:.72rem;color:#00d4ff;font-weight:600">'+(ROLES[currentUser?currentUser.role:'viewer']||{label:'—'}).label+'</span></div>' +
-    '<div style="display:flex;justify-content:space-between;padding:7px 11px;background:#141720;border-radius:6px"><span style="font-size:.79rem;color:#c8cdd6">Veri Depolama</span><span style="font-size:.72rem;color:#22c55e;font-weight:600">✓ localStorage</span></div>' +
-    '</div></div>' +
-    '<div class="acard"><div class="ahead"><h3>Hızlı İşlemler</h3></div><div class="abody" style="display:flex;flex-direction:column;gap:7px;padding:14px">' +
-    '<button class="ab abA" onclick="sp(\'requests\')">📩 Teklif Talepleri</button>' +
-    '<button class="ab abG" onclick="sp(\'prods\')">📦 Hizmet Ekle / Düzenle</button>' +
-    '<button class="ab abG" onclick="sp(\'cats\')">🏷 Kategori Yönet</button>' +
-    '<button class="ab abG" onclick="sp(\'emailjs\')">📧 EmailJS Ayarla</button>' +
-    '<button class="ab abG" onclick="closeAdm()">🌐 Siteyi Görüntüle</button>' +
-    '</div></div></div>';
+  loadRequestsFromFB(function(reqs) {
+    var newCount = reqs.filter(function(r){return r.status==='new';}).length;
+    var storageLabel = _fbReady ? '✓ Firebase' : '✓ localStorage';
+    var storageColor = _fbReady ? '#00d4ff' : '#22c55e';
+    document.getElementById('admContent').innerHTML =
+      '<div class="asts">' +
+      '<div class="ast'+(newCount>0?' red':'')+'"><div class="av" style="'+(newCount>0?'color:#ef4444':'')+'">'+newCount+'</div><div class="al">Bekleyen Teklif</div></div>' +
+      '<div class="ast"><div class="av">'+prods.length+'</div><div class="al">Hizmet</div></div>' +
+      '<div class="ast"><div class="av">'+cats.length+'</div><div class="al">Kategori</div></div>' +
+      '<div class="ast"><div class="av">'+(ej.pk?'✓':'✗')+'</div><div class="al">EmailJS</div></div>' +
+      '</div>' +
+      (newCount>0?'<div style="background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.25);border-radius:9px;padding:14px 18px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:1.4rem">🔔</span><div><p style="font-size:.84rem;font-weight:700;color:#f87171">'+newCount+' yeni teklif talebi bekliyor!</p></div></div><button class="ab abR" onclick="sp(\'requests\')">Görüntüle →</button></div>':'') +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">' +
+      '<div class="acard"><div class="ahead"><h3>Oturum Bilgisi</h3></div><div class="abody" style="padding:14px;display:flex;flex-direction:column;gap:7px">' +
+      '<div style="display:flex;justify-content:space-between;padding:7px 11px;background:#141720;border-radius:6px"><span style="font-size:.79rem;color:#c8cdd6">Kullanıcı</span><span style="font-size:.72rem;color:#00d4ff;font-weight:600">'+x(currentUser?currentUser.email:'—')+'</span></div>' +
+      '<div style="display:flex;justify-content:space-between;padding:7px 11px;background:#141720;border-radius:6px"><span style="font-size:.79rem;color:#c8cdd6">Rol</span><span style="font-size:.72rem;color:#00d4ff;font-weight:600">'+(ROLES[currentUser?currentUser.role:'viewer']||{label:'—'}).label+'</span></div>' +
+      '<div style="display:flex;justify-content:space-between;padding:7px 11px;background:#141720;border-radius:6px"><span style="font-size:.79rem;color:#c8cdd6">Veri Depolama</span><span style="font-size:.72rem;color:'+storageColor+';font-weight:600">'+storageLabel+'</span></div>' +
+      '</div></div>' +
+      '<div class="acard"><div class="ahead"><h3>Hızlı İşlemler</h3></div><div class="abody" style="display:flex;flex-direction:column;gap:7px;padding:14px">' +
+      '<button class="ab abA" onclick="sp(\'requests\')">📩 Teklif Talepleri</button>' +
+      '<button class="ab abG" onclick="sp(\'prods\')">📦 Hizmet Ekle / Düzenle</button>' +
+      '<button class="ab abG" onclick="sp(\'cats\')">🏷 Kategori Yönet</button>' +
+      '<button class="ab abG" onclick="sp(\'emailjs\')">📧 EmailJS Ayarla</button>' +
+      '<button class="ab abG" onclick="closeAdm()">🌐 Siteyi Görüntüle</button>' +
+      '</div></div></div>';
+  });
 }
 
 /* ── REQUESTS ── */
