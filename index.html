@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GITS Teknoloji — Global IT Solutions | v6.0</title>
+<title>GITS Teknoloji — Global IT Solutions | v6.1</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}html,body{background:#0a0c10;color:#e8eaf0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6}
@@ -476,7 +476,7 @@ a[id^="nav"]:hover{color:#fff}
   <p id="ctatxt">IT altyapınızı bir üst seviyeye taşımak için bugün bizimle iletişime geçin.</p>
   <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
     <button class="btnp" id="ctaBtnP" onclick="document.getElementById('squote').scrollIntoView({behavior:'smooth'})">Teklif İste</button>
-    <a class="btng" id="ctaBtnS" href="tel:+905001234567">Bizi Arayın</a>
+    <a class="btng" id="ctaBtnS" href="https://wa.me/905001234567" target="_blank">Bizi Arayın</a>
   </div>
 </section>
 <footer class="ft">
@@ -490,7 +490,7 @@ a[id^="nav"]:hover{color:#fff}
       <li><a onclick="showLegal('terms')">Kullanım Koşulları</a></li>
     </ul></div>
   </div>
-  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v6.0</span><span class="admin-hint">· #admin</span></div>
+  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v6.1</span><span class="admin-hint">· #admin</span></div>
 </footer>
 </div>
 <!-- HUKUKİ SAYFALAR -->
@@ -560,7 +560,7 @@ a[id^="nav"]:hover{color:#fff}
   </div></div>
 </div>
 <div class="asb">
-  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v6.0</small></div>
+  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v6.1</small></div>
   <nav class="asbnav" id="admNav"></nav>
   <div class="asbft">
     <button onclick="closeAdm()">🌐 Siteye Dön</button>
@@ -605,7 +605,7 @@ try {
 }
 
 /* ═══════════════════════════════════════
-   GITS TEKNOLOJİ v6.0 — localStorage tabanlı
+   GITS TEKNOLOJİ v6.1 — localStorage tabanlı
    Firebase kaldırıldı, tüm veri tarayıcıda saklanır
    ═══════════════════════════════════════ */
 
@@ -1590,7 +1590,15 @@ function renderQuote() {
 }
 function saveQuote() { Object.assign(cont,{quoteLabel:gv('cQL'),quoteTitle:gv('cQT'),quoteSideNote:gv('cQN'),quoteSuccess:gv('cQS')});saveAll(); }
 function renderCta() {
-  cPanel('<div class="ag2"><div class="aff"><label>CTA Etiketi</label><input type="text" id="cCL" value="'+x(cont.ctaLabel||'İletişim')+'"></div><div class="aff"><label>Başlık</label><input type="text" id="cCT" value="'+x(cont.ctaTitle||'')+'"></div></div><div class="aff"><label>Açıklama</label><textarea id="cCC" rows="2">'+x(cont.ctaTxt||'')+'</textarea></div><div class="ag2"><div class="aff"><label>Birincil Buton</label><input type="text" id="cCBP" value="'+x(cont.ctaBtnP||'Teklif İste')+'"></div><div class="aff"><label>İkincil Buton</label><input type="text" id="cCBS" value="'+x(cont.ctaBtnS||'Bizi Arayın')+'"></div></div><hr style="border-color:rgba(255,255,255,.07);margin:14px 0"><div class="aff"><label>Şirket Açıklaması</label><textarea id="cFA" rows="2">'+x(cont.footerAbout||'')+'</textarea></div><div class="ag2"><div class="aff"><label>K1 Başlık</label><input type="text" id="cF1h" value="'+x(cont.ftc1h||'Hizmetler')+'"></div><div class="aff"><label>K1 Linkler</label><textarea id="cF1" rows="3">'+(cont.ftc1||['Siber Güvenlik','Cloud Hizmetleri','Firewall','Teknik Destek']).join('\n')+'</textarea></div></div><div class="ag2"><div class="aff"><label>K2 Başlık</label><input type="text" id="cF2h" value="'+x(cont.ftc2h||'Kurumsal')+'"></div><div class="aff"><label>K2 Linkler</label><textarea id="cF2" rows="3">'+(cont.ftc2||['Hakkımızda','Blog','Referanslar','Kariyer']).join('\n')+'</textarea></div></div>','saveCta');
+  var f = '<div class="ag2"><div class="aff"><label>CTA Etiketi</label><input type="text" id="cCL" value="'+x(cont.ctaLabel||'İletişim')+'"></div><div class="aff"><label>Başlık</label><input type="text" id="cCT" value="'+x(cont.ctaTitle||'')+'"></div></div>' +
+    '<div class="aff"><label>Açıklama</label><textarea id="cCC" rows="2">'+x(cont.ctaTxt||'')+'</textarea></div>' +
+    '<div class="ag2"><div class="aff"><label>Birincil Buton</label><input type="text" id="cCBP" value="'+x(cont.ctaBtnP||'Teklif İste')+'"></div><div class="aff"><label>İkincil Buton Metni</label><input type="text" id="cCBS" value="'+x(cont.ctaBtnS||'Bizi Arayın')+'"></div></div>' +
+    '<div class="aff"><label>📞 WhatsApp / Telefon Numarası (Başında + ve ülke kodu ile)</label><input type="text" id="cCPhone" value="'+x(cont.ctaPhone||'+905001234567')+'" placeholder="+905001234567"></div>' +
+    '<hr style="border-color:rgba(255,255,255,.07);margin:14px 0">' +
+    '<div class="aff"><label>Şirket Açıklaması</label><textarea id="cFA" rows="2">'+x(cont.footerAbout||'')+'</textarea></div>' +
+    '<div class="ag2"><div class="aff"><label>K1 Başlık</label><input type="text" id="cF1h" value="'+x(cont.ftc1h||'Hizmetler')+'"></div><div class="aff"><label>K1 Linkler</label><textarea id="cF1" rows="3">'+(cont.ftc1||['Siber Güvenlik','Cloud Hizmetleri','Firewall','Teknik Destek']).join('\n')+'</textarea></div></div>' +
+    '<div class="ag2"><div class="aff"><label>K2 Başlık</label><input type="text" id="cF2h" value="'+x(cont.ftc2h||'Kurumsal')+'"></div><div class="aff"><label>K2 Linkler</label><textarea id="cF2" rows="3">'+(cont.ftc2||['Hakkımızda','Blog','Referanslar','Kariyer']).join('\n')+'</textarea></div></div>';
+  cPanel(f,'saveCta');
 }
 function saveCta() { Object.assign(cont,{ctaLabel:gv('cCL'),ctaTitle:gv('cCT'),ctaTxt:gv('cCC'),ctaBtnP:gv('cCBP'),ctaBtnS:gv('cCBS'),ctaPhone:gv('cCPhone'),footerAbout:gv('cFA'),ftc1h:gv('cF1h'),ftc2h:gv('cF2h'),ftc1:gv('cF1').split('\n').filter(Boolean),ftc2:gv('cF2').split('\n').filter(Boolean)});saveAll(); }
 function renderNav() {
@@ -1683,7 +1691,10 @@ function rs() {
   if(c.ctaBtnP) setText('ctaBtnP',c.ctaBtnP);
   if(c.ctaBtnS) setText('ctaBtnS',c.ctaBtnS);
   var telBtn = document.getElementById('ctaBtnS');
-  if(telBtn && c.ctaPhone) telBtn.href = 'tel:'+c.ctaPhone;
+  if(telBtn && c.ctaPhone) {
+    var num = c.ctaPhone.replace(/[^0-9]/g,'');
+    telBtn.href = 'https://wa.me/'+num;
+  }
   if(c.footerAbout) setText('fabout',c.footerAbout);
   var fc=sel('ftcopy');if(fc)fc.innerHTML='© <span class="ft-year">'+CY+'</span> '+x(c.ftcopyPrefix||'GITS Teknoloji Ltd. Şti. — Tüm hakları saklıdır.');
   if(c.fttagline) setText('fttagline',c.fttagline);
