@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GITS Teknoloji — Global IT Solutions | v6.7</title>
+<title>GITS Teknoloji — Global IT Solutions | v6.8</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}html,body{background:#0a0c10;color:#e8eaf0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6}
@@ -490,7 +490,7 @@ a[id^="nav"]:hover{color:#fff}
       <li><a onclick="showLegal('terms')">Kullanım Koşulları</a></li>
     </ul></div>
   </div>
-  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v6.7</span><span class="admin-hint">· #admin</span></div>
+  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v6.8</span><span class="admin-hint">· #admin</span></div>
 </footer>
 </div>
 <!-- HUKUKİ SAYFALAR -->
@@ -560,7 +560,7 @@ a[id^="nav"]:hover{color:#fff}
   </div></div>
 </div>
 <div class="asb">
-  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v6.7</small></div>
+  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v6.8</small></div>
   <nav class="asbnav" id="admNav"></nav>
   <div class="asbft">
     <button onclick="closeAdm()">🌐 Siteye Dön</button>
@@ -605,7 +605,7 @@ try {
 }
 
 /* ═══════════════════════════════════════
-   GITS TEKNOLOJİ v6.7 — localStorage tabanlı
+   GITS TEKNOLOJİ v6.8 — localStorage tabanlı
    Firebase kaldırıldı, tüm veri tarayıcıda saklanır
    ═══════════════════════════════════════ */
 
@@ -1523,7 +1523,7 @@ function renderProds() {
     '<div class="aff" style="margin-bottom:8px"><label>Kısa Açıklama</label><input type="text" id="npd" placeholder="Kısa açıklama..."></div>' +
     '<div class="aff" style="margin-bottom:8px"><label>Detaylı Açıklama (hover\'da görünür)</label><textarea id="npdetail" rows="2" placeholder="Hizmet içeriği..."></textarea></div>' +
     '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">' +
-    '<label style="font-size:.75rem;color:#c8cdd6;display:flex;align-items:center;gap:6px"><input type="checkbox" id="npmarquee" checked style="accent-color:#00d4ff"> Kayan bantta göster</label>' +
+    '<label style="font-size:.75rem;color:#c8cdd6;display:flex;align-items:center;gap:6px"><input type="checkbox" id="npmarquee" checked style="accent-color:#00d4ff"> ⭐ Öne Çıkan & ⭐ Öne Çıkan & Kayan Bantta Göster</label>' +
     '<button class="ab abA" onclick="addProd()">Hizmet Ekle</button></div>' +
     '<div style="padding-top:8px;border-top:1px solid rgba(255,255,255,.06)">' +
     '<p style="font-size:.67rem;color:#4a5568;text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px;font-weight:600">Hızlı İkon Seç</p>' +
@@ -1908,13 +1908,13 @@ function renderMetricCard() {
 
 var _svcPage = 1;
 var _svcPerPage = 12;
-var _svcCat = 'Tümü';
+var _svcCat = 'Öne Çıkanlar';
 var _svcSearch = '';
 
 function buildSvc() {
   var te = document.getElementById('stabs'), ge = document.getElementById('sgrid');
   if (!te || !ge) return;
-  var ac = ['Tümü'].concat(cats.map(function(c){return c.name;}).filter(function(n){return prods.some(function(p){return p.cat===n;});}));
+  var ac = ['Öne Çıkanlar','Tümü'].concat(cats.map(function(c){return c.name;}).filter(function(n){return prods.some(function(p){return p.cat===n;});}));
   te.innerHTML = ac.map(function(c,i){
     return '<button class="tab'+(i===0?' on':'')+'" onclick="fsvc(this,\''+c.replace(/'/g,"\\'")+'\')">'+c+'</button>';
   }).join('');
@@ -1937,14 +1937,17 @@ function renderSvcGrid() {
 
   /* Filtrele */
   var filtered = prods.filter(function(p){
-    var catMatch = _svcCat === 'Tümü' || p.cat === _svcCat;
+    var catMatch;
+    if (_svcCat === 'Öne Çıkanlar') catMatch = p.marquee === true;
+    else if (_svcCat === 'Tümü') catMatch = true;
+    else catMatch = p.cat === _svcCat;
     var searchMatch = !_svcSearch || p.name.toLowerCase().indexOf(_svcSearch.toLowerCase()) > -1 ||
       (p.desc||'').toLowerCase().indexOf(_svcSearch.toLowerCase()) > -1 ||
       p.cat.toLowerCase().indexOf(_svcSearch.toLowerCase()) > -1;
     return catMatch && searchMatch;
   });
 
-  /* Kategori seçiliyse sayfalama yok, tümünü göster */
+  /* Öne Çıkanlar ve Tümü dışında sayfalama yok */
   var paged, totalPages, showPager;
   if (_svcCat !== 'Tümü' || _svcSearch) {
     paged = filtered;
@@ -1990,7 +1993,7 @@ function renderSvcGrid() {
     pager.innerHTML = ph;
     pager.style.display = 'flex';
   } else {
-    pager.style.display = 'none';
+    if (pager) pager.style.display = 'none';
   }
 }
 
