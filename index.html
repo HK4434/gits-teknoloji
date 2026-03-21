@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GITS Teknoloji — Global IT Solutions | v6.6</title>
+<title>GITS Teknoloji — Global IT Solutions | v6.7</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}html,body{background:#0a0c10;color:#e8eaf0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6}
@@ -490,7 +490,7 @@ a[id^="nav"]:hover{color:#fff}
       <li><a onclick="showLegal('terms')">Kullanım Koşulları</a></li>
     </ul></div>
   </div>
-  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v6.6</span><span class="admin-hint">· #admin</span></div>
+  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v6.7</span><span class="admin-hint">· #admin</span></div>
 </footer>
 </div>
 <!-- HUKUKİ SAYFALAR -->
@@ -560,7 +560,7 @@ a[id^="nav"]:hover{color:#fff}
   </div></div>
 </div>
 <div class="asb">
-  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v6.6</small></div>
+  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v6.7</small></div>
   <nav class="asbnav" id="admNav"></nav>
   <div class="asbft">
     <button onclick="closeAdm()">🌐 Siteye Dön</button>
@@ -605,7 +605,7 @@ try {
 }
 
 /* ═══════════════════════════════════════
-   GITS TEKNOLOJİ v6.6 — localStorage tabanlı
+   GITS TEKNOLOJİ v6.7 — localStorage tabanlı
    Firebase kaldırıldı, tüm veri tarayıcıda saklanır
    ═══════════════════════════════════════ */
 
@@ -1906,6 +1906,11 @@ function renderMetricCard() {
   document.getElementById('uptV').style.color = CM[m.uptC]||CM.blue;
 }
 
+var _svcPage = 1;
+var _svcPerPage = 12;
+var _svcCat = 'Tümü';
+var _svcSearch = '';
+
 function buildSvc() {
   var te = document.getElementById('stabs'), ge = document.getElementById('sgrid');
   if (!te || !ge) return;
@@ -1913,24 +1918,88 @@ function buildSvc() {
   te.innerHTML = ac.map(function(c,i){
     return '<button class="tab'+(i===0?' on':'')+'" onclick="fsvc(this,\''+c.replace(/'/g,"\\'")+'\')">'+c+'</button>';
   }).join('');
-  ge.innerHTML = prods.map(function(p){
+
+  /* Arama kutusu */
+  var svcSection = document.getElementById('ssvc');
+  if (svcSection && !document.getElementById('svcSearch')) {
+    var searchDiv = document.createElement('div');
+    searchDiv.style.cssText = 'margin-bottom:18px;position:relative;max-width:360px';
+    searchDiv.innerHTML = '<input id="svcSearch" type="text" placeholder="🔍 Hizmet ara..." oninput="_svcSearch=this.value;_svcPage=1;renderSvcGrid()" style="width:100%;background:#141720;border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#e8eaf0;font-size:.84rem;padding:9px 14px;outline:none">';
+    te.parentNode.insertBefore(searchDiv, ge);
+  }
+
+  renderSvcGrid();
+}
+
+function renderSvcGrid() {
+  var ge = document.getElementById('sgrid');
+  if (!ge) return;
+
+  /* Filtrele */
+  var filtered = prods.filter(function(p){
+    var catMatch = _svcCat === 'Tümü' || p.cat === _svcCat;
+    var searchMatch = !_svcSearch || p.name.toLowerCase().indexOf(_svcSearch.toLowerCase()) > -1 ||
+      (p.desc||'').toLowerCase().indexOf(_svcSearch.toLowerCase()) > -1 ||
+      p.cat.toLowerCase().indexOf(_svcSearch.toLowerCase()) > -1;
+    return catMatch && searchMatch;
+  });
+
+  /* Kategori seçiliyse sayfalama yok, tümünü göster */
+  var paged, totalPages, showPager;
+  if (_svcCat !== 'Tümü' || _svcSearch) {
+    paged = filtered;
+    showPager = false;
+  } else {
+    totalPages = Math.ceil(filtered.length / _svcPerPage);
+    if (_svcPage > totalPages) _svcPage = 1;
+    paged = filtered.slice((_svcPage - 1) * _svcPerPage, _svcPage * _svcPerPage);
+    showPager = totalPages > 1;
+  }
+
+  /* Kartlar */
+  if (!paged.length) {
+    ge.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;font-size:.84rem;color:#4a5568;font-style:italic">Sonuç bulunamadı.</div>';
+    return;
+  }
+
+  ge.innerHTML = paged.map(function(p){
     return '<div class="sc on" data-cat="'+x(p.cat)+'" style="display:block">' +
       '<div class="sico">'+(p.icon||'⚙')+'</div><span class="sarr">↗</span>' +
       '<h3>'+x(p.name)+'</h3><p>'+x(p.desc||'')+'</p>' +
       (p.detail?'<div class="sc-detail">'+x(p.detail)+'</div>':'') +
       '<div class="spr">'+(p.price>0?Number(p.price).toLocaleString('tr-TR')+' TL/ay':'Teklif bazlı')+'</div></div>';
   }).join('');
+
+  /* Sayfalama */
+  var pager = document.getElementById('svcPager');
+  if (!pager) {
+    pager = document.createElement('div');
+    pager.id = 'svcPager';
+    pager.style.cssText = 'display:flex;gap:6px;justify-content:center;align-items:center;margin-top:24px;flex-wrap:wrap';
+    ge.parentNode.insertBefore(pager, ge.nextSibling);
+  }
+
+  if (showPager) {
+    var ph = '';
+    ph += '<button onclick="_svcPage=Math.max(1,_svcPage-1);renderSvcGrid()" style="background:#141720;border:1px solid rgba(255,255,255,.1);color:#e8eaf0;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:.8rem">‹ Önceki</button>';
+    for (var i = 1; i <= totalPages; i++) {
+      ph += '<button onclick="_svcPage='+i+';renderSvcGrid()" style="background:'+(i===_svcPage?'#00d4ff':'#141720')+';border:1px solid rgba(255,255,255,.1);color:'+(i===_svcPage?'#000':'#e8eaf0')+';padding:6px 12px;border-radius:6px;cursor:pointer;font-size:.8rem;font-weight:'+(i===_svcPage?'700':'400')+'">'+i+'</button>';
+    }
+    ph += '<button onclick="_svcPage=Math.min(totalPages,_svcPage+1);renderSvcGrid()" style="background:#141720;border:1px solid rgba(255,255,255,.1);color:#e8eaf0;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:.8rem">Sonraki ›</button>';
+    ph += '<span style="font-size:.72rem;color:#4a5568;margin-left:8px">'+filtered.length+' hizmet, '+totalPages+' sayfa</span>';
+    pager.innerHTML = ph;
+    pager.style.display = 'flex';
+  } else {
+    pager.style.display = 'none';
+  }
 }
-function fsvc(btn,cat) {
+
+function fsvc(btn, cat) {
   document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('on');});
   btn.classList.add('on');
-  document.querySelectorAll('.sc').forEach(function(c){
-    if (cat==='Tümü' || c.dataset.cat===cat) {
-      c.style.display='block';
-    } else {
-      c.style.display='none';
-    }
-  });
+  _svcCat = cat;
+  _svcPage = 1;
+  renderSvcGrid();
 }
 
 function buildMQ() {
