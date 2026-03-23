@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GITS Teknoloji — Global IT Solutions | v6.8</title>
+<title>GITS Teknoloji — Global IT Solutions | v7.0</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}html,body{background:#0a0c10;color:#e8eaf0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6}
@@ -410,6 +410,26 @@ a[id^="nav"]:hover{color:#fff}
           <div class="fg"><label>Sözleşme Süresi</label><div class="pills" id="pcnt"><div class="pill on">Aylık</div><div class="pill">6 Aylık</div><div class="pill">Yıllık</div><div class="pill">2 Yıllık</div></div></div>
         </div>
         <div class="fg" style="margin-top:6px"><label>Destek Dili</label><div class="pills" id="plng"><div class="pill on">🇹🇷 Türkçe</div><div class="pill">🇬🇧 İngilizce</div><div class="pill">🇹🇷🇬🇧 Türkçe & İngilizce</div></div></div>
+        <div class="fg" style="margin-top:14px">
+          <label>👤 Personel Teknik Gereksinimi</label>
+          <p style="font-size:.72rem;color:#4a5568;margin:4px 0 10px">Hizmeti verecek personel için minimum teknik gereksinim belirtebilirsiniz.</p>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <label style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:#c8cdd6;cursor:pointer">
+                <input type="checkbox" id="preqExp" style="accent-color:#00d4ff" onchange="togglePreqExp()">
+                Minimum Deneyim
+              </label>
+              <div id="preqExpYr" style="display:none;align-items:center;gap:6px">
+                <input type="number" id="preqYears" min="1" max="30" value="1" style="width:60px;background:#141720;border:1px solid rgba(255,255,255,.15);border-radius:6px;color:#e8eaf0;padding:5px 8px;font-size:.82rem;outline:none;text-align:center">
+                <span style="font-size:.82rem;color:#6b7280">yıl</span>
+              </div>
+            </div>
+            <label style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:#c8cdd6;cursor:pointer">
+              <input type="checkbox" id="preqCert" style="accent-color:#00d4ff">
+              İlgili Alanda Geçerli Sertifika
+            </label>
+          </div>
+        </div>
       </div>
       <div class="qsec"><div class="qst">📍 Lokasyonlar</div>
         <div class="locrow"><div class="fg"><label>Lokasyon / Şehir</label><input type="text" id="locinp" placeholder="İstanbul — Levent Ofis" onkeydown="if(event.key==='Enter')addLoc()"></div><button class="locbtn" onclick="addLoc()">＋ Ekle</button></div>
@@ -490,7 +510,7 @@ a[id^="nav"]:hover{color:#fff}
       <li><a onclick="showLegal('terms')">Kullanım Koşulları</a></li>
     </ul></div>
   </div>
-  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v6.8</span><span class="admin-hint">· #admin</span></div>
+  <div class="ftbot"><p id="ftcopy"></p><p style="color:rgba(0,212,255,.6);font-size:.72rem" id="fttagline">Global IT Solutions</p><span style="font-size:.62rem;color:rgba(58,66,82,.5)">v7.0</span><span class="admin-hint">· #admin</span></div>
 </footer>
 </div>
 <!-- HUKUKİ SAYFALAR -->
@@ -560,7 +580,7 @@ a[id^="nav"]:hover{color:#fff}
   </div></div>
 </div>
 <div class="asb">
-  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v6.8</small></div>
+  <div class="asbl"><svg width="128" height="30"><use href="#L-nav"/></svg><small>YÖNETİM PANELİ — v7.0</small></div>
   <nav class="asbnav" id="admNav"></nav>
   <div class="asbft">
     <button onclick="closeAdm()">🌐 Siteye Dön</button>
@@ -605,7 +625,7 @@ try {
 }
 
 /* ═══════════════════════════════════════
-   GITS TEKNOLOJİ v6.8 — localStorage tabanlı
+   GITS TEKNOLOJİ v7.0 — localStorage tabanlı
    Firebase kaldırıldı, tüm veri tarayıcıda saklanır
    ═══════════════════════════════════════ */
 
@@ -1427,7 +1447,8 @@ function showRD(i) {
       '<div class="rdrow"><span class="rdlabel">Tür</span><span class="rdval">'+x((r.support||{}).type||'—')+'</span></div>' +
       '<div class="rdrow"><span class="rdlabel">Sözleşme</span><span class="rdval">'+x((r.support||{}).contract||'—')+'</span></div>' +
       '<div class="rdrow"><span class="rdlabel">Ödeme Modeli</span><span class="rdval">'+x(r.paymentModel||'—')+'</span></div>' +
-      '<div class="rdrow"><span class="rdlabel">Destek Dili</span><span class="rdval">'+x(r.supportLang||'—')+'</span></div></div>';
+      '<div class="rdrow"><span class="rdlabel">Destek Dili</span><span class="rdval">'+x(r.supportLang||'—')+'</span></div>' +
+      '<div class="rdrow"><span class="rdlabel">Personel Gereksinimi</span><span class="rdval" style="color:#00d4ff">'+x(r.personnelReq||'Gereksinim Yok')+'</span></div></div>';
 
     if (r.locations && r.locations!=='—') html += '<div class="rdsec"><h4>Lokasyonlar</h4><div class="rdrow"><span class="rdval">'+x(r.locations)+'</span></div></div>';
     if (r.notes && r.notes!=='—') html += '<div class="rdsec"><h4>Müşteri Notu</h4><p style="font-size:.79rem;color:#c8cdd6;line-height:1.65;background:#141720;padding:10px;border-radius:6px">'+x(r.notes)+'</p></div>';
@@ -2097,6 +2118,10 @@ function qs(){
 }
 
 function addLoc(){var i=document.getElementById('locinp'),v=i.value.trim();if(!v)return;locs.push(v);i.value='';renderLocs();}
+function togglePreqExp(){
+  var el = document.getElementById('preqExpYr');
+  if (el) el.style.display = document.getElementById('preqExp').checked ? 'flex' : 'none';
+}
 function rmLoc(i){locs.splice(i,1);renderLocs();}
 function renderLocs(){document.getElementById('loclist').innerHTML=locs.map(function(l,i){return '<div class="lc">'+x(l)+'<button class="lrm" onclick="rmLoc('+i+')">×</button></div>';}).join('');}
 
@@ -2119,11 +2144,18 @@ function subQ(){
   var typ=(document.querySelector('#ptyp .pill.on')||{textContent:'—'}).textContent;
   var cnt=(document.querySelector('#pcnt .pill.on')||{textContent:'—'}).textContent;
   var lng=(document.querySelector('#plng .pill.on')||{textContent:'—'}).textContent;
+  var preqExp = document.getElementById('preqExp') && document.getElementById('preqExp').checked;
+  var preqYrs = preqExp ? (document.getElementById('preqYears').value||'1') : null;
+  var preqCert = document.getElementById('preqCert') && document.getElementById('preqCert').checked;
+  var preq = 'Gereksinim Yok';
+  if (preqExp && preqCert) preq = preqYrs+' Yıl Deneyim & Sertifika';
+  else if (preqExp) preq = 'Min. '+preqYrs+' Yıl Deneyim';
+  else if (preqCert) preq = 'İlgili Sertifika';
   var pModel=(document.querySelector('.ptab.on')||{textContent:'Aylık Ödeme'}).textContent;
   var rd={name:n,email:e,phone:gv('qph')||'—',company:gv('qco')||'—',
     services:svcs.join(', ')||'—',oneoff:oos.join(', ')||'—',customServices:csvc||'—',
     support:{level:lvl,hours:hrs,type:typ,contract:cnt},
-    supportLang:lng,paymentModel:pModel,
+    supportLang:lng,personnelReq:preq,paymentModel:pModel,
     locations:locs.join(', ')||'—',notes:gv('qnotes')||'—',
     status:'new',createdAt:new Date().toISOString()};
   /* localStorage'a kaydet */
@@ -2135,7 +2167,7 @@ function subQ(){
     st.className='fsts sending';st.style.display='flex';st.innerHTML='⏳ Gönderiliyor...';
     document.getElementById('qsubBtn').disabled=true;
     emailjs.init(ej.pk);
-    emailjs.send(ej.sid,ej.tid,{from_name:n,from_email:e,phone:gv('qph')||'—',company:gv('qco')||'—',services:svcs.join(', ')||'—',oneoff:oos.join(', ')||'—',custom_svcs:csvc||'—',support_level:lvl,support_hours:hrs,support_type:typ,contract:cnt,support_lang:lng,payment_model:pModel,locations:locs.join(', ')||'—',notes:gv('qnotes')||'—',to_email:ej.to})
+    emailjs.send(ej.sid,ej.tid,{from_name:n,from_email:e,phone:gv('qph')||'—',company:gv('qco')||'—',services:svcs.join(', ')||'—',oneoff:oos.join(', ')||'—',custom_svcs:csvc||'—',support_level:lvl,support_hours:hrs,support_type:typ,contract:cnt,support_lang:lng,personnel_req:preq,payment_model:pModel,locations:locs.join(', ')||'—',notes:gv('qnotes')||'—',to_email:ej.to})
     .then(function(){st.className='fsts success';st.innerHTML='✓ Gönderildi!';document.getElementById('qsubBtn').disabled=false;setTimeout(function(){showSuc();st.style.display='none';},1000);})
     .catch(function(err){st.className='fsts error';st.innerHTML='✗ '+(err.text||err.message);document.getElementById('qsubBtn').disabled=false;});
   } else {
